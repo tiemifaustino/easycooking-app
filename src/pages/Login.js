@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoginBtnDisabled, setIsLoginBtnDisabled] = useState(true);
+  const history = useHistory();
 
   function handleChange(event, setState) {
     setState(event.value);
@@ -25,10 +27,23 @@ function Login() {
     }
   }, [email, password]);
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    localStorage.setItem('mealsToken', 1);
+    localStorage.setItem('cocktailsToken', 1);
+
+    const user = JSON.stringify({ email });
+    localStorage.setItem('user', user);
+
+    history.push('/foods');
+  };
+
   return (
     <>
       <h1>Login</h1>
-      <form>
+      <form
+        onSubmit={ (event) => handleSubmit(event) }
+      >
         <input
           data-testid="email-input"
           type="email"
