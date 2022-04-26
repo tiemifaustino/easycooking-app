@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Login from './pages/Login';
+import Food from './pages/Food';
 
 function App() {
   return (
@@ -18,7 +19,7 @@ function App() {
       <Route exact path="/drinks/:id" />
       <Route exact path="/foods/:id" />
       <Route exact path="/drinks" />
-      <Route exact path="/foods" />
+      <Route exact path="/foods" component={ Food } />
       <Route exact path="/" component={ Login } />
     </Switch>
   );
