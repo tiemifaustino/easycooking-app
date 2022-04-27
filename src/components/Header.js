@@ -50,11 +50,19 @@ function Header(props) {
     if (cocktail.drinks?.length === 1) {
       history.push(`/drinks/${cocktail.drinks[0].idDrink}`);
     }
+
+    if (cocktail === null) {
+      global.alert('Sorry, we haven\'t found any recipes for these filters');
+    }
   }, [cocktail]);
 
   useEffect(() => {
     if (recipe.meals?.length === 1) {
       history.push(`/foods/${recipe.meals[0].idMeal}`);
+    }
+
+    if (recipe.meals === null) {
+      global.alert('Sorry, we haven\'t found any recipes for these filters');
     }
   }, [recipe]);
 

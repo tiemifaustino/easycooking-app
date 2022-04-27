@@ -24,9 +24,8 @@ function Foods() {
           );
         })
       }
-    
-       <Footer />
-      </div>
+      <Footer />
+    </div>
   );
 }
 
