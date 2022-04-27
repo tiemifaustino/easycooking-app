@@ -18,7 +18,9 @@ export default function Footer() {
   };
 
   return (
-    <footer data-testid="footer">
+    <footer
+      data-testid="footer"
+    >
       <button
         type="button"
         onClick={ handleDrinkClick }

@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import DoneRecipes from './pages/DoneRecipes';
 import Drinks from './pages/Drinks';
-import DrinksInProgress from './pages/DrinksInProgress';
+import RecipeInProgress from './pages/RecipeInProgress';
 import Explore from './pages/Explore';
 import ExploreDrinks from './pages/ExploreDrinks';
 import ExploreFoods from './pages/ExploreFoods';
@@ -29,7 +29,7 @@ function App() {
       <Route exact path="/explore/drinks" component={ ExploreDrinks } />
       <Route exact path="/explore/foods" component={ ExploreFoods } />
       <Route exact path="/explore" component={ Explore } />
-      <Route exact path="/drinks/:id/in-progress" component={ DrinksInProgress } />
+      <Route exact path="/drinks/:id/in-progress" component={ RecipeInProgress } />
       <Route exact path="/foods/:id/in-progress" />
       <Route exact path="/drinks/:id" />
       <Route exact path="/foods/:id" />
