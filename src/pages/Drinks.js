@@ -1,4 +1,5 @@
 import React from 'react';
+import Footer from '../components/Footer';
 import { useSelector } from 'react-redux';
 import Header from '../components/Header';
 import Cards from '../components/Cards';
@@ -22,6 +23,7 @@ function Drinks() {
           );
         })
       }
+      <Footer />
     </div>
   );
 }
