@@ -1,8 +1,8 @@
 import React from 'react';
-import Footer from '../components/Footer';
 import { useSelector } from 'react-redux';
-import Header from '../components/Header';
 import Cards from '../components/Cards';
+import Footer from '../components/Footer';
+import Header from '../components/Header';
 
 function Drinks() {
   const drinks = useSelector((state) => state.cocktailReducer.cocktail.drinks);
