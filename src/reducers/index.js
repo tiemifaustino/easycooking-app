@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
-import placeHolder from './placeHolder';
+import recipeReducer from './recipeReducer';
 
-const rootReducer = combineReducers({ placeHolder });
+const rootReducer = combineReducers({ recipeReducer });
 
 export default rootReducer;
