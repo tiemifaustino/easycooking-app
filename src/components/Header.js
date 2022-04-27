@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { string } from 'prop-types';
 import { useHistory } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 import { recipeThunk, cocktailThunk } from '../actions/index.actions';
@@ -12,6 +12,8 @@ function Header(props) {
   const [showInput, setShowInput] = useState(false);
   const [search, setSearch] = useState('');
   const [typeInput, setTypeInput] = useState('');
+  const { cocktail } = useSelector((state) => state.cocktailReducer);
+  const { recipe } = useSelector((state) => state.recipeReducer);
   const dispatch = useDispatch();
 
   const handleProfileClick = () => {
@@ -36,9 +38,25 @@ function Header(props) {
       global.alert('Your search must have only 1 (one) character');
       return;
     }
-    dispatch(recipeThunk(objToDispatch));
-    dispatch(cocktailThunk(objToDispatch));
+
+    if (window.location.href.includes('/foods')) {
+      dispatch(recipeThunk(objToDispatch));
+    } else if (window.location.href.includes('/drinks')) {
+      dispatch(cocktailThunk(objToDispatch));
+    }
   };
+
+  useEffect(() => {
+    if (cocktail.drinks?.length === 1) {
+      history.push(`/drinks/${cocktail.drinks[0].idDrink}`);
+    }
+  }, [cocktail]);
+
+  useEffect(() => {
+    if (recipe.meals?.length === 1) {
+      history.push(`/foods/${recipe.meals[0].idMeal}`);
+    }
+  }, [recipe]);
 
   return (
     <header>
