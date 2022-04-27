@@ -34,7 +34,48 @@ function Header(props) {
       }
       {
         showInput && (
-          <input type="text" placeholder="Search" data-testid="search-input" />
+          <form>
+            <label htmlFor="search-input">
+              <input
+                type="text"
+                placeholder="Search"
+                data-testid="search-input"
+                id="search-input"
+              />
+            </label>
+
+            <label htmlFor="ingredient-search-radio">
+              <input
+                type="radio"
+                data-testid="ingredient-search-radio"
+                id="ingredient-search-radio"
+                name="search-radio"
+              />
+              Ingredient
+            </label>
+
+            <label htmlFor="name-search-radio">
+              <input
+                type="radio"
+                data-testid="name-search-radio"
+                id="name-search-radio"
+                name="search-radio"
+              />
+              Name
+            </label>
+
+            <label htmlFor="first-letter-search-radio">
+              <input
+                type="radio"
+                data-testid="first-letter-search-radio"
+                id="first-letter-search-radio"
+                name="search-radio"
+              />
+              First Letter
+            </label>
+
+            <button type="button" data-testid="exec-search-btn">Search</button>
+          </form>
         )
       }
 
