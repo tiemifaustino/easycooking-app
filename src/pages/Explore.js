@@ -9,6 +9,7 @@ function Explore() {
   return (
     <>
       <Header title="Explore" visible={ false } />
+
       <button
         data-testid="explore-foods"
         type="button"
@@ -23,6 +24,7 @@ function Explore() {
       >
         Explore Drinks
       </button>
+
       <Footer />
     </>
   );
