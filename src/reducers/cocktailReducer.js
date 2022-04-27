@@ -14,7 +14,7 @@ const cocktailReducer = (state = INICIAL_STATE, action) => {
   case REQUEST_COCKTAIL_SUCCESS:
     return {
       ...state,
-      recipe: action.recipe,
+      cocktail: action.cocktail,
     };
   case REQUEST_COCKTAIL_FAILURE:
     return {

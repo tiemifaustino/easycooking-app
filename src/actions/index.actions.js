@@ -36,9 +36,9 @@ export const requestCocktail = () => ({
   type: REQUEST_COCKTAIL,
 });
 
-export const requestCocktailSuccess = (Cocktail) => ({
+export const requestCocktailSuccess = (cocktail) => ({
   type: REQUEST_COCKTAIL_SUCCESS,
-  Cocktail,
+  cocktail,
 });
 
 export const requestCocktailFailure = (error) => ({
