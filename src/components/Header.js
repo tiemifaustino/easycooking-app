@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
-import { recipeThunk } from '../actions/index.actions';
+import { recipeThunk, cocktailThunk } from '../actions/index.actions';
 
 function Header(props) {
   const { title, visible } = props;
@@ -37,23 +37,41 @@ function Header(props) {
       return;
     }
     dispatch(recipeThunk(objToDispatch));
+    dispatch(cocktailThunk(objToDispatch));
   };
 
   return (
     <header>
-      <button type="button" onClick={ handleProfileClick }>
-        <img src={ profileIcon } alt="profileIcon" data-testid="profile-top-btn" />
+      <button
+        type="button"
+        onClick={ handleProfileClick }
+      >
+        <img
+          src={ profileIcon }
+          alt="profileIcon"
+          data-testid="profile-top-btn"
+        />
       </button>
+
       <h1 data-testid="page-title">
         { title }
       </h1>
+
       {
         visible && (
-          <button type="button" onClick={ showSearchBtn }>
-            <img src={ searchIcon } alt="searchIcon" data-testid="search-top-btn" />
+          <button
+            type="button"
+            onClick={ showSearchBtn }
+          >
+            <img
+              src={ searchIcon }
+              alt="searchIcon"
+              data-testid="search-top-btn"
+            />
           </button>
         )
       }
+
       {
         showInput && (
           <form>
