@@ -6,6 +6,27 @@ function Profile() {
   return (
     <>
       <Header title="Profile" visible={ false } />
+      <div>
+        <h2 data-testid="profile-email"> Email </h2>
+        <button
+          type="button"
+          data-testid="profile-done-btn"
+        >
+          Done Recipes
+        </button>
+        <button
+          type="button"
+          data-testid="profile-favorite-btn"
+        >
+          Favorite Recipes
+        </button>
+        <button
+          type="button"
+          data-testid="profile-logout-btn"
+        >
+          Logout
+        </button>
+      </div>
       <Footer />
     </>
   );
