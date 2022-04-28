@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
+import CocktailDetails from './pages/CocktailDetails';
 import DoneRecipes from './pages/DoneRecipes';
 import Drinks from './pages/Drinks';
 import Explore from './pages/Explore';
@@ -11,6 +12,7 @@ import FavoriteRecipes from './pages/FavoriteRecipes';
 import Foods from './pages/Foods';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
+import RecipeDetails from './pages/RecipeDetails';
 import RecipeInProgress from './pages/RecipeInProgress';
 
 function App() {
@@ -31,8 +33,8 @@ function App() {
       <Route exact path="/explore" component={ Explore } />
       <Route exact path="/drinks/:id/in-progress" component={ RecipeInProgress } />
       <Route exact path="/foods/:id/in-progress" />
-      <Route exact path="/drinks/:id" />
-      <Route exact path="/foods/:id" />
+      <Route exact path="/drinks/:id" component={ CocktailDetails } />
+      <Route exact path="/foods/:id" component={ RecipeDetails } />
       <Route exact path="/drinks" component={ Drinks } />
       <Route exact path="/foods" component={ Foods } />
       <Route exact path="/" component={ Login } />
