@@ -41,9 +41,9 @@ export const requestCocktailSuccess = (cocktail) => ({
   cocktail,
 });
 
-export const requestCocktailFailure = (error) => ({
+export const requestCocktailFailure = () => ({
   type: REQUEST_COCKTAIL_FAILURE,
-  error,
+  error: 'Sorry, we haven\'t found any recipes for these filters.',
 });
 
 export function cocktailThunk(searchValue) {
@@ -52,7 +52,7 @@ export function cocktailThunk(searchValue) {
       const response = await fetchCocktail(searchValue);
       dispatch(requestCocktailSuccess(response));
     } catch (error) {
-      dispatch(requestCocktailFailure(error));
+      dispatch(requestCocktailFailure());
     }
   };
 }
