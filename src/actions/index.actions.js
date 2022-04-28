@@ -1,5 +1,5 @@
 import {
-  fetchCocktail, fetchCocktailByID, fetchRecipe, fetchRecipeByID
+  fetchCocktail, fetchCocktailByID, fetchRecipe, fetchRecipeByID,
 } from '../services/API';
 
 export const REQUEST_RECIPE = 'REQUEST_RECIPE';
