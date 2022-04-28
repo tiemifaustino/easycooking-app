@@ -47,22 +47,24 @@ function Header(props) {
   };
 
   useEffect(() => {
+    const ERROR_MESSAGE = 'Sorry, we haven\'t found any recipes for these filters.';
     if (cocktail.drinks?.length === 1) {
       history.push(`/drinks/${cocktail.drinks[0].idDrink}`);
     }
 
-    if (cocktail === null) {
-      global.alert('Sorry, we haven\'t found any recipes for these filters');
+    if (cocktail.drinks === null || cocktail === ERROR_MESSAGE) {
+      global.alert(ERROR_MESSAGE);
     }
   }, [cocktail]);
 
   useEffect(() => {
+    const ERROR_MESSAGE = 'Sorry, we haven\'t found any recipes for these filters.';
     if (recipe.meals?.length === 1) {
       history.push(`/foods/${recipe.meals[0].idMeal}`);
     }
 
     if (recipe.meals === null) {
-      global.alert('Sorry, we haven\'t found any recipes for these filters');
+      global.alert(ERROR_MESSAGE);
     }
   }, [recipe]);
 

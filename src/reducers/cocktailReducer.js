@@ -19,7 +19,7 @@ const cocktailReducer = (state = INICIAL_STATE, action) => {
   case REQUEST_COCKTAIL_FAILURE:
     return {
       ...state,
-      error: action.error,
+      cocktail: action.error,
     };
   default:
     return state;
