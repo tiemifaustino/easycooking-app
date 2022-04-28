@@ -1,8 +1,8 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import Header from '../components/Header';
 import Cards from '../components/Cards';
 import Footer from '../components/Footer';
+import Header from '../components/Header';
 
 function Foods() {
   const foods = useSelector((state) => state.recipeReducer.recipe.meals);
