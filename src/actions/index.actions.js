@@ -71,9 +71,9 @@ export const requestRecipeByID = () => ({
   type: REQUEST_RECIPE_BY_ID,
 });
 
-export const requestRecipeByIDSuccess = (cocktail) => ({
+export const requestRecipeByIDSuccess = (recipe) => ({
   type: REQUEST_RECIPE_BY_ID_SUCCESS,
-  cocktail,
+  recipe,
 });
 
 export const requestRecipeByIDFailure = (error) => ({
