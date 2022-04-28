@@ -1,8 +1,10 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 
 function Profile() {
+  const history = useHistory();
   return (
     <>
       <Header title="Profile" visible={ false } />
@@ -17,6 +19,7 @@ function Profile() {
         <button
           type="button"
           data-testid="profile-favorite-btn"
+          onClick={ () => history.push('/favorite-recipes') }
         >
           Favorite Recipes
         </button>
