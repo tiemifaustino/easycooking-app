@@ -1,8 +1,6 @@
 import {
-  fetchRecipe,
-  fetchCocktail,
-  fetchRecipeByID,
-  fetchCocktailByID } from '../services/API';
+  fetchCocktail, fetchCocktailByID, fetchRecipe, fetchRecipeByID
+} from '../services/API';
 
 export const REQUEST_RECIPE = 'REQUEST_RECIPE';
 export const REQUEST_RECIPE_SUCCESS = 'REQUEST_RECIPE_SUCCESS';
