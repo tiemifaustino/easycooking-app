@@ -17,7 +17,7 @@ function Profile() {
       <Header title="Profile" visible={ false } />
       <div>
         <h2 data-testid="profile-email">
-          email
+          {localStorage.getItem('user')}
         </h2>
         <button
           type="button"
