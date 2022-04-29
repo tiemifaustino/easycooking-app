@@ -16,7 +16,6 @@ function ExploreFoods() {
   }, []);
 
   const handleClickSuprise = () => {
-    dispatch(requestRecipeSupriseThunk());
     const { idMeal } = recipeSuprise.meals[0];
     history.push(`/foods/${idMeal}`);
   };
