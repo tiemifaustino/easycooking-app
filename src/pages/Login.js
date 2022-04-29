@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { Form, Button } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './Login.css';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -39,36 +42,47 @@ function Login() {
   };
 
   return (
-    <>
-      <h1>Login</h1>
-      <form
-        onSubmit={ (event) => handleSubmit(event) }
-      >
-        <input
+    <Form
+      onSubmit={ (event) => handleSubmit(event) }
+      className="d-flex flex-column m-4 "
+    >
+      <h1 className="mx-auto">Login</h1>
+
+      <Form.Group className="mb-3">
+        <Form.Control
           data-testid="email-input"
           type="email"
           value={ email }
           onChange={ (event) => handleChange(event.target, setEmail) }
           placeholder="Email"
+          className="mt-5"
+          size="lg"
         />
+      </Form.Group>
 
-        <input
+      <Form.Group className="mb-3">
+        <Form.Control
           data-testid="password-input"
           type="password"
           value={ password }
           onChange={ (event) => handleChange(event.target, setPassword) }
           placeholder="Password"
+          size="lg"
         />
+      </Form.Group>
 
-        <button
-          data-testid="login-submit-btn"
-          disabled={ isLoginBtnDisabled }
-          type="submit"
-        >
-          Enter
-        </button>
-      </form>
-    </>
+      <Button
+        data-testid="login-submit-btn"
+        disabled={ isLoginBtnDisabled }
+        type="submit"
+        variant="danger"
+        size="lg"
+        value="Submit"
+        className="mt-5"
+      >
+        Enter
+      </Button>
+    </Form>
   );
 }
 
