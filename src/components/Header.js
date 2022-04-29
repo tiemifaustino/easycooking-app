@@ -55,6 +55,7 @@ function Header(props) {
     if (cocktail.drinks === null || cocktail === ERROR_MESSAGE) {
       global.alert(ERROR_MESSAGE);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cocktail]);
 
   useEffect(() => {
@@ -66,6 +67,7 @@ function Header(props) {
     if (recipe.meals === null) {
       global.alert(ERROR_MESSAGE);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [recipe]);
 
   return (
