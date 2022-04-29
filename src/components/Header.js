@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { string } from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { Form, Button } from 'react-bootstrap';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 import { recipeThunk, cocktailThunk } from '../actions/index.actions';
+import './Header.css';
 
 function Header(props) {
   const { title, visible } = props;
@@ -70,94 +72,104 @@ function Header(props) {
 
   return (
     <header>
-      <button
-        type="button"
-        onClick={ handleProfileClick }
-      >
-        <img
-          src={ profileIcon }
-          alt="profileIcon"
-          data-testid="profile-top-btn"
-        />
-      </button>
+      <div className="d-flex justify-content-around p-2">
+        <button
+          type="button"
+          onClick={ handleProfileClick }
+          className="button-icon"
+        >
+          <img
+            src={ profileIcon }
+            alt="profileIcon"
+            data-testid="profile-top-btn"
+          />
+        </button>
 
-      <h1 data-testid="page-title">
-        { title }
-      </h1>
+        <h1 data-testid="page-title" className="title">
+          { title }
+        </h1>
 
-      {
-        visible && (
-          <button
-            type="button"
-            onClick={ showSearchBtn }
-          >
-            <img
-              src={ searchIcon }
-              alt="searchIcon"
-              data-testid="search-top-btn"
-            />
-          </button>
-        )
-      }
+        {
+          visible && (
+            <button
+              type="button"
+              onClick={ showSearchBtn }
+              className="button-icon"
+            >
+              <img
+                src={ searchIcon }
+                alt="searchIcon"
+                data-testid="search-top-btn"
+              />
+            </button>
+          )
+        }
+      </div>
 
       {
         showInput && (
-          <form>
-            <label htmlFor="search-input">
-              <input
-                type="text"
-                placeholder="Search"
-                data-testid="search-input"
-                id="search-input"
-                value={ search }
-                onChange={ handleChangeSearch }
-              />
-            </label>
+          <Form className="d-flex justify-content-center flex-column">
+            <Form.Group className="d-flex justify-content-center m-0">
+              <Form.Label htmlFor="search-input">
+                <Form.Control
+                  type="text"
+                  placeholder="Search"
+                  data-testid="search-input"
+                  id="search-input"
+                  value={ search }
+                  onChange={ handleChangeSearch }
+                />
+              </Form.Label>
+            </Form.Group>
 
-            <label htmlFor="ingredient-search-radio">
-              <input
-                type="radio"
-                data-testid="ingredient-search-radio"
-                id="ingredient-search-radio"
-                name="typeInput"
-                value="Ingredient"
-                onChange={ handleChangeInput }
-              />
-              Ingredient
-            </label>
+            <Form.Group className="d-flex justify-content-around mb-2">
+              <Form.Label htmlFor="ingredient-search-radio" className="d-flex">
+                <Form.Check
+                  type="radio"
+                  data-testid="ingredient-search-radio"
+                  id="ingredient-search-radio"
+                  name="typeInput"
+                  value="Ingredient"
+                  onChange={ handleChangeInput }
+                />
+                Ingredient
+              </Form.Label>
 
-            <label htmlFor="name-search-radio">
-              <input
-                type="radio"
-                data-testid="name-search-radio"
-                id="name-search-radio"
-                name="typeInput"
-                value="Name"
-                onChange={ handleChangeInput }
-              />
-              Name
-            </label>
+              <Form.Label htmlFor="name-search-radio" className="d-flex">
+                <Form.Check
+                  type="radio"
+                  data-testid="name-search-radio"
+                  id="name-search-radio"
+                  name="typeInput"
+                  value="Name"
+                  onChange={ handleChangeInput }
+                />
+                Name
+              </Form.Label>
 
-            <label htmlFor="first-letter-search-radio">
-              <input
-                type="radio"
-                data-testid="first-letter-search-radio"
-                id="first-letter-search-radio"
-                name="typeInput"
-                value="First Letter"
-                onChange={ handleChangeInput }
-              />
-              First Letter
-            </label>
+              <Form.Label htmlFor="first-letter-search-radio" className="d-flex">
+                <Form.Check
+                  type="radio"
+                  data-testid="first-letter-search-radio"
+                  id="first-letter-search-radio"
+                  name="typeInput"
+                  value="First Letter"
+                  onChange={ handleChangeInput }
+                />
+                First Letter
+              </Form.Label>
+            </Form.Group>
 
-            <button
+            <Button
               type="button"
               data-testid="exec-search-btn"
               onClick={ handleClickSearch }
+              variant="danger"
+              className="mx-4 mb-3"
             >
               Search
-            </button>
-          </form>
+            </Button>
+          </Form>
         )
       }
 

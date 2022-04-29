@@ -1,0 +1,27 @@
+:root {
+
+  --color-background: #fdffff;
+
+  --color-1: #280000;
+
+  --color-2: #570000;
+
+  --color-3: #b10f2e;
+
+  --color-4: #f3b39e;
+
+}
+
+header {
+  background-color: var(--color-4);
+}
+
+.button-icon {
+  background-color: transparent;
+  border: none;
+  padding: 5px;
+}
+
+.title {
+  color: var(--color-1);
+}

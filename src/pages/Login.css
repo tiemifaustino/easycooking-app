@@ -10,12 +10,11 @@
 
   --color-3: #b10f2e;
 
-  --color-4: #de7c5a;
+  --color-4: #f3b39e;
 
 }
 
 * {
-  background-color: var(--color-background);
 
   /* stylelint-disable-next-line font-family-name-quotes */
   font-family: 'Open Sans' , sans-serif;

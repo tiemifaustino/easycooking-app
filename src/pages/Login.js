@@ -44,7 +44,7 @@ function Login() {
   return (
     <Form
       onSubmit={ (event) => handleSubmit(event) }
-      className="d-flex flex-column m-4 "
+      className="d-flex flex-column m-4"
     >
       <h1 className="mx-auto">Login</h1>
 
