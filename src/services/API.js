@@ -51,3 +51,19 @@ export async function fetchCocktailSuprise() {
 
   return response.ok ? Promise.resolve(json) : Promise.reject(json);
 }
+
+export async function fetchRecipeListArea(area) {
+  const URL = `https://www.themealdb.com/api/json/v1/1/list.php?a=${area}`;
+  const response = await fetch(URL);
+  const json = await response.json();
+
+  return response.ok ? Promise.resolve(json) : Promise.reject(json);
+}
+
+export async function fetchRecipeByNationality(nationality) {
+  const URL = `https://www.themealdb.com/api/json/v1/1/filter.php?a=Canadian${nationality}`;
+  const response = await fetch(URL);
+  const json = await response.json();
+
+  return response.ok ? Promise.resolve(json) : Promise.reject(json);
+}

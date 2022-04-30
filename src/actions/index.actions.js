@@ -1,6 +1,6 @@
 import {
   fetchCocktail, fetchCocktailByID, fetchRecipe, fetchRecipeByID,
-  fetchRecipeSuprise, fetchCocktailSuprise,
+  fetchRecipeSuprise, fetchCocktailSuprise, fetchRecipeListArea,
 } from '../services/API';
 
 export const REQUEST_RECIPE = 'REQUEST_RECIPE';
@@ -21,6 +21,12 @@ export const REQUEST_RECIPE_SUPRISE_FAILURE = 'REQUEST_RECIPE_SUPRISE_FAILURE';
 export const REQUEST_COCKTAIL_SUPRISE = 'REQUEST_COCKTAIL_SUPRISE';
 export const REQUEST_COCKTAIL_SUPRISE_SUCCESS = 'REQUEST_COCKTAIL_SUPRISE_SUCCESS';
 export const REQUEST_COCKTAIL_SUPRISE_FAILURE = 'REQUEST_COCKTAIL_SUPRISE_FAILURE';
+export const REQUEST_RECIPE_LIST_AREA = 'REQUEST_RECIPE_LIST_AREA';
+export const REQUEST_RECIPE_LIST_AREA_SUCCESS = 'REQUEST_RECIPE_LIST_AREA_SUCCESS';
+export const REQUEST_RECIPE_LIST_AREA_FAILURE = 'REQUEST_RECIPE_LIST_AREA_FAILURE';
+export const REQUEST_RECIPE_NATIONALITY = 'REQUEST_RECIPE_NATIONALITY';
+export const REQUEST_RECIPE_NATIONALITY_SUCCESS = 'REQUEST_RECIPE_NATIONALITY_SUCCESS';
+export const REQUEST_RECIPE_NATIONALITY_FAILURE = 'REQUEST_RECIPE_NATIONALITY_FAILURE';
 
 export const requestRecipe = () => ({
   type: REQUEST_RECIPE,
@@ -97,7 +103,6 @@ export function requestRecipeByIDThunk(id) {
   };
 }
 
-//
 export const requestCocktailByID = () => ({
   type: REQUEST_COCKTAIL_BY_ID,
 });
@@ -170,6 +175,56 @@ export function requestCocktailSupriseThunk() {
       dispatch(requestCocktailSupriseSuccess(response));
     } catch (error) {
       dispatch(requestCocktailSupriseFailure(error));
+    }
+  };
+}
+
+export const requestRecipeListArea = () => ({
+  type: REQUEST_RECIPE_LIST_AREA,
+});
+
+export const requestRecipeListAreaSuccess = (recipe) => ({
+  type: REQUEST_RECIPE_LIST_AREA_SUCCESS,
+  recipe: recipe.meals,
+});
+
+export const requestRecipeListAreaFailure = (error) => ({
+  type: REQUEST_RECIPE_LIST_AREA_FAILURE,
+  error,
+});
+
+export function requestRecipeListAreaThunk(area) {
+  return async (dispatch) => {
+    try {
+      const response = await fetchRecipeListArea(area);
+      dispatch(requestRecipeListAreaSuccess(response));
+    } catch (error) {
+      dispatch(requestRecipeListAreaFailure(error));
+    }
+  };
+}
+//!
+export const requestRecipeNationality = () => ({
+  type: REQUEST_RECIPE_NATIONALITY,
+});
+
+export const requestRecipeNationalitySuccess = (recipe) => ({
+  type: REQUEST_RECIPE_NATIONALITY_SUCCESS,
+  recipe: recipe.meals,
+});
+
+export const requestRecipeNationalityFailure = (error) => ({
+  type: REQUEST_RECIPE_NATIONALITY_FAILURE,
+  error,
+});
+
+export function requestRecipeByNationalityThunk(area) {
+  return async (dispatch) => {
+    try {
+      const response = await fetchRecipeByNationality(area);
+      dispatch(requestRecipeNationalitySuccess(response));
+    } catch (error) {
+      dispatch(requestRecipeNationalityFailure(error));
     }
   };
 }
