@@ -1,18 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { requestRecipeByIDThunk } from '../actions/index.actions';
+import { Carousel } from 'react-bootstrap';
+import { requestRecipeByIDThunk, cocktailThunk } from '../actions/index.actions';
+import Cards from '../components/Cards';
 
 function RecipeDetails() {
   const { id } = useParams();
   const dispatch = useDispatch();
   const { recipe } = useSelector((state) => state.recipeByIDReducer);
+  const { cocktail } = useSelector((state) => state.cocktailReducer);
   const [ingredients, setIngredients] = useState([]);
   const [meal, setMeal] = useState([]);
   const [measurements, setMeasurements] = useState([]);
+  const [recommendedCards, setRecommendedCards] = useState([]);
 
   useEffect(() => {
+    dispatch(cocktailThunk({ search: '', typeInput: 'Name' }));
     dispatch(requestRecipeByIDThunk(id));
+    console.log(Carousel);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -36,6 +42,16 @@ function RecipeDetails() {
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [recipe]);
+
+  useEffect(() => {
+    const sortRandomizer = 0.5;
+    const MAXIMUN_NUMBER_OF_CARDS = 6;
+    if (cocktail.drinks?.length > 0) {
+      const randomCards = [...cocktail.drinks]
+        .sort(() => Math.random() - sortRandomizer);
+      setRecommendedCards(randomCards.slice(0, MAXIMUN_NUMBER_OF_CARDS));
+    }
+  }, [cocktail]);
 
   return (
     meal.length > 0
@@ -80,8 +96,21 @@ function RecipeDetails() {
           <div>
             <h2>Recommended</h2>
             <ul>
-              <li data-testid={ `${0}-recomendation-card` } />
-              <li data-testid={ `${1}-recomendation-card` } />
+              {
+                recommendedCards && recommendedCards.map((drink, index) => (
+                  <li
+                    data-testid={ `${index}-recomendation-card` }
+                    key={ drink.idDrink }
+                  >
+                    <Cards
+                      key={ drink.idDrink }
+                      img={ drink.strDrinkThumb }
+                      index={ index }
+                      title={ drink.strDrink }
+                    />
+                  </li>
+                ))
+              }
             </ul>
           </div>
           <button type="button" data-testid="start-recipe-btn">Start Recipe</button>

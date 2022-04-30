@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { requestCocktailByIDThunk } from '../actions/index.actions';
+import { requestCocktailByIDThunk, recipeThunk } from '../actions/index.actions';
 
 function CocktailDetails() {
   const { id } = useParams();
@@ -13,6 +13,7 @@ function CocktailDetails() {
 
   useEffect(() => {
     dispatch(requestCocktailByIDThunk(id));
+    dispatch(recipeThunk({ search: '', typeInput: 'Name' }));
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
