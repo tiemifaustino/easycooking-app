@@ -1,10 +1,12 @@
 import {
   fetchCocktail, fetchCocktailByID, fetchRecipe, fetchRecipeByID,
-  fetchRecipeSuprise, fetchCocktailSuprise,
+  fetchRecipeSuprise, fetchCocktailSuprise, fetchCategoriesFood, fetchCategoriesCocktail,
 } from '../services/API';
 
 export const REQUEST_RECIPE = 'REQUEST_RECIPE';
 export const REQUEST_RECIPE_SUCCESS = 'REQUEST_RECIPE_SUCCESS';
+export const REQUEST_CATEGORY_RECIPE_SUCCESS = 'REQUEST_CATEGORY_RECIPE_SUCCESS';
+export const REQUEST_CATEGORY_RECIPE_FAILURE = 'REQUEST_CATEGORY_RECIPE_FAILURE';
 export const REQUEST_RECIPE_FAILURE = 'REQUEST_RECIPE_FAILURE';
 export const REQUEST_COCKTAIL = 'REQUEST_COCKTAIL';
 export const REQUEST_COCKTAIL_SUCCESS = 'REQUEST_COCKTAIL_SUCCESS';
@@ -47,13 +49,35 @@ export function recipeThunk(searchValue) {
   };
 }
 
-export const requestCocktail = () => ({
-  type: REQUEST_COCKTAIL,
-});
+export function recipeCategoriesThunk(category) {
+  return async (dispatch) => {
+    try {
+      const response = await fetchCategoriesFood(category);
+      dispatch(requestRecipeSuccess(response));
+    } catch (error) {
+      dispatch(requestRecipeFailure(error));
+    }
+  };
+}
 
 export const requestCocktailSuccess = (cocktail) => ({
   type: REQUEST_COCKTAIL_SUCCESS,
   cocktail,
+});
+
+export function cocktailCategoriesThunk(category) {
+  return async (dispatch) => {
+    try {
+      const response = await fetchCategoriesCocktail(category);
+      dispatch(requestCocktailSuccess(response));
+    } catch (error) {
+      dispatch(requestRecipeFailure(error));
+    }
+  };
+}
+
+export const requestCocktail = () => ({
+  type: REQUEST_COCKTAIL,
 });
 
 export const requestCocktailFailure = () => ({
