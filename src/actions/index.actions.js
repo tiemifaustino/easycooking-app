@@ -1,6 +1,6 @@
 import {
   fetchCocktail, fetchCocktailByID, fetchRecipe, fetchRecipeByID,
-  fetchRecipeSuprise, fetchCocktailSuprise,
+  fetchRecipeSuprise, fetchCocktailSuprise, fetchIngredientsList,
 } from '../services/API';
 
 export const REQUEST_RECIPE = 'REQUEST_RECIPE';
@@ -21,6 +21,9 @@ export const REQUEST_RECIPE_SUPRISE_FAILURE = 'REQUEST_RECIPE_SUPRISE_FAILURE';
 export const REQUEST_COCKTAIL_SUPRISE = 'REQUEST_COCKTAIL_SUPRISE';
 export const REQUEST_COCKTAIL_SUPRISE_SUCCESS = 'REQUEST_COCKTAIL_SUPRISE_SUCCESS';
 export const REQUEST_COCKTAIL_SUPRISE_FAILURE = 'REQUEST_COCKTAIL_SUPRISE_FAILURE';
+export const REQUEST_INGREDIENTS_LIST = 'REQUEST_INGREDIENTS_LIST';
+export const REQUEST_INGREDIENTS_LIST_SUCCESS = 'REQUEST_INGREDIENTS_LIST_SUCCESS';
+export const REQUEST_INGREDIENTS_LIST_FAILURE = 'REQUEST_INGREDIENTS_LIST_FAILURE';
 
 export const requestRecipe = () => ({
   type: REQUEST_RECIPE,
@@ -170,6 +173,33 @@ export function requestCocktailSupriseThunk() {
       dispatch(requestCocktailSupriseSuccess(response));
     } catch (error) {
       dispatch(requestCocktailSupriseFailure(error));
+    }
+  };
+}
+
+// Ingredients List
+export const requestIngredientsList = () => ({
+  type: REQUEST_INGREDIENTS_LIST,
+});
+
+export const requestIngredientsListSuccess = (ingredients) => ({
+  type: REQUEST_INGREDIENTS_LIST_SUCCESS,
+  ingredients: ingredients.meals,
+});
+
+export const requestIngredientsListFailure = (error) => ({
+  type: REQUEST_INGREDIENTS_LIST_FAILURE,
+  error,
+});
+
+export function requestIngredientsListThunk() {
+  return async (dispatch) => {
+    try {
+      const response = await fetchIngredientsList();
+      dispatch(requestIngredientsListSuccess(response));
+      console.log(response.meals);
+    } catch (error) {
+      dispatch(requestIngredientsListFailure(error));
     }
   };
 }

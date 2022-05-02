@@ -51,3 +51,11 @@ export async function fetchCocktailSuprise() {
 
   return response.ok ? Promise.resolve(json) : Promise.reject(json);
 }
+
+export async function fetchIngredientsList() {
+  const URL = 'https://www.themealdb.com/api/json/v1/1/list.php?i=list';
+  const response = await fetch(URL);
+  const json = await response.json();
+
+  return response.ok ? Promise.resolve(json) : Promise.reject(json);
+}
