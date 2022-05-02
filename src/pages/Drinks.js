@@ -3,8 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import Cards from '../components/Cards';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
-import { cocktailThunk } from '../actions/index.actions';
-import { fetchCategoriesCocktail } from '../services/API';
+import { cocktailThunk, cocktailCategoriesThunk } from '../actions/index.actions';
 
 function Drinks() {
   const dispatch = useDispatch();
@@ -32,7 +31,7 @@ function Drinks() {
     console.log(name);
     console.log(drinks);
 
-    dispatch(fetchCategoriesCocktail(name));
+    dispatch(cocktailCategoriesThunk(name));
   };
 
   return (
