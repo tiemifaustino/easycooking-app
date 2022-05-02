@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Cards from '../components/Cards';
 import Footer from '../components/Footer';
@@ -7,15 +7,15 @@ import { cocktailThunk, cocktailCategoriesThunk } from '../actions/index.actions
 
 function Drinks() {
   const dispatch = useDispatch();
+  const [clicked, setClicked] = useState({});
   const drinks = useSelector((state) => state.cocktailReducer.cocktail.drinks);
 
   const buttonsNames = [
-    'All',
     'Ordinary Drink',
     'Cocktail',
     'Milk / Float / Shake',
-    'Cocoa',
     'Other/Unknown',
+    'Cocoa',
   ];
 
   useEffect(() => {
@@ -27,16 +27,33 @@ function Drinks() {
   const handleClick = ({ target }) => {
     const { name } = target;
 
-    // const objToDispatch = { search: name, typeInput: 'Ingredient' };
-    console.log(name);
-    console.log(drinks);
+    setClicked({
+      [name]: !clicked[name],
+    });
 
-    dispatch(cocktailCategoriesThunk(name));
+    if (clicked[name]) {
+      const objToDispatch = { search: '', typeInput: 'Name' };
+
+      dispatch(cocktailThunk(objToDispatch));
+    } else {
+      dispatch(cocktailCategoriesThunk(name));
+    }
+
+    console.log(name);
+  };
+
+  const handleClickToggle = () => {
+    const obj = { search: '', typeInput: 'Name' };
+
+    dispatch(cocktailThunk(obj));
   };
 
   return (
     <div>
       <Header title="Drinks" visible />
+      <button type="reset" onClick={ handleClickToggle }>
+        Reset
+      </button>
       {
         buttonsNames.map((buttonName, index) => (
           <button
