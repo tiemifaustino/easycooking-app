@@ -1,18 +1,48 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
-import { requestCocktailByIDThunk } from '../actions/index.actions';
+import { useParams, useHistory } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { requestCocktailByIDThunk, recipeThunk } from '../actions/index.actions';
+import SimpleSliderRecipes from '../components/SimpleSliderRecipes';
+import shareBtnLogo from '../images/shareIcon.svg';
+import favoriteNotChecked from '../images/whiteHeartIcon.svg';
+import favoriteChecked from '../images/blackHeartIcon.svg';
 
 function CocktailDetails() {
   const { id } = useParams();
   const dispatch = useDispatch();
+  const history = useHistory();
   const { cocktail } = useSelector((state) => state.cocktailByIDReducer);
+  const { recipe } = useSelector((state) => state.recipeReducer);
   const [ingredients, setIngredients] = useState([]);
   const [drink, setDrink] = useState([]);
   const [measurements, setMeasurements] = useState([]);
+  const [recommendedCards, setRecommendedCards] = useState([]);
+  const [currentBtn, setCurrentBtn] = useState('Start Recipe');
+  const [showBtn, setShowBtn] = useState(true);
+  const [isFavorite, setIsFavorite] = useState(false);
+
+  const findButtonInLocalStorage = () => {
+    const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
+    const isRecipeDone = doneRecipes?.some((doneRecipe) => doneRecipe.id === Number(id));
+    setShowBtn(!isRecipeDone);
+    const recipesInProgress = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    if (recipesInProgress?.cocktails[id] !== undefined) setCurrentBtn('Continue Recipe');
+  };
+
+  const checkIfIsFavorite = () => {
+    const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    const isRecipeFavorite = favoriteRecipes?.some(
+      (favoriteRecipe) => favoriteRecipe.id === id,
+    );
+    setIsFavorite(isRecipeFavorite);
+  };
 
   useEffect(() => {
+    dispatch(recipeThunk({ search: '', typeInput: 'Name' }));
     dispatch(requestCocktailByIDThunk(id));
+    findButtonInLocalStorage();
+    checkIfIsFavorite();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -36,6 +66,53 @@ function CocktailDetails() {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cocktail]);
+
+  useEffect(() => {
+    // const sortRandomizer = 0.5;
+    const MAXIMUN_NUMBER_OF_CARDS = 6;
+    if (recipe.meals?.length > 0) {
+      const randomCards = [...recipe.meals];
+      // .sort(() => Math.random() - sortRandomizer);
+      setRecommendedCards(randomCards.slice(0, MAXIMUN_NUMBER_OF_CARDS));
+    }
+  }, [recipe]);
+
+  const handleClick = () => {
+    history.push(`/drinks/${id}/in-progress`);
+  };
+
+  const handleShare = () => {
+    toast.success('Link copied!');
+    navigator.clipboard.writeText(window.location.href);
+  };
+
+  const handleFavorite = () => {
+    const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
+
+    if (isFavorite) {
+      const filteredFavorites = favoriteRecipes
+        .filter((favoriteRecipe) => favoriteRecipe.id !== id);
+      const favoritesString = JSON.stringify(filteredFavorites);
+      localStorage.setItem('favoriteRecipes', favoritesString);
+    } else {
+      const favoriteRecipeToAdd = {
+        id,
+        type: 'drink',
+        nationality: '',
+        category: cocktail[0].strCategory,
+        alcoholicOrNot: cocktail[0].strAlcoholic,
+        name: cocktail[0].strDrink,
+        image: cocktail[0].strDrinkThumb,
+
+      };
+      const favoritesString = JSON
+        .stringify([favoriteRecipeToAdd]);
+      localStorage.setItem('favoriteRecipes', favoritesString);
+    }
+
+    setIsFavorite(!isFavorite);
+  };
+
   return (
     drink.length > 0
       ? (
@@ -47,8 +124,30 @@ function CocktailDetails() {
           />
           <div>
             <h2 data-testid="recipe-title">{cocktail[0].strDrink}</h2>
-            <button type="button" data-testid="share-btn">Share Btn</button>
-            <button type="button" data-testid="favorite-btn">Favoritar</button>
+            <input
+              type="image"
+              data-testid="share-btn"
+              onClick={ handleShare }
+              src={ shareBtnLogo }
+              alt="Share button"
+            />
+            {isFavorite
+              ? (
+                <input
+                  type="image"
+                  data-testid="favorite-btn"
+                  alt="Favorite button"
+                  src={ favoriteChecked }
+                  onClick={ handleFavorite }
+                />)
+              : (
+                <input
+                  type="image"
+                  data-testid="favorite-btn"
+                  alt="Favorite button"
+                  src={ favoriteNotChecked }
+                  onClick={ handleFavorite }
+                />) }
             <p data-testid="recipe-category">{cocktail[0].strAlcoholic}</p>
           </div>
 
@@ -70,14 +169,21 @@ function CocktailDetails() {
               {cocktail[0].strInstructions}
             </p>
           </div>
-          <div>
-            <h2>Recommended</h2>
-            <ul>
-              <li data-testid={ `${0}-recomendation-card` } />
-              <li data-testid={ `${1}-recomendation-card` } />
-            </ul>
-          </div>
-          <button type="button" data-testid="start-recipe-btn">Start Recipe</button>
+          <h2>Recommended</h2>
+          <SimpleSliderRecipes
+            recommendedCards={ recommendedCards }
+          />
+          {showBtn
+            ? (
+              <button
+                className="recipe-button"
+                type="button"
+                data-testid="start-recipe-btn"
+                onClick={ () => handleClick() }
+              >
+                {currentBtn}
+              </button>)
+            : ''}
         </div>
       ) : '');
 }
