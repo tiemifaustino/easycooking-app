@@ -14,7 +14,7 @@ const recipeByIDReducer = (state = INICIAL_STATE, action) => {
   case REQUEST_RECIPE_BY_ID_SUCCESS:
     return {
       ...state,
-      recipe: action.recipe,
+      recipe: action.recipe.meals,
     };
   case REQUEST_RECIPE_BY_ID_FAILURE:
     return {

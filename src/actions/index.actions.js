@@ -1,11 +1,13 @@
 import {
   fetchCocktail, fetchCocktailByID, fetchRecipe, fetchRecipeByID,
-  fetchRecipeSuprise, fetchCocktailSuprise, fetchIngredientsList,
-  fetchIngredientsDrinks,
+  fetchRecipeSuprise, fetchCocktailSuprise, fetchCategoriesFood, fetchCategoriesCocktail,
+  fetchIngredientsList, fetchIngredientsDrinks,
 } from '../services/API';
 
 export const REQUEST_RECIPE = 'REQUEST_RECIPE';
 export const REQUEST_RECIPE_SUCCESS = 'REQUEST_RECIPE_SUCCESS';
+export const REQUEST_CATEGORY_RECIPE_SUCCESS = 'REQUEST_CATEGORY_RECIPE_SUCCESS';
+export const REQUEST_CATEGORY_RECIPE_FAILURE = 'REQUEST_CATEGORY_RECIPE_FAILURE';
 export const REQUEST_RECIPE_FAILURE = 'REQUEST_RECIPE_FAILURE';
 export const REQUEST_COCKTAIL = 'REQUEST_COCKTAIL';
 export const REQUEST_COCKTAIL_SUCCESS = 'REQUEST_COCKTAIL_SUCCESS';
@@ -22,10 +24,8 @@ export const REQUEST_RECIPE_SUPRISE_FAILURE = 'REQUEST_RECIPE_SUPRISE_FAILURE';
 export const REQUEST_COCKTAIL_SUPRISE = 'REQUEST_COCKTAIL_SUPRISE';
 export const REQUEST_COCKTAIL_SUPRISE_SUCCESS = 'REQUEST_COCKTAIL_SUPRISE_SUCCESS';
 export const REQUEST_COCKTAIL_SUPRISE_FAILURE = 'REQUEST_COCKTAIL_SUPRISE_FAILURE';
-export const REQUEST_INGREDIENTS_LIST = 'REQUEST_INGREDIENTS_LIST';
 export const REQUEST_INGREDIENTS_LIST_SUCCESS = 'REQUEST_INGREDIENTS_LIST_SUCCESS';
 export const REQUEST_INGREDIENTS_LIST_FAILURE = 'REQUEST_INGREDIENTS_LIST_FAILURE';
-export const REQUEST_INGREDIENTS_DRINKS = 'REQUEST_INGREDIENTS_DRINKS';
 export const REQUEST_INGREDIENTS_DRINKS_SUCCESS = 'REQUEST_INGREDIENTS_DRINKS_SUCCESS';
 export const REQUEST_INGREDIENTS_DRINKS_FAILURE = 'REQUEST_INGREDIENTS_DRINKS_FAILURE';
 
@@ -54,13 +54,35 @@ export function recipeThunk(searchValue) {
   };
 }
 
-export const requestCocktail = () => ({
-  type: REQUEST_COCKTAIL,
-});
+export function recipeCategoriesThunk(category) {
+  return async (dispatch) => {
+    try {
+      const response = await fetchCategoriesFood(category);
+      dispatch(requestRecipeSuccess(response));
+    } catch (error) {
+      dispatch(requestRecipeFailure(error));
+    }
+  };
+}
 
 export const requestCocktailSuccess = (cocktail) => ({
   type: REQUEST_COCKTAIL_SUCCESS,
   cocktail,
+});
+
+export function cocktailCategoriesThunk(category) {
+  return async (dispatch) => {
+    try {
+      const response = await fetchCategoriesCocktail(category);
+      dispatch(requestCocktailSuccess(response));
+    } catch (error) {
+      dispatch(requestRecipeFailure(error));
+    }
+  };
+}
+
+export const requestCocktail = () => ({
+  type: REQUEST_COCKTAIL,
 });
 
 export const requestCocktailFailure = () => ({
@@ -83,9 +105,9 @@ export const requestRecipeByID = () => ({
   type: REQUEST_RECIPE_BY_ID,
 });
 
-export const requestRecipeByIDSuccess = (cocktail) => ({
+export const requestRecipeByIDSuccess = (recipe) => ({
   type: REQUEST_RECIPE_BY_ID_SUCCESS,
-  cocktail,
+  recipe,
 });
 
 export const requestRecipeByIDFailure = (error) => ({
@@ -182,10 +204,6 @@ export function requestCocktailSupriseThunk() {
 }
 
 // Ingredients List - Meals
-export const requestIngredientsList = () => ({
-  type: REQUEST_INGREDIENTS_LIST,
-});
-
 export const requestIngredientsListSuccess = (ingredients) => ({
   type: REQUEST_INGREDIENTS_LIST_SUCCESS,
   ingredients: ingredients.meals,
@@ -201,7 +219,6 @@ export function requestIngredientsListThunk() {
     try {
       const response = await fetchIngredientsList();
       dispatch(requestIngredientsListSuccess(response));
-      // console.log(response);
     } catch (error) {
       dispatch(requestIngredientsListFailure(error));
     }
@@ -209,10 +226,6 @@ export function requestIngredientsListThunk() {
 }
 
 //  Ingredients List - Drinks
-export const requestIngredientsDrinks = () => ({
-  type: REQUEST_INGREDIENTS_DRINKS,
-});
-
 export const requestIngredientsDrinksSuccess = (drinksIngredients) => ({
   type: REQUEST_INGREDIENTS_DRINKS_SUCCESS,
   drinksIngredients: drinksIngredients.drinks,
@@ -228,7 +241,6 @@ export function requestIngredientsDrinksThunk() {
     try {
       const response = await fetchIngredientsDrinks();
       dispatch(requestIngredientsDrinksSuccess(response));
-      // console.log(response);
     } catch (error) {
       dispatch(requestIngredientsDrinksFailure(error));
     }

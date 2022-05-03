@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { requestIngredientsListThunk,
@@ -20,7 +20,6 @@ function ExploreIngredients() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  console.log(pathname);
   return (
     <>
       <Header title="Explore Ingredients" visible={ false } />
@@ -30,12 +29,17 @@ function ExploreIngredients() {
           const maxIngredients = 11;
           if (index > maxIngredients) return;
           return (
-            <CardIngredients
+            <Link
+              to="/foods"
               key={ ingredient.idIngredient }
-              index={ index }
-              img={ `https://www.themealdb.com/images/ingredients/${ingredient.strIngredient}-Small.png` }
-              title={ ingredient.strIngredient }
-            />
+            >
+              <CardIngredients
+                key={ ingredient.idIngredient }
+                index={ index }
+                img={ `https://www.themealdb.com/images/ingredients/${ingredient.strIngredient}-Small.png` }
+                title={ ingredient.strIngredient }
+              />
+            </Link>
           );
         })
       }
