@@ -1,6 +1,7 @@
 import { REQUEST_INGREDIENTS_LIST,
   REQUEST_INGREDIENTS_LIST_SUCCESS,
-  REQUEST_INGREDIENTS_LIST_FAILURE } from '../actions/index.actions';
+  REQUEST_INGREDIENTS_LIST_FAILURE,
+} from '../actions/index.actions';
 
 const INICIAL_STATE = {
   ingredients: [],

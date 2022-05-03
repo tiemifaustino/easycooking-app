@@ -197,7 +197,7 @@ export function requestIngredientsListThunk() {
     try {
       const response = await fetchIngredientsList();
       dispatch(requestIngredientsListSuccess(response));
-      console.log(response.meals);
+      console.log(response);
     } catch (error) {
       dispatch(requestIngredientsListFailure(error));
     }
