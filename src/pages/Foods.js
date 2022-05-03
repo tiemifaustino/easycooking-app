@@ -12,6 +12,7 @@ function Foods() {
   const foods = useSelector((state) => state.recipeReducer.recipe.meals);
 
   const buttonsNames = [
+    'All',
     'Beef',
     'Breakfast',
     'Chicken',
@@ -23,8 +24,8 @@ function Foods() {
     const objToDispatch = { search: '', typeInput: 'Name' };
 
     dispatch(recipeThunk(objToDispatch));
-    console.log('Use effect');
-  }, [dispatch]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleClick = ({ target }) => {
     const { name } = target;
@@ -33,7 +34,7 @@ function Foods() {
       [name]: !clicked[name],
     });
 
-    if (clicked[name]) {
+    if (clicked[name] || name === 'All') {
       const objToDispatch = { search: '', typeInput: 'Name' };
 
       dispatch(recipeThunk(objToDispatch));
@@ -78,6 +79,7 @@ function Foods() {
           return (
             <Cards
               key={ index }
+              id={ meal.idMeal }
               img={ meal.strMealThumb }
               index={ index }
               title={ meal.strMeal }

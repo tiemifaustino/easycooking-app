@@ -11,6 +11,7 @@ function Drinks() {
   const drinks = useSelector((state) => state.cocktailReducer.cocktail.drinks);
 
   const buttonsNames = [
+    'All',
     'Ordinary Drink',
     'Cocktail',
     'Milk / Float / Shake',
@@ -31,7 +32,7 @@ function Drinks() {
       [name]: !clicked[name],
     });
 
-    if (clicked[name]) {
+    if (clicked[name] || name === 'All') {
       const objToDispatch = { search: '', typeInput: 'Name' };
 
       dispatch(cocktailThunk(objToDispatch));
@@ -73,6 +74,7 @@ function Drinks() {
           if (index > maxdrinks) return;
           return (
             <Cards
+              id={ drink.idDrink }
               key={ drink.strDrink }
               img={ drink.strDrinkThumb }
               index={ index }
