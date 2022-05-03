@@ -1,24 +1,34 @@
 import React, { useEffect, useState } from 'react';
+import { useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
-import { Carousel } from 'react-bootstrap';
 import { requestRecipeByIDThunk, cocktailThunk } from '../actions/index.actions';
-import Cards from '../components/Cards';
+import SimpleSliderDrinks from '../components/SimpleSliderDrinks';
 
 function RecipeDetails() {
   const { id } = useParams();
   const dispatch = useDispatch();
+  const history = useHistory();
   const { recipe } = useSelector((state) => state.recipeByIDReducer);
   const { cocktail } = useSelector((state) => state.cocktailReducer);
   const [ingredients, setIngredients] = useState([]);
   const [meal, setMeal] = useState([]);
   const [measurements, setMeasurements] = useState([]);
   const [recommendedCards, setRecommendedCards] = useState([]);
+  const [currentBtn, setCurrentBtn] = useState('Start Recipe');
+  const [showBtn, setShowBtn] = useState(true);
+
+  const findButtonInLocalStorage = () => {
+    const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
+    const isRecipeDone = doneRecipes?.some((doneRecipe) => doneRecipe.id === Number(id));
+    setShowBtn(!isRecipeDone);
+    const recipesInProgress = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    if (recipesInProgress?.meals[id] !== undefined) setCurrentBtn('Continue Recipe');
+  };
 
   useEffect(() => {
     dispatch(cocktailThunk({ search: '', typeInput: 'Name' }));
     dispatch(requestRecipeByIDThunk(id));
-    console.log(Carousel);
+    findButtonInLocalStorage();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -44,14 +54,18 @@ function RecipeDetails() {
   }, [recipe]);
 
   useEffect(() => {
-    const sortRandomizer = 0.5;
+    // const sortRandomizer = 0.5;
     const MAXIMUN_NUMBER_OF_CARDS = 6;
     if (cocktail.drinks?.length > 0) {
-      const randomCards = [...cocktail.drinks]
-        .sort(() => Math.random() - sortRandomizer);
+      const randomCards = [...cocktail.drinks];
+      // .sort(() => Math.random() - sortRandomizer);
       setRecommendedCards(randomCards.slice(0, MAXIMUN_NUMBER_OF_CARDS));
     }
   }, [cocktail]);
+
+  const handleClick = () => {
+    history.push(`/foods/${id}/in-progress`);
+  };
 
   return (
     meal.length > 0
@@ -93,27 +107,22 @@ function RecipeDetails() {
               title="video da receita"
             />
           </div>
-          <div>
-            <h2>Recommended</h2>
-            <ul>
-              {
-                recommendedCards && recommendedCards.map((drink, index) => (
-                  <li
-                    data-testid={ `${index}-recomendation-card` }
-                    key={ drink.idDrink }
-                  >
-                    <Cards
-                      key={ drink.idDrink }
-                      img={ drink.strDrinkThumb }
-                      index={ index }
-                      title={ drink.strDrink }
-                    />
-                  </li>
-                ))
-              }
-            </ul>
-          </div>
-          <button type="button" data-testid="start-recipe-btn">Start Recipe</button>
+          <h2>Recommended</h2>
+          <SimpleSliderDrinks
+            recommendedCards={ recommendedCards }
+          />
+          {showBtn
+            ? (
+              <button
+                className="recipe-button"
+                type="button"
+                data-testid="start-recipe-btn"
+                onClick={ () => handleClick() }
+              >
+                {currentBtn}
+              </button>)
+            : ''}
+
         </div>
       ) : '');
 }

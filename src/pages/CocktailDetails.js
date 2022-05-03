@@ -1,19 +1,34 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import { requestCocktailByIDThunk, recipeThunk } from '../actions/index.actions';
+import SimpleSliderRecipes from '../components/SimpleSliderRecipes';
 
 function CocktailDetails() {
   const { id } = useParams();
   const dispatch = useDispatch();
+  const history = useHistory();
   const { cocktail } = useSelector((state) => state.cocktailByIDReducer);
+  const { recipe } = useSelector((state) => state.recipeReducer);
   const [ingredients, setIngredients] = useState([]);
   const [drink, setDrink] = useState([]);
   const [measurements, setMeasurements] = useState([]);
+  const [recommendedCards, setRecommendedCards] = useState([]);
+  const [currentBtn, setCurrentBtn] = useState('Start Recipe');
+  const [showBtn, setShowBtn] = useState(true);
+
+  const findButtonInLocalStorage = () => {
+    const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
+    const isRecipeDone = doneRecipes?.some((doneRecipe) => doneRecipe.id === Number(id));
+    setShowBtn(!isRecipeDone);
+    const recipesInProgress = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    if (recipesInProgress?.cocktails[id] !== undefined) setCurrentBtn('Continue Recipe');
+  };
 
   useEffect(() => {
-    dispatch(requestCocktailByIDThunk(id));
     dispatch(recipeThunk({ search: '', typeInput: 'Name' }));
+    dispatch(requestCocktailByIDThunk(id));
+    findButtonInLocalStorage();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -37,6 +52,21 @@ function CocktailDetails() {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cocktail]);
+
+  useEffect(() => {
+    // const sortRandomizer = 0.5;
+    const MAXIMUN_NUMBER_OF_CARDS = 6;
+    if (recipe.meals?.length > 0) {
+      const randomCards = [...recipe.meals];
+      // .sort(() => Math.random() - sortRandomizer);
+      setRecommendedCards(randomCards.slice(0, MAXIMUN_NUMBER_OF_CARDS));
+    }
+  }, [recipe]);
+
+  const handleClick = () => {
+    history.push(`/drinks/${id}/in-progress`);
+  };
+
   return (
     drink.length > 0
       ? (
@@ -71,14 +101,21 @@ function CocktailDetails() {
               {cocktail[0].strInstructions}
             </p>
           </div>
-          <div>
-            <h2>Recommended</h2>
-            <ul>
-              <li data-testid={ `${0}-recomendation-card` } />
-              <li data-testid={ `${1}-recomendation-card` } />
-            </ul>
-          </div>
-          <button type="button" data-testid="start-recipe-btn">Start Recipe</button>
+          <h2>Recommended</h2>
+          <SimpleSliderRecipes
+            recommendedCards={ recommendedCards }
+          />
+          {showBtn
+            ? (
+              <button
+                className="recipe-button"
+                type="button"
+                data-testid="start-recipe-btn"
+                onClick={ () => handleClick() }
+              >
+                {currentBtn}
+              </button>)
+            : ''}
         </div>
       ) : '');
 }
