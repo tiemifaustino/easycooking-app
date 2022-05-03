@@ -1,4 +1,5 @@
 import React from 'react';
+import { ToastContainer } from 'react-toastify';
 import { Route, Switch } from 'react-router-dom';
 import CocktailDetails from './pages/CocktailDetails';
 import DoneRecipes from './pages/DoneRecipes';
@@ -15,32 +16,40 @@ import Profile from './pages/Profile';
 import RecipeDetails from './pages/RecipeDetails';
 import RecipeInProgress from './pages/RecipeInProgress';
 import NotFound from './pages/NotFound';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
-    <Switch>
-      <Route exact path="/favorite-recipes" component={ FavoriteRecipes } />
-      <Route exact path="/done-recipes" component={ DoneRecipes } />
-      <Route exact path="/profile" component={ Profile } />
-      <Route
-        exact
-        path="/explore/foods/nationalities"
-        component={ ExploreNationalities }
-      />
-      <Route exact path="/explore/foods/ingredients" component={ ExploreIngredients } />
-      <Route exact path="/explore/drinks/ingredients" component={ ExploreIngredients } />
-      <Route exact path="/explore/drinks" component={ ExploreDrinks } />
-      <Route exact path="/explore/foods" component={ ExploreFoods } />
-      <Route exact path="/explore" component={ Explore } />
-      <Route exact path="/drinks/:id/in-progress" component={ RecipeInProgress } />
-      <Route exact path="/foods/:id/in-progress" />
-      <Route exact path="/drinks/:id" component={ CocktailDetails } />
-      <Route exact path="/foods/:id" component={ RecipeDetails } />
-      <Route exact path="/drinks" component={ Drinks } />
-      <Route exact path="/foods" component={ Foods } />
-      <Route exact path="/" component={ Login } />
-      <Route path="*" component={ NotFound } />
-    </Switch>
+    <>
+      <ToastContainer />
+      <Switch>
+        <Route exact path="/favorite-recipes" component={ FavoriteRecipes } />
+        <Route exact path="/done-recipes" component={ DoneRecipes } />
+        <Route exact path="/profile" component={ Profile } />
+        <Route
+          exact
+          path="/explore/foods/nationalities"
+          component={ ExploreNationalities }
+        />
+        <Route exact path="/explore/foods/ingredients" component={ ExploreIngredients } />
+        <Route
+          exact
+          path="/explore/drinks/ingredients"
+          component={ ExploreIngredients }
+        />
+        <Route exact path="/explore/drinks" component={ ExploreDrinks } />
+        <Route exact path="/explore/foods" component={ ExploreFoods } />
+        <Route exact path="/explore" component={ Explore } />
+        <Route exact path="/drinks/:id/in-progress" component={ RecipeInProgress } />
+        <Route exact path="/foods/:id/in-progress" />
+        <Route exact path="/drinks/:id" component={ CocktailDetails } />
+        <Route exact path="/foods/:id" component={ RecipeDetails } />
+        <Route exact path="/drinks" component={ Drinks } />
+        <Route exact path="/foods" component={ Foods } />
+        <Route exact path="/" component={ Login } />
+        <Route path="*" component={ NotFound } />
+      </Switch>
+    </>
   );
 }
 
