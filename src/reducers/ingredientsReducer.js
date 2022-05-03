@@ -1,23 +1,32 @@
 import { REQUEST_INGREDIENTS_LIST,
   REQUEST_INGREDIENTS_LIST_SUCCESS,
   REQUEST_INGREDIENTS_LIST_FAILURE,
+  REQUEST_INGREDIENTS_DRINKS,
+  REQUEST_INGREDIENTS_DRINKS_SUCCESS,
+  REQUEST_INGREDIENTS_DRINKS_FAILURE,
 } from '../actions/index.actions';
 
 const INICIAL_STATE = {
   ingredients: [],
+  drinksIngredients: [],
   error: '',
 };
 
 const ingredientsReducer = (state = INICIAL_STATE, action) => {
   switch (action.type) {
-  case REQUEST_INGREDIENTS_LIST:
+  case REQUEST_INGREDIENTS_LIST || REQUEST_INGREDIENTS_DRINKS:
     return { ...state };
   case REQUEST_INGREDIENTS_LIST_SUCCESS:
     return {
       ...state,
       ingredients: action.ingredients,
     };
-  case REQUEST_INGREDIENTS_LIST_FAILURE:
+  case REQUEST_INGREDIENTS_DRINKS_SUCCESS:
+    return {
+      ...state,
+      drinksIngredients: action.drinksIngredients,
+    };
+  case REQUEST_INGREDIENTS_LIST_FAILURE || REQUEST_INGREDIENTS_DRINKS_FAILURE:
     return {
       ...state,
       error: action.error,

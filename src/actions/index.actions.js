@@ -1,6 +1,7 @@
 import {
   fetchCocktail, fetchCocktailByID, fetchRecipe, fetchRecipeByID,
   fetchRecipeSuprise, fetchCocktailSuprise, fetchIngredientsList,
+  fetchIngredientsDrinks,
 } from '../services/API';
 
 export const REQUEST_RECIPE = 'REQUEST_RECIPE';
@@ -24,6 +25,9 @@ export const REQUEST_COCKTAIL_SUPRISE_FAILURE = 'REQUEST_COCKTAIL_SUPRISE_FAILUR
 export const REQUEST_INGREDIENTS_LIST = 'REQUEST_INGREDIENTS_LIST';
 export const REQUEST_INGREDIENTS_LIST_SUCCESS = 'REQUEST_INGREDIENTS_LIST_SUCCESS';
 export const REQUEST_INGREDIENTS_LIST_FAILURE = 'REQUEST_INGREDIENTS_LIST_FAILURE';
+export const REQUEST_INGREDIENTS_DRINKS = 'REQUEST_INGREDIENTS_DRINKS';
+export const REQUEST_INGREDIENTS_DRINKS_SUCCESS = 'REQUEST_INGREDIENTS_DRINKS_SUCCESS';
+export const REQUEST_INGREDIENTS_DRINKS_FAILURE = 'REQUEST_INGREDIENTS_DRINKS_FAILURE';
 
 export const requestRecipe = () => ({
   type: REQUEST_RECIPE,
@@ -177,7 +181,7 @@ export function requestCocktailSupriseThunk() {
   };
 }
 
-// Ingredients List
+// Ingredients List - Meals
 export const requestIngredientsList = () => ({
   type: REQUEST_INGREDIENTS_LIST,
 });
@@ -197,9 +201,36 @@ export function requestIngredientsListThunk() {
     try {
       const response = await fetchIngredientsList();
       dispatch(requestIngredientsListSuccess(response));
-      console.log(response);
+      // console.log(response);
     } catch (error) {
       dispatch(requestIngredientsListFailure(error));
+    }
+  };
+}
+
+//  Ingredients List - Drinks
+export const requestIngredientsDrinks = () => ({
+  type: REQUEST_INGREDIENTS_DRINKS,
+});
+
+export const requestIngredientsDrinksSuccess = (drinksIngredients) => ({
+  type: REQUEST_INGREDIENTS_DRINKS_SUCCESS,
+  drinksIngredients: drinksIngredients.drinks,
+});
+
+export const requestIngredientsDrinksFailure = (error) => ({
+  type: REQUEST_INGREDIENTS_DRINKS_FAILURE,
+  error,
+});
+
+export function requestIngredientsDrinksThunk() {
+  return async (dispatch) => {
+    try {
+      const response = await fetchIngredientsDrinks();
+      dispatch(requestIngredientsDrinksSuccess(response));
+      // console.log(response);
+    } catch (error) {
+      dispatch(requestIngredientsDrinksFailure(error));
     }
   };
 }
