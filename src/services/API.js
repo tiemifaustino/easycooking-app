@@ -52,8 +52,8 @@ export async function fetchCocktailSuprise() {
   return response.ok ? Promise.resolve(json) : Promise.reject(json);
 }
 
-export async function fetchRecipeListArea(area) {
-  const URL = `https://www.themealdb.com/api/json/v1/1/list.php?a=${area}`;
+export async function fetchRecipeListArea() {
+  const URL = 'https://www.themealdb.com/api/json/v1/1/list.php?a=list';
   const response = await fetch(URL);
   const json = await response.json();
 
@@ -61,7 +61,8 @@ export async function fetchRecipeListArea(area) {
 }
 
 export async function fetchRecipeByNationality(nationality) {
-  const URL = `https://www.themealdb.com/api/json/v1/1/filter.php?a=Canadian${nationality}`;
+  let URL = `https://www.themealdb.com/api/json/v1/1/filter.php?a=${nationality}`;
+  if (nationality === 'All') URL = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
   const response = await fetch(URL);
   const json = await response.json();
 

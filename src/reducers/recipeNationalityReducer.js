@@ -14,7 +14,7 @@ const recipeNationalityReducer = (state = INICIAL_STATE, action) => {
   case REQUEST_RECIPE_NATIONALITY_SUCCESS:
     return {
       ...state,
-      recipeNationality: action.recipe,
+      recipeNationality: action.recipeNationality,
     };
   case REQUEST_RECIPE_NATIONALITY_FAILURE:
     return {

@@ -1,6 +1,6 @@
 import {
   fetchCocktail, fetchCocktailByID, fetchRecipe, fetchRecipeByID,
-  fetchRecipeSuprise, fetchCocktailSuprise, fetchRecipeListArea,
+  fetchRecipeSuprise, fetchCocktailSuprise, fetchRecipeListArea, fetchRecipeByNationality,
 } from '../services/API';
 
 export const REQUEST_RECIPE = 'REQUEST_RECIPE';
@@ -203,14 +203,14 @@ export function requestRecipeListAreaThunk(area) {
     }
   };
 }
-//!
+
 export const requestRecipeNationality = () => ({
   type: REQUEST_RECIPE_NATIONALITY,
 });
 
 export const requestRecipeNationalitySuccess = (recipe) => ({
   type: REQUEST_RECIPE_NATIONALITY_SUCCESS,
-  recipe: recipe.meals,
+  recipeNationality: recipe.meals,
 });
 
 export const requestRecipeNationalityFailure = (error) => ({

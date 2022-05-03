@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState,
+} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Header from '../components/Header';
 import Cards from '../components/Cards';
@@ -10,29 +11,50 @@ function ExploreNationalities() {
   const { recipeArea } = useSelector((state) => state.recipeListAreaReducer);
   const { recipeNationality } = useSelector((state) => state.recipeNationalityReducer);
   const dispatch = useDispatch();
+  const [nationalityValue, setNationalityValue] = useState('All');
 
   useEffect(() => {
     dispatch(requestRecipeListAreaThunk());
-    dispatch(requestRecipeByNationalityThunk());
   }, []);
+
+  const handleChangeOption = ({ target: { value } }) => {
+    setNationalityValue(value);
+  };
+
+  useEffect(() => {
+    dispatch(requestRecipeByNationalityThunk(nationalityValue));
+  }, [nationalityValue]);
 
   return (
     <>
       <Header title="Explore Nationalities" visible />
       <div>
-        {/* {console.log(recipeNationality, 'aqui')} */}
-        <select data-testid="explore-by-nationality-dropdown">
-          {
-            recipeArea && recipeArea.map((nationality, index) => (
-              <option
-                key={ nationality.strArea + index }
-                data-testid={ `${nationality.strArea}-option` }
-              >
-                { nationality.strArea }
-              </option>
-            ))
-          }
-        </select>
+        <label htmlFor="explore-by-nationality-dropdown">
+          <select
+            data-testid="explore-by-nationality-dropdown"
+            value={ nationalityValue }
+            onChange={ handleChangeOption }
+            id="explore-by-nationality-dropdown"
+          >
+            <option
+              value="All"
+              data-testid="All-option"
+            >
+              All
+            </option>
+            {
+              recipeArea.map((nationality, index) => (
+                <option
+                  key={ nationality.strArea + index }
+                  data-testid={ `${nationality.strArea}-option` }
+                  value={ nationality.strArea }
+                >
+                  { nationality.strArea }
+                </option>
+              ))
+            }
+          </select>
+        </label>
         {
           recipeNationality && recipeNationality.map((nationality, index) => {
             const maxnationality = 11;
@@ -43,6 +65,7 @@ function ExploreNationalities() {
                 img={ nationality.strMealThumb }
                 index={ index }
                 title={ nationality.strMeal }
+                id={ nationality.idMeal }
               />
             );
           })
