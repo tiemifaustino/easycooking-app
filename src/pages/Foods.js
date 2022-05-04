@@ -22,13 +22,11 @@ function Foods() {
     'Goat',
   ];
 
-  useEffect(() => {
-    console.log(filter);
-    return () => {
-      dispatch(ingredientFilter(''));
-    };
+  useEffect(() => () => {
+    dispatch(ingredientFilter(''));
+  },
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  []);
 
   useEffect(() => {
     const objToDispatch = { search: '', typeInput: 'Name' };
@@ -39,7 +37,6 @@ function Foods() {
     } else {
       dispatch(recipeThunk(objToDispatch));
     }
-    // dispatch(recipeThunk(objToDispatch));
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -89,7 +86,6 @@ function Foods() {
           .map((meal, index) => {
             const maxFoods = 11;
             if (index > maxFoods) return;
-            console.log(meal);
             return (
               <Cards
                 key={ index }

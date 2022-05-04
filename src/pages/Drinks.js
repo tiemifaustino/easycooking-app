@@ -21,13 +21,11 @@ function Drinks() {
     'Cocoa',
   ];
 
-  useEffect(() => {
-    console.log(filter);
-    return () => {
-      dispatch(ingredientFilter(''));
-    };
+  useEffect(() => () => {
+    dispatch(ingredientFilter(''));
+  },
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  []);
 
   useEffect(() => {
     const objToDispatch = { search: '', typeInput: 'Name' };
@@ -38,8 +36,6 @@ function Drinks() {
     } else {
       dispatch(cocktailThunk(objToDispatch));
     }
-
-    // dispatch(cocktailThunk(objToDispatch));
   }, [dispatch]);
 
   const handleClick = ({ target }) => {
