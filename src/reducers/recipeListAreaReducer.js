@@ -1,6 +1,6 @@
 import { REQUEST_RECIPE_LIST_AREA,
   REQUEST_RECIPE_LIST_AREA_SUCCESS,
-  REQUEST_RECIPE_LIST_AREA_FAILURE } from '../actions/index.actions';
+  REQUEST_RECIPE_LIST_AREA_FAILURE } from '../actions/actionType';
 
 const INICIAL_STATE = {
   recipeArea: [],

@@ -3,7 +3,7 @@ import {
   REQUEST_INGREDIENTS_LIST_FAILURE,
   REQUEST_INGREDIENTS_DRINKS_SUCCESS,
   REQUEST_INGREDIENTS_DRINKS_FAILURE,
-} from '../actions/index.actions';
+} from '../actions/actionType';
 
 const INICIAL_STATE = {
   ingredients: [],

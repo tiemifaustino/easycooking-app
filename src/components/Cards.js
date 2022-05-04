@@ -5,7 +5,11 @@ import { useHistory } from 'react-router-dom';
 function Cards({ index, img, title, id }) {
   const history = useHistory();
   const handleClick = () => {
-    history.push(`/foods/${id}`);
+    if (window.location.href.includes('/foods')) {
+      history.push(`/foods/${id}`);
+    } else if (window.location.href.includes('/drinks')) {
+      history.push(`/drinks/${id}`);
+    }
   };
 
   return (

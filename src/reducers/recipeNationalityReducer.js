@@ -1,6 +1,6 @@
 import { REQUEST_RECIPE_NATIONALITY,
   REQUEST_RECIPE_NATIONALITY_SUCCESS,
-  REQUEST_RECIPE_NATIONALITY_FAILURE } from '../actions/index.actions';
+  REQUEST_RECIPE_NATIONALITY_FAILURE } from '../actions/actionType';
 
 const INICIAL_STATE = {
   recipeNationality: [],
