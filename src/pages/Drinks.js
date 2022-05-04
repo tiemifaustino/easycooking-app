@@ -52,8 +52,6 @@ function Drinks() {
     } else {
       dispatch(cocktailCategoriesThunk(name));
     }
-
-    console.log(name);
   };
 
   const handleClickToggle = () => {

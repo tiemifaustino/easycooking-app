@@ -1,6 +1,6 @@
 import { REQUEST_RECIPE_BY_ID,
   REQUEST_RECIPE_BY_ID_SUCCESS,
-  REQUEST_RECIPE_BY_ID_FAILURE } from '../actions/index.actions';
+  REQUEST_RECIPE_BY_ID_FAILURE } from '../actions/actionType';
 
 const INICIAL_STATE = {
   recipe: [],

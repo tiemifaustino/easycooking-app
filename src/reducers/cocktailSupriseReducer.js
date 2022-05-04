@@ -1,6 +1,6 @@
 import { REQUEST_COCKTAIL_SUPRISE,
   REQUEST_COCKTAIL_SUPRISE_SUCCESS,
-  REQUEST_COCKTAIL_SUPRISE_FAILURE } from '../actions/index.actions';
+  REQUEST_COCKTAIL_SUPRISE_FAILURE } from '../actions/actionType';
 
 const INICIAL_STATE = {
   cocktailSuprise: [],
