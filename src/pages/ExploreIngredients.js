@@ -4,7 +4,7 @@ import { useHistory, Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { requestIngredientsListThunk,
-  requestIngredientsDrinksThunk } from '../actions/index.actions';
+  requestIngredientsDrinksThunk, ingredientFilter } from '../actions/index.actions';
 import CardIngredients from '../components/CardIngredients';
 
 function ExploreIngredients() {
@@ -20,6 +20,11 @@ function ExploreIngredients() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const handleClick = (ingredientValue) => {
+    dispatch(ingredientFilter(ingredientValue));
+    history.push('/foods');
+  };
+
   return (
     <>
       <Header title="Explore Ingredients" visible={ false } />
@@ -29,17 +34,17 @@ function ExploreIngredients() {
           const maxIngredients = 11;
           if (index > maxIngredients) return;
           return (
-            <Link
-              to="/foods"
+            <button
+              onClick={ () => handleClick(ingredient.strIngredient) }
               key={ ingredient.idIngredient }
+              type="button"
             >
               <CardIngredients
-                key={ ingredient.idIngredient }
                 index={ index }
                 img={ `https://www.themealdb.com/images/ingredients/${ingredient.strIngredient}-Small.png` }
                 title={ ingredient.strIngredient }
               />
-            </Link>
+            </button>
           );
         })
       }
@@ -49,12 +54,17 @@ function ExploreIngredients() {
           const maxIngredients = 11;
           if (index > maxIngredients) return;
           return (
-            <CardIngredients
+            <Link
+              to="/drinks"
               key={ index }
-              index={ index }
-              img={ `https://www.thecocktaildb.com/images/ingredients/${drinkIngredient.strIngredient1}-Small.png` }
-              title={ drinkIngredient.strIngredient1 }
-            />
+            >
+              <CardIngredients
+                key={ index }
+                index={ index }
+                img={ `https://www.thecocktaildb.com/images/ingredients/${drinkIngredient.strIngredient1}-Small.png` }
+                title={ drinkIngredient.strIngredient1 }
+              />
+            </Link>
           );
         })
       }
