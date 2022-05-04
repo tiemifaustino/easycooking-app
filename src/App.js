@@ -14,7 +14,8 @@ import Foods from './pages/Foods';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
 import RecipeDetails from './pages/RecipeDetails';
-import RecipeInProgress from './pages/RecipeInProgress';
+import FoodInProgress from './pages/FoodInProgress';
+import DrinkInProgress from './pages/DrinkInProgress';
 import NotFound from './pages/NotFound';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -40,8 +41,8 @@ function App() {
         <Route exact path="/explore/drinks" component={ ExploreDrinks } />
         <Route exact path="/explore/foods" component={ ExploreFoods } />
         <Route exact path="/explore" component={ Explore } />
-        <Route exact path="/drinks/:id/in-progress" component={ RecipeInProgress } />
-        <Route exact path="/foods/:id/in-progress" />
+        <Route exact path="/drinks/:id/in-progress" component={ DrinkInProgress } />
+        <Route exact path="/foods/:id/in-progress" component={ FoodInProgress } />
         <Route exact path="/drinks/:id" component={ CocktailDetails } />
         <Route exact path="/foods/:id" component={ RecipeDetails } />
         <Route exact path="/drinks" component={ Drinks } />
