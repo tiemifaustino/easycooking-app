@@ -29,9 +29,7 @@ export const REQUEST_INGREDIENTS_LIST_FAILURE = 'REQUEST_INGREDIENTS_LIST_FAILUR
 export const REQUEST_INGREDIENTS_DRINKS_SUCCESS = 'REQUEST_INGREDIENTS_DRINKS_SUCCESS';
 export const REQUEST_INGREDIENTS_DRINKS_FAILURE = 'REQUEST_INGREDIENTS_DRINKS_FAILURE';
 
-export const requestRecipe = () => ({
-  type: REQUEST_RECIPE,
-});
+export const requestRecipe = () => ({ type: REQUEST_RECIPE });
 
 export const requestRecipeSuccess = (recipe) => ({
   type: REQUEST_RECIPE_SUCCESS,
@@ -81,9 +79,7 @@ export function cocktailCategoriesThunk(category) {
   };
 }
 
-export const requestCocktail = () => ({
-  type: REQUEST_COCKTAIL,
-});
+export const requestCocktail = () => ({ type: REQUEST_COCKTAIL });
 
 export const requestCocktailFailure = () => ({
   type: REQUEST_COCKTAIL_FAILURE,
@@ -101,9 +97,7 @@ export function cocktailThunk(searchValue) {
   };
 }
 
-export const requestRecipeByID = () => ({
-  type: REQUEST_RECIPE_BY_ID,
-});
+export const requestRecipeByID = () => ({ type: REQUEST_RECIPE_BY_ID });
 
 export const requestRecipeByIDSuccess = (recipe) => ({
   type: REQUEST_RECIPE_BY_ID_SUCCESS,
@@ -127,9 +121,7 @@ export function requestRecipeByIDThunk(id) {
 }
 
 //
-export const requestCocktailByID = () => ({
-  type: REQUEST_COCKTAIL_BY_ID,
-});
+export const requestCocktailByID = () => ({ type: REQUEST_COCKTAIL_BY_ID });
 
 export const requestCocktailByIDSuccess = (cocktail) => ({
   type: REQUEST_COCKTAIL_BY_ID_SUCCESS,
@@ -152,10 +144,7 @@ export function requestCocktailByIDThunk(id) {
   };
 }
 
-// Recipe and Drink Suprise
-export const requestRecipeSuprise = () => ({
-  type: REQUEST_RECIPE_SUPRISE,
-});
+export const requestRecipeSuprise = () => ({ type: REQUEST_RECIPE_SUPRISE });
 
 export const requestRecipeSupriseSuccess = (recipeSuprise) => ({
   type: REQUEST_RECIPE_SUPRISE_SUCCESS,
@@ -178,9 +167,7 @@ export function requestRecipeSupriseThunk() {
   };
 }
 
-export const requestCocktailSuprise = () => ({
-  type: REQUEST_COCKTAIL_SUPRISE,
-});
+export const requestCocktailSuprise = () => ({ type: REQUEST_COCKTAIL_SUPRISE });
 
 export const requestCocktailSupriseSuccess = (cocktailSuprise) => ({
   type: REQUEST_COCKTAIL_SUPRISE_SUCCESS,
@@ -203,7 +190,6 @@ export function requestCocktailSupriseThunk() {
   };
 }
 
-// Ingredients List - Meals
 export const requestIngredientsListSuccess = (ingredients) => ({
   type: REQUEST_INGREDIENTS_LIST_SUCCESS,
   ingredients: ingredients.meals,
@@ -225,7 +211,6 @@ export function requestIngredientsListThunk() {
   };
 }
 
-//  Ingredients List - Drinks
 export const requestIngredientsDrinksSuccess = (drinksIngredients) => ({
   type: REQUEST_INGREDIENTS_DRINKS_SUCCESS,
   drinksIngredients: drinksIngredients.drinks,
@@ -246,3 +231,8 @@ export function requestIngredientsDrinksThunk() {
     }
   };
 }
+
+export const ingredientFilter = (filter) => ({
+  type: 'FILTER',
+  filter,
+});

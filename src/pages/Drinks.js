@@ -3,12 +3,14 @@ import { useSelector, useDispatch } from 'react-redux';
 import Cards from '../components/Cards';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
-import { cocktailThunk, cocktailCategoriesThunk } from '../actions/index.actions';
+import { cocktailThunk, cocktailCategoriesThunk,
+  ingredientFilter } from '../actions/index.actions';
 
 function Drinks() {
   const dispatch = useDispatch();
   const [clicked, setClicked] = useState({});
   const drinks = useSelector((state) => state.cocktailReducer.cocktail.drinks);
+  const { filter } = useSelector((state) => state.filterReducer);
 
   const buttonsNames = [
     'All',
@@ -19,10 +21,21 @@ function Drinks() {
     'Cocoa',
   ];
 
+  useEffect(() => () => {
+    dispatch(ingredientFilter(''));
+  },
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  []);
+
   useEffect(() => {
     const objToDispatch = { search: '', typeInput: 'Name' };
+    const objFilteredByIngredient = { search: filter, typeInput: 'Ingredient' };
 
-    dispatch(cocktailThunk(objToDispatch));
+    if (filter) {
+      dispatch(cocktailThunk(objFilteredByIngredient));
+    } else {
+      dispatch(cocktailThunk(objToDispatch));
+    }
   }, [dispatch]);
 
   const handleClick = ({ target }) => {

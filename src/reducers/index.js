@@ -6,6 +6,7 @@ import cocktailByIDReducer from './cocktailByIDReducer';
 import recipeSupriseReducer from './recipeSupriseReducer';
 import cocktailSupriseReducer from './cocktailSupriseReducer';
 import ingredientsReducer from './ingredientsReducer';
+import filterReducer from './filterReducer';
 
 const rootReducer = combineReducers({
   recipeReducer,
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   ingredientsReducer,
   recipeByIDReducer,
   cocktailByIDReducer,
+  filterReducer,
 });
 
 export default rootReducer;
