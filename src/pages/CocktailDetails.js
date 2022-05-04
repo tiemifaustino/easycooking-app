@@ -92,7 +92,7 @@ function CocktailDetails() {
     if (isFavorite) {
       const filteredFavorites = favoriteRecipes
         .filter((favoriteRecipe) => favoriteRecipe.id !== id);
-      const favoritesString = JSON.stringify(filteredFavorites);
+      const favoritesString = JSON.stringify([...favoriteRecipes, filteredFavorites]);
       localStorage.setItem('favoriteRecipes', favoritesString);
     } else {
       const favoriteRecipeToAdd = {
