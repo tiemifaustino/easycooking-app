@@ -3,32 +3,21 @@ import { useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { requestRecipeByIDThunk, cocktailThunk } from '../actions/index.actions';
-import SimpleSliderDrinks from '../components/SimpleSliderDrinks';
 import shareBtnLogo from '../images/shareIcon.svg';
 import favoriteNotChecked from '../images/whiteHeartIcon.svg';
 import favoriteChecked from '../images/blackHeartIcon.svg';
 
-function RecipeDetails() {
+function FoodInProgress() {
   const { id } = useParams();
   const dispatch = useDispatch();
   const history = useHistory();
   const { recipe } = useSelector((state) => state.recipeByIDReducer);
-  const { cocktail } = useSelector((state) => state.cocktailReducer);
   const [ingredients, setIngredients] = useState([]);
   const [meal, setMeal] = useState([]);
   const [measurements, setMeasurements] = useState([]);
-  const [recommendedCards, setRecommendedCards] = useState([]);
-  const [currentBtn, setCurrentBtn] = useState('Start Recipe');
-  const [showBtn, setShowBtn] = useState(true);
   const [isFavorite, setIsFavorite] = useState(false);
-
-  const findButtonInLocalStorage = () => {
-    const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
-    const isRecipeDone = doneRecipes?.some((doneRecipe) => doneRecipe.id === Number(id));
-    setShowBtn(!isRecipeDone);
-    const recipesInProgress = JSON.parse(localStorage.getItem('inProgressRecipes'));
-    if (recipesInProgress?.meals[id] !== undefined) setCurrentBtn('Continue Recipe');
-  };
+  const [isChecked, setIsChecked] = useState(false);
+  const [numberOfSteps, setNumberOfSteps] = useState(0);
 
   const checkIfIsFavorite = () => {
     const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
@@ -41,7 +30,6 @@ function RecipeDetails() {
   useEffect(() => {
     dispatch(cocktailThunk({ search: '', typeInput: 'Name' }));
     dispatch(requestRecipeByIDThunk(id));
-    findButtonInLocalStorage();
     checkIfIsFavorite();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -53,12 +41,14 @@ function RecipeDetails() {
     if (recipe.length > 0) {
       const mealIngredients = Object.entries(recipe[0])
         .filter((mealIngredient) => mealIngredient[0].includes('strIngredient'))
-        .filter((ingredientsArray) => ingredientsArray[1] !== '')
+        .filter((ingredientsArray) => ingredientsArray[1] !== ''
+        && ingredientsArray[1] !== null)
         .map((ingredientBeingMapped) => ingredientBeingMapped[1]);
 
       const mealMeasurements = Object.entries(recipe[0])
         .filter((mealMeasurement) => mealMeasurement[0].includes('strMeasure'))
-        .filter((measurementsArray) => measurementsArray[1] !== '')
+        .filter((measurementsArray) => measurementsArray[1] !== ''
+        && measurementsArray[1] !== null)
         .map((measurementsMapped) => measurementsMapped[1]);
 
       setIngredients(mealIngredients);
@@ -67,23 +57,37 @@ function RecipeDetails() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [recipe]);
 
-  useEffect(() => {
-    // const sortRandomize = 0.5;
-    const MAXIMUN_NUMBER_OF_CARDS = 6;
-    if (cocktail.drinks?.length > 0) {
-      const randomCards = [...cocktail.drinks];
-      // .sort(() => Math.random() - sortRandomize);
-      setRecommendedCards(randomCards.slice(0, MAXIMUN_NUMBER_OF_CARDS));
-    }
-  }, [cocktail]);
-
   const handleClick = () => {
-    history.push(`/foods/${id}/in-progress`);
+    const timeElapsed = Date.now();
+    const today = new Date(timeElapsed);
+    const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
+    const currentRecipe = {
+      id: meal[0].idMeal,
+      type: 'food',
+      nationality: meal[0].strArea,
+      category: meal[0].strCategory,
+      alcoholicOrNot: '',
+      name: meal[0].strMeal,
+      image: meal[0].strMealThumb,
+      doneDate: today.toDateString(),
+      tags: meal[0].strTags,
+    };
+
+    if (!doneRecipes) {
+      const doneRecipeString = JSON.stringify([currentRecipe]);
+      localStorage.setItem('doneRecipes', doneRecipeString);
+    } else {
+      const doneRecipeString = JSON.stringify([...doneRecipes, currentRecipe]);
+      localStorage.setItem('doneRecipes', doneRecipeString);
+    }
+
+    history.push('/done-recipes');
   };
 
   const handleShare = () => {
     toast.success('Link copied!');
-    navigator.clipboard.writeText(window.location.href);
+    const recipeURL = window.location.href.replace('/in-progress', '');
+    navigator.clipboard.writeText(recipeURL);
   };
 
   const handleFavorite = () => {
@@ -95,6 +99,7 @@ function RecipeDetails() {
       const favoritesString = JSON.stringify(filteredFavorites);
       localStorage.setItem('favoriteRecipes', favoritesString);
     } else {
+      console.log(recipe, meal);
       const favoriteRecipeToAdd = {
         id,
         type: 'food',
@@ -112,6 +117,14 @@ function RecipeDetails() {
 
     setIsFavorite(!isFavorite);
   };
+
+  const handleChecked = () => {
+    setIsChecked(!isChecked);
+  };
+
+  useEffect(() => {
+    setNumberOfSteps(document.querySelectorAll('input[name=chkBox]:checked').length);
+  }, [isChecked]);
 
   return (
     meal.length > 0
@@ -152,47 +165,49 @@ function RecipeDetails() {
           </div>
 
           <div>
-            <ul>
-              <h2>Ingredients</h2>
-              {ingredients.map((ingredient, index) => (
-                <li
-                  key={ `${index}-ingredient-name-and-measure` }
-                  data-testid={ `${index}-ingredient-name-and-measure` }
+            <h2>Ingredients</h2>
+            {ingredients.map((ingredient, index) => (
+              <div
+                key={ `${index}-ingredient-name-and-measure` }
+                data-testid={ `${index}-ingredient-step` }
+              >
+                <label
+                  htmlFor={ `${index}-ingredient-step` }
                 >
+                  <input
+                    type="checkbox"
+                    id={ `${index}-ingredient-step` }
+                    name="chkBox"
+                    onChange={ handleChecked }
+                  />
                   {`${ingredient} ${measurements[index]}`}
-
-                </li>
-              ))}
-            </ul>
+                </label>
+              </div>
+            ))}
             <h2>Instructions</h2>
             <p data-testid="instructions">{meal[0].strInstructions}</p>
             <h2>Video</h2>
-            <iframe
+            {/* <iframe
               width="420"
               height="315"
               data-testid="video"
               src={ meal[0].strYoutube.replace('watch?v=', 'embed/') }
               title="video da receita"
-            />
+            /> */}
           </div>
-          <h2>Recommended</h2>
-          <SimpleSliderDrinks
-            recommendedCards={ recommendedCards }
-          />
-          {showBtn
-            ? (
-              <button
-                className="recipe-button"
-                type="button"
-                data-testid="start-recipe-btn"
-                onClick={ () => handleClick() }
-              >
-                {currentBtn}
-              </button>)
-            : ''}
+
+          <button
+            className="recipe-button"
+            type="button"
+            data-testid="finish-recipe-btn"
+            disabled={ numberOfSteps !== ingredients.length }
+            onClick={ () => handleClick() }
+          >
+            Finish Recipe
+          </button>
 
         </div>
       ) : '');
 }
 
-export default RecipeDetails;
+export default FoodInProgress;

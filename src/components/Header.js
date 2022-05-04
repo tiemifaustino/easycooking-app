@@ -13,7 +13,6 @@ function Header(props) {
   const [search, setSearch] = useState('');
   const [typeInput, setTypeInput] = useState('');
   const [clicked, setClicked] = useState(false);
-  // const [objDispatch, setObjDispatch] = useState({});
   const { cocktail } = useSelector((state) => state.cocktailReducer);
   const { recipe } = useSelector((state) => state.recipeReducer);
   const dispatch = useDispatch();
@@ -42,21 +41,13 @@ function Header(props) {
       return;
     }
 
-    console.log(obj);
-
     setClicked(!clicked);
 
     if (window.location.href.includes('/foods')) {
-      console.log('Foods dispatch');
       dispatch(recipeThunk(obj));
     } else if (window.location.href.includes('/drinks')) {
-      console.log('Drinks dispatch');
       dispatch(cocktailThunk(obj));
     }
-
-    console.log('Length do meals', recipe.meals?.length);
-
-    console.log('Recipe meals', recipe.meals);
   };
 
   useEffect(() => {
@@ -67,7 +58,6 @@ function Header(props) {
     }
 
     if (recipe.meals?.length === 1 && clicked) {
-      console.log('Have one food');
       history.push(`/foods/${recipe.meals[0].idMeal}`);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -81,7 +71,6 @@ function Header(props) {
     }
 
     if (cocktail.drinks?.length === 1 && clicked) {
-      console.log('Have one drink');
       history.push(`/drinks/${cocktail.drinks[0].idDrink}`);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
