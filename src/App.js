@@ -16,6 +16,7 @@ import Profile from './pages/Profile';
 import RecipeDetails from './pages/RecipeDetails';
 import FoodInProgress from './pages/FoodInProgress';
 import DrinkInProgress from './pages/DrinkInProgress';
+import NotFound from './pages/NotFound';
 import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
@@ -47,6 +48,7 @@ function App() {
         <Route exact path="/drinks" component={ Drinks } />
         <Route exact path="/foods" component={ Foods } />
         <Route exact path="/" component={ Login } />
+        <Route path="*" component={ NotFound } />
       </Switch>
     </>
   );

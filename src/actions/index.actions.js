@@ -2,45 +2,29 @@ import {
   fetchCocktail, fetchCocktailByID, fetchRecipe, fetchRecipeByID,
   fetchRecipeSuprise, fetchCocktailSuprise, fetchCategoriesFood, fetchCategoriesCocktail,
   fetchIngredientsList, fetchIngredientsDrinks,
+  fetchRecipeListArea, fetchRecipeByNationality,
 } from '../services/API';
+import {
+  REQUEST_RECIPE, REQUEST_RECIPE_SUCCESS,
+  REQUEST_RECIPE_FAILURE, REQUEST_COCKTAIL, REQUEST_COCKTAIL_SUCCESS,
+  REQUEST_COCKTAIL_FAILURE, REQUEST_RECIPE_BY_ID, REQUEST_RECIPE_BY_ID_SUCCESS,
+  REQUEST_RECIPE_BY_ID_FAILURE, REQUEST_COCKTAIL_BY_ID,
+  REQUEST_COCKTAIL_BY_ID_SUCCESS, REQUEST_COCKTAIL_BY_ID_FAILURE,
+  REQUEST_RECIPE_SUPRISE, REQUEST_RECIPE_SUPRISE_SUCCESS, REQUEST_RECIPE_SUPRISE_FAILURE,
+  REQUEST_COCKTAIL_SUPRISE, REQUEST_COCKTAIL_SUPRISE_SUCCESS,
+  REQUEST_COCKTAIL_SUPRISE_FAILURE, REQUEST_RECIPE_LIST_AREA,
+  REQUEST_RECIPE_LIST_AREA_SUCCESS, REQUEST_RECIPE_LIST_AREA_FAILURE,
+  REQUEST_RECIPE_NATIONALITY, REQUEST_RECIPE_NATIONALITY_SUCCESS,
+  REQUEST_RECIPE_NATIONALITY_FAILURE, REQUEST_INGREDIENTS_LIST_SUCCESS,
+  REQUEST_INGREDIENTS_LIST_FAILURE, REQUEST_INGREDIENTS_DRINKS_SUCCESS,
+  REQUEST_INGREDIENTS_DRINKS_FAILURE } from './actionType';
 
-export const REQUEST_RECIPE = 'REQUEST_RECIPE';
-export const REQUEST_RECIPE_SUCCESS = 'REQUEST_RECIPE_SUCCESS';
-export const REQUEST_CATEGORY_RECIPE_SUCCESS = 'REQUEST_CATEGORY_RECIPE_SUCCESS';
-export const REQUEST_CATEGORY_RECIPE_FAILURE = 'REQUEST_CATEGORY_RECIPE_FAILURE';
-export const REQUEST_RECIPE_FAILURE = 'REQUEST_RECIPE_FAILURE';
-export const REQUEST_COCKTAIL = 'REQUEST_COCKTAIL';
-export const REQUEST_COCKTAIL_SUCCESS = 'REQUEST_COCKTAIL_SUCCESS';
-export const REQUEST_COCKTAIL_FAILURE = 'REQUEST_COCKTAIL_FAILURE';
-export const REQUEST_RECIPE_BY_ID = 'REQUEST_RECIPE_BY_ID';
-export const REQUEST_RECIPE_BY_ID_SUCCESS = 'REQUEST_RECIPE_BY_ID_SUCCESS';
-export const REQUEST_RECIPE_BY_ID_FAILURE = 'REQUEST_RECIPE_BY_ID_FAILURE';
-export const REQUEST_COCKTAIL_BY_ID = 'REQUEST_COCKTAIL_BY_ID';
-export const REQUEST_COCKTAIL_BY_ID_SUCCESS = 'REQUEST_COCKTAIL_BY_ID_SUCCESS';
-export const REQUEST_COCKTAIL_BY_ID_FAILURE = 'REQUEST_COCKTAIL_BY_ID_FAILURE';
-export const REQUEST_RECIPE_SUPRISE = 'REQUEST_RECIPE_SUPRISE';
-export const REQUEST_RECIPE_SUPRISE_SUCCESS = 'REQUEST_RECIPE_SUPRISE_SUCCESS';
-export const REQUEST_RECIPE_SUPRISE_FAILURE = 'REQUEST_RECIPE_SUPRISE_FAILURE';
-export const REQUEST_COCKTAIL_SUPRISE = 'REQUEST_COCKTAIL_SUPRISE';
-export const REQUEST_COCKTAIL_SUPRISE_SUCCESS = 'REQUEST_COCKTAIL_SUPRISE_SUCCESS';
-export const REQUEST_COCKTAIL_SUPRISE_FAILURE = 'REQUEST_COCKTAIL_SUPRISE_FAILURE';
-export const REQUEST_INGREDIENTS_LIST_SUCCESS = 'REQUEST_INGREDIENTS_LIST_SUCCESS';
-export const REQUEST_INGREDIENTS_LIST_FAILURE = 'REQUEST_INGREDIENTS_LIST_FAILURE';
-export const REQUEST_INGREDIENTS_DRINKS_SUCCESS = 'REQUEST_INGREDIENTS_DRINKS_SUCCESS';
-export const REQUEST_INGREDIENTS_DRINKS_FAILURE = 'REQUEST_INGREDIENTS_DRINKS_FAILURE';
-
-export const requestRecipe = () => ({
-  type: REQUEST_RECIPE,
-});
-
+export const requestRecipe = () => ({ type: REQUEST_RECIPE });
 export const requestRecipeSuccess = (recipe) => ({
-  type: REQUEST_RECIPE_SUCCESS,
-  recipe,
+  type: REQUEST_RECIPE_SUCCESS, recipe,
 });
-
 export const requestRecipeFailure = (error) => ({
-  type: REQUEST_RECIPE_FAILURE,
-  error,
+  type: REQUEST_RECIPE_FAILURE, error,
 });
 
 export function recipeThunk(searchValue) {
@@ -66,8 +50,7 @@ export function recipeCategoriesThunk(category) {
 }
 
 export const requestCocktailSuccess = (cocktail) => ({
-  type: REQUEST_COCKTAIL_SUCCESS,
-  cocktail,
+  type: REQUEST_COCKTAIL_SUCCESS, cocktail,
 });
 
 export function cocktailCategoriesThunk(category) {
@@ -81,10 +64,7 @@ export function cocktailCategoriesThunk(category) {
   };
 }
 
-export const requestCocktail = () => ({
-  type: REQUEST_COCKTAIL,
-});
-
+export const requestCocktail = () => ({ type: REQUEST_COCKTAIL });
 export const requestCocktailFailure = () => ({
   type: REQUEST_COCKTAIL_FAILURE,
   error: 'Sorry, we haven\'t found any recipes for these filters.',
@@ -101,18 +81,12 @@ export function cocktailThunk(searchValue) {
   };
 }
 
-export const requestRecipeByID = () => ({
-  type: REQUEST_RECIPE_BY_ID,
-});
-
+export const requestRecipeByID = () => ({ type: REQUEST_RECIPE_BY_ID });
 export const requestRecipeByIDSuccess = (recipe) => ({
-  type: REQUEST_RECIPE_BY_ID_SUCCESS,
-  recipe,
+  type: REQUEST_RECIPE_BY_ID_SUCCESS, recipe,
 });
-
 export const requestRecipeByIDFailure = (error) => ({
-  type: REQUEST_RECIPE_BY_ID_FAILURE,
-  error,
+  type: REQUEST_RECIPE_BY_ID_FAILURE, error,
 });
 
 export function requestRecipeByIDThunk(id) {
@@ -126,19 +100,12 @@ export function requestRecipeByIDThunk(id) {
   };
 }
 
-//
-export const requestCocktailByID = () => ({
-  type: REQUEST_COCKTAIL_BY_ID,
-});
-
+export const requestCocktailByID = () => ({ type: REQUEST_COCKTAIL_BY_ID });
 export const requestCocktailByIDSuccess = (cocktail) => ({
-  type: REQUEST_COCKTAIL_BY_ID_SUCCESS,
-  cocktail,
+  type: REQUEST_COCKTAIL_BY_ID_SUCCESS, cocktail,
 });
-
 export const requestCocktailByIDFailure = (error) => ({
-  type: REQUEST_COCKTAIL_BY_ID_FAILURE,
-  error,
+  type: REQUEST_COCKTAIL_BY_ID_FAILURE, error,
 });
 
 export function requestCocktailByIDThunk(id) {
@@ -152,19 +119,12 @@ export function requestCocktailByIDThunk(id) {
   };
 }
 
-// Recipe and Drink Suprise
-export const requestRecipeSuprise = () => ({
-  type: REQUEST_RECIPE_SUPRISE,
-});
-
+export const requestRecipeSuprise = () => ({ type: REQUEST_RECIPE_SUPRISE });
 export const requestRecipeSupriseSuccess = (recipeSuprise) => ({
-  type: REQUEST_RECIPE_SUPRISE_SUCCESS,
-  recipeSuprise,
+  type: REQUEST_RECIPE_SUPRISE_SUCCESS, recipeSuprise,
 });
-
 export const requestRecipeSupriseFailure = (error) => ({
-  type: REQUEST_RECIPE_SUPRISE_FAILURE,
-  error,
+  type: REQUEST_RECIPE_SUPRISE_FAILURE, error,
 });
 
 export function requestRecipeSupriseThunk() {
@@ -178,18 +138,14 @@ export function requestRecipeSupriseThunk() {
   };
 }
 
-export const requestCocktailSuprise = () => ({
-  type: REQUEST_COCKTAIL_SUPRISE,
-});
+export const requestCocktailSuprise = () => ({ type: REQUEST_COCKTAIL_SUPRISE });
 
 export const requestCocktailSupriseSuccess = (cocktailSuprise) => ({
-  type: REQUEST_COCKTAIL_SUPRISE_SUCCESS,
-  cocktailSuprise,
+  type: REQUEST_COCKTAIL_SUPRISE_SUCCESS, cocktailSuprise,
 });
 
 export const requestCocktailSupriseFailure = (error) => ({
-  type: REQUEST_COCKTAIL_SUPRISE_FAILURE,
-  error,
+  type: REQUEST_COCKTAIL_SUPRISE_FAILURE, error,
 });
 
 export function requestCocktailSupriseThunk() {
@@ -203,15 +159,36 @@ export function requestCocktailSupriseThunk() {
   };
 }
 
-// Ingredients List - Meals
+export const requestRecipeListArea = () => ({
+  type: REQUEST_RECIPE_LIST_AREA,
+});
+
+export const requestRecipeListAreaSuccess = (recipe) => ({
+  type: REQUEST_RECIPE_LIST_AREA_SUCCESS, recipe: recipe.meals,
+});
+
+export const requestRecipeListAreaFailure = (error) => ({
+  type: REQUEST_RECIPE_LIST_AREA_FAILURE, error,
+});
+
+export function requestRecipeListAreaThunk(area) {
+  return async (dispatch) => {
+    try {
+      const response = await fetchRecipeListArea(area);
+      dispatch(requestRecipeListAreaSuccess(response));
+    } catch (error) {
+      dispatch(requestRecipeListAreaFailure(error));
+    }
+  };
+}
+
 export const requestIngredientsListSuccess = (ingredients) => ({
   type: REQUEST_INGREDIENTS_LIST_SUCCESS,
   ingredients: ingredients.meals,
 });
 
 export const requestIngredientsListFailure = (error) => ({
-  type: REQUEST_INGREDIENTS_LIST_FAILURE,
-  error,
+  type: REQUEST_INGREDIENTS_LIST_FAILURE, error,
 });
 
 export function requestIngredientsListThunk() {
@@ -225,15 +202,35 @@ export function requestIngredientsListThunk() {
   };
 }
 
-//  Ingredients List - Drinks
+export const requestRecipeNationality = () => ({
+  type: REQUEST_RECIPE_NATIONALITY,
+});
+
+export const requestRecipeNationalitySuccess = (recipe) => ({
+  type: REQUEST_RECIPE_NATIONALITY_SUCCESS, recipeNationality: recipe.meals,
+});
+
+export const requestRecipeNationalityFailure = (error) => ({
+  type: REQUEST_RECIPE_NATIONALITY_FAILURE, error,
+});
+
+export function requestRecipeByNationalityThunk(area) {
+  return async (dispatch) => {
+    try {
+      const response = await fetchRecipeByNationality(area);
+      dispatch(requestRecipeNationalitySuccess(response));
+    } catch (error) {
+      dispatch(requestRecipeNationalityFailure(error));
+    }
+  };
+}
+
 export const requestIngredientsDrinksSuccess = (drinksIngredients) => ({
-  type: REQUEST_INGREDIENTS_DRINKS_SUCCESS,
-  drinksIngredients: drinksIngredients.drinks,
+  type: REQUEST_INGREDIENTS_DRINKS_SUCCESS, drinksIngredients: drinksIngredients.drinks,
 });
 
 export const requestIngredientsDrinksFailure = (error) => ({
-  type: REQUEST_INGREDIENTS_DRINKS_FAILURE,
-  error,
+  type: REQUEST_INGREDIENTS_DRINKS_FAILURE, error,
 });
 
 export function requestIngredientsDrinksThunk() {
@@ -246,3 +243,7 @@ export function requestIngredientsDrinksThunk() {
     }
   };
 }
+
+export const ingredientFilter = (filter) => ({
+  type: 'FILTER', filter,
+});

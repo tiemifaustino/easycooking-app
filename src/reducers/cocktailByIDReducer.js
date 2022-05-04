@@ -1,6 +1,6 @@
 import { REQUEST_COCKTAIL_BY_ID,
   REQUEST_COCKTAIL_BY_ID_SUCCESS,
-  REQUEST_COCKTAIL_BY_ID_FAILURE } from '../actions/index.actions';
+  REQUEST_COCKTAIL_BY_ID_FAILURE } from '../actions/actionType';
 
 const INICIAL_STATE = {
   cocktail: [],
