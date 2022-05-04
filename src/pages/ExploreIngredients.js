@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory, Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { requestIngredientsListThunk,
@@ -20,9 +20,14 @@ function ExploreIngredients() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const handleClick = (ingredientValue) => {
+  const handleClickMeals = (ingredientValue) => {
     dispatch(ingredientFilter(ingredientValue));
     history.push('/foods');
+  };
+
+  const handleClickDrinks = (ingredientValue) => {
+    dispatch(ingredientFilter(ingredientValue));
+    history.push('/drinks');
   };
 
   return (
@@ -35,7 +40,7 @@ function ExploreIngredients() {
           if (index > maxIngredients) return;
           return (
             <button
-              onClick={ () => handleClick(ingredient.strIngredient) }
+              onClick={ () => handleClickMeals(ingredient.strIngredient) }
               key={ ingredient.idIngredient }
               type="button"
             >
@@ -54,17 +59,17 @@ function ExploreIngredients() {
           const maxIngredients = 11;
           if (index > maxIngredients) return;
           return (
-            <Link
-              to="/drinks"
+            <button
+              onClick={ () => handleClickDrinks(drinkIngredient.strIngredient1) }
               key={ index }
+              type="button"
             >
               <CardIngredients
-                key={ index }
                 index={ index }
                 img={ `https://www.thecocktaildb.com/images/ingredients/${drinkIngredient.strIngredient1}-Small.png` }
                 title={ drinkIngredient.strIngredient1 }
               />
-            </Link>
+            </button>
           );
         })
       }

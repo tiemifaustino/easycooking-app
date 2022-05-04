@@ -27,18 +27,21 @@ function Foods() {
     return () => {
       dispatch(ingredientFilter(''));
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     const objToDispatch = { search: '', typeInput: 'Name' };
+    const objFilteredByIngredient = { search: filter, typeInput: 'Ingredient' };
 
-    dispatch(recipeThunk(objToDispatch));
-<<<<<<< HEAD
-  }, [dispatch]);
-=======
+    if (filter) {
+      dispatch(recipeThunk(objFilteredByIngredient));
+    } else {
+      dispatch(recipeThunk(objToDispatch));
+    }
+    // dispatch(recipeThunk(objToDispatch));
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
->>>>>>> 80da6f0960397028d11eb4846b9b97a70b15bd29
 
   const handleClick = ({ target }) => {
     const { name } = target;
@@ -82,37 +85,21 @@ function Foods() {
         ))
       }
       {
-<<<<<<< HEAD
         foods && foods
-          .filter((food) => Object.values(food).includes(filter))
           .map((meal, index) => {
             const maxFoods = 11;
             if (index > maxFoods) return;
-            console.log(meal.strMeal);
+            console.log(meal);
             return (
               <Cards
                 key={ index }
+                id={ meal.idMeal }
                 img={ meal.strMealThumb }
                 index={ index }
                 title={ meal.strMeal }
               />
             );
           })
-=======
-        foods && foods.map((meal, index) => {
-          const maxFoods = 11;
-          if (index > maxFoods) return;
-          return (
-            <Cards
-              key={ index }
-              id={ meal.idMeal }
-              img={ meal.strMealThumb }
-              index={ index }
-              title={ meal.strMeal }
-            />
-          );
-        })
->>>>>>> 80da6f0960397028d11eb4846b9b97a70b15bd29
       }
       <Footer />
     </div>
