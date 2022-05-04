@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function DoneRecipesCard({ index, title }) {
+function DoneRecipesCard({ index, title, img }) {
   return (
-    <div data-testid="0-horizontal-image">
+    <div>
       <img
         data-testid={ `${index}-horizontal-image` }
         alt={ title }
-        src={ imageChicken }
+        src={ img }
       />
       <p data-testid={ `${index}-horizontal-name` } />
       <p
