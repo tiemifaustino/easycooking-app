@@ -1,4 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Radio+Canada:wght@300;400;500;600;700&display=swap') ;
+
 * {
+  box-sizing: border-box;
+
+  /* stylelint-disable-next-line font-family-name-quotes */
+  font-family: 'Radio Canada' , sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+
+  --color-background: #f4d8c2;
+
+  --color-1: #280000;
+
+  --color-2: #80160c;
+
+  --color-3: #b10f2e;
+
+  --color-4: #f3b39e;
+
+  --color-5: #fdffff;
+
+}
+
+body {
+  background-color: var(--color-background);
+}
+
+/* * {
   margin: 0;
   padding: 0;
 }
@@ -34,6 +65,7 @@
 }
 */
 
+/*
 .meals > .logo {
   animation: shake 1.5s infinite ease;
   color: aliceblue;
@@ -70,4 +102,4 @@
   100% {
     transform: rotate(-10deg);
   }
-}
+}  */

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Form, Button } from 'react-bootstrap';
-// import 'bootstrap/dist/css/bootstrap.min.css';
 import './Login.css';
+import logoApp from '../images/logoAppFundo.png';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -42,47 +42,57 @@ function Login() {
   };
 
   return (
-    <Form
-      onSubmit={ (event) => handleSubmit(event) }
-      className="d-flex flex-column m-4"
-    >
-      <h1 className="mx-auto">Login</h1>
-
-      <Form.Group className="mb-3">
-        <Form.Control
-          data-testid="email-input"
-          type="email"
-          value={ email }
-          onChange={ (event) => handleChange(event.target, setEmail) }
-          placeholder="Email"
-          className="mt-5"
-          size="lg"
+    <>
+      <div className="d-flex justify-content-center mt-2">
+        <img
+          className="logo"
+          src={ logoApp }
+          alt="Logotipo do App"
+          width="320px"
         />
-      </Form.Group>
-
-      <Form.Group className="mb-3">
-        <Form.Control
-          data-testid="password-input"
-          type="password"
-          value={ password }
-          onChange={ (event) => handleChange(event.target, setPassword) }
-          placeholder="Password"
-          size="lg"
-        />
-      </Form.Group>
-
-      <Button
-        data-testid="login-submit-btn"
-        disabled={ isLoginBtnDisabled }
-        type="submit"
-        variant="danger"
-        size="lg"
-        value="Submit"
-        className="mt-5"
+      </div>
+      <Form
+        onSubmit={ (event) => handleSubmit(event) }
+        className="d-flex flex-column mx-5"
       >
-        Enter
-      </Button>
-    </Form>
+        <h4>Login</h4>
+
+        <Form.Group className="mb-3">
+          <Form.Control
+            data-testid="email-input"
+            type="email"
+            value={ email }
+            onChange={ (event) => handleChange(event.target, setEmail) }
+            placeholder="Email"
+            className="mt-3"
+            size="md"
+          />
+        </Form.Group>
+
+        <Form.Group className="mb-3">
+          <Form.Control
+            data-testid="password-input"
+            type="password"
+            value={ password }
+            onChange={ (event) => handleChange(event.target, setPassword) }
+            placeholder="Password"
+            size="md"
+          />
+        </Form.Group>
+
+        <Button
+          data-testid="login-submit-btn"
+          disabled={ isLoginBtnDisabled }
+          type="submit"
+          variant="danger"
+          value="Submit"
+          className="mt-3"
+          size="md"
+        >
+          Enter
+        </Button>
+      </Form>
+    </>
   );
 }
 

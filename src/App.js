@@ -19,6 +19,7 @@ import FoodInProgress from './pages/FoodInProgress';
 import DrinkInProgress from './pages/DrinkInProgress';
 import NotFound from './pages/NotFound';
 import 'react-toastify/dist/ReactToastify.css';
+import './App.css';
 
 function App() {
   return (
