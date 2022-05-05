@@ -1,6 +1,6 @@
 import { REQUEST_RECIPE_SUPRISE,
   REQUEST_RECIPE_SUPRISE_SUCCESS,
-  REQUEST_RECIPE_SUPRISE_FAILURE } from '../actions/index.actions';
+  REQUEST_RECIPE_SUPRISE_FAILURE } from '../actions/actionType';
 
 const INICIAL_STATE = {
   recipeSuprise: [],

@@ -34,7 +34,7 @@ function RecipeInProgress() {
       </label>
 
       <h2 data-testid="instructions">Instructions</h2>
-      <p>Texto das intruções</p>
+      <p>Texto das instruções</p>
       <button data-testid="finish-recipe-btn" type="button">Finish Recipe</button>
     </>
   );

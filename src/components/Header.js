@@ -14,6 +14,7 @@ function Header(props) {
   const [showInput, setShowInput] = useState(false);
   const [search, setSearch] = useState('');
   const [typeInput, setTypeInput] = useState('');
+  const [clicked, setClicked] = useState(false);
   const { cocktail } = useSelector((state) => state.cocktailReducer);
   const { recipe } = useSelector((state) => state.recipeReducer);
   const dispatch = useDispatch();
@@ -35,40 +36,47 @@ function Header(props) {
   };
 
   const handleClickSearch = () => {
-    const objToDispatch = { search, typeInput };
+    const obj = { search, typeInput };
+
     if (typeInput === 'First Letter' && search.length !== 1) {
       global.alert('Your search must have only 1 (one) character');
       return;
     }
 
+    setClicked(!clicked);
+
     if (window.location.href.includes('/foods')) {
-      dispatch(recipeThunk(objToDispatch));
+      dispatch(recipeThunk(obj));
     } else if (window.location.href.includes('/drinks')) {
-      dispatch(cocktailThunk(objToDispatch));
+      dispatch(cocktailThunk(obj));
     }
   };
 
   useEffect(() => {
     const ERROR_MESSAGE = 'Sorry, we haven\'t found any recipes for these filters.';
-    if (cocktail.drinks?.length === 1) {
-      history.push(`/drinks/${cocktail.drinks[0].idDrink}`);
-    }
-
-    if (cocktail.drinks === null || cocktail === ERROR_MESSAGE) {
-      global.alert(ERROR_MESSAGE);
-    }
-  }, [cocktail]);
-
-  useEffect(() => {
-    const ERROR_MESSAGE = 'Sorry, we haven\'t found any recipes for these filters.';
-    if (recipe.meals?.length === 1) {
-      history.push(`/foods/${recipe.meals[0].idMeal}`);
-    }
 
     if (recipe.meals === null) {
       global.alert(ERROR_MESSAGE);
     }
+
+    if (recipe.meals?.length === 1 && clicked) {
+      history.push(`/foods/${recipe.meals[0].idMeal}`);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [recipe]);
+
+  useEffect(() => {
+    const ERROR_MESSAGE = 'Sorry, we haven\'t found any recipes for these filters.';
+
+    if (cocktail.drinks === null || cocktail === ERROR_MESSAGE) {
+      global.alert(ERROR_MESSAGE);
+    }
+
+    if (cocktail.drinks?.length === 1 && clicked) {
+      history.push(`/drinks/${cocktail.drinks[0].idDrink}`);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [cocktail]);
 
   return (
     <header>
