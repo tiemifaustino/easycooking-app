@@ -1,15 +1,14 @@
-import React, { useState } from 'react';
-import { useHistory, Redirect } from 'react-router-dom';
+import React from 'react';
+import { useHistory } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 
 function Profile() {
   const history = useHistory();
-  const [logout, setLogout] = useState(false);
 
   const handleClearClick = () => {
     localStorage.clear();
-    setLogout(true);
+    history.push('/');
   };
 
   return (
@@ -17,7 +16,7 @@ function Profile() {
       <Header title="Profile" visible={ false } />
       <div>
         <h2 data-testid="profile-email">
-          {localStorage.getItem('user')}
+          {JSON.parse(localStorage.getItem('user')).email}
         </h2>
         <button
           type="button"
@@ -40,7 +39,6 @@ function Profile() {
         >
           Logout
         </button>
-        { logout && <Redirect to="/" /> }
       </div>
       <Footer />
     </>
