@@ -97,22 +97,24 @@ function Foods() {
           }
         </div>
       </div>
-      {
-        foods && foods
-          .map((meal, index) => {
-            const maxFoods = 11;
-            if (index > maxFoods) return;
-            return (
-              <Cards
-                key={ index }
-                id={ meal.idMeal }
-                img={ meal.strMealThumb }
-                index={ index }
-                title={ meal.strMeal }
-              />
-            );
-          })
-      }
+      <div className="d-flex flex-wrap justify-content-center">
+        {
+          foods && foods
+            .map((meal, index) => {
+              const maxFoods = 11;
+              if (index > maxFoods) return;
+              return (
+                <Cards
+                  key={ index }
+                  id={ meal.idMeal }
+                  img={ meal.strMealThumb }
+                  index={ index }
+                  title={ meal.strMeal }
+                />
+              );
+            })
+        }
+      </div>
       <Footer />
     </div>
   );
