@@ -1,17 +1,16 @@
 :root {
 
-  --color-background: #fdffff;
+  --color-background: #f4d8c2;
 
   --color-1: #280000;
 
-  --color-2: #570000;
+  --color-2: #80160c;
 
   --color-3: #b10f2e;
 
   --color-4: #f3b39e;
 
-  --color-5: #f4d8c2;
-
+  --color-5: #fdffff;
 }
 
 h4 {
@@ -22,8 +21,6 @@ h4 {
 
 .logo {
   animation: bounce 2s;
-
-  /* animation: bounce 1s infinite alternate; */
 }
 
 @keyframes bounce {
@@ -36,15 +33,3 @@ h4 {
     transform: translateY(0);
   }
 }
-
-/*
-@keyframes bounce {
-
-  from {
-    transform: translateY(0);
-  }
-
-  to {
-    transform: translateY(-15px);
-  }
-} */

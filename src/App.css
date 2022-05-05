@@ -22,17 +22,13 @@
   --color-4: #f3b39e;
 
   --color-5: #fdffff;
-
 }
 
 body {
   background-color: var(--color-background);
 }
 
-/* * {
-  margin: 0;
-  padding: 0;
-}
+/*
 
 .meals {
   align-items: center;

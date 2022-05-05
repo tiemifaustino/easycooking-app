@@ -2,7 +2,7 @@
 
   --color-background: #f4d8c2;
 
-  --color-1: #280000;
+  --color-1: #610101;
 
   --color-2: #80160c;
 
@@ -15,7 +15,8 @@
 }
 
 header {
-  background-color: var(--color-4);
+  background-color: var(--color-background);
+  font-size: 1rem;
 }
 
 .button-icon {
@@ -26,6 +27,5 @@ header {
 
 .title {
   color: var(--color-2);
-
-  /* text-shadow: var(--color-1); */
 }
+

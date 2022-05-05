@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Button } from 'react-bootstrap';
 import Cards from '../components/Cards';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import { recipeThunk, recipeCategoriesThunk,
   ingredientFilter } from '../actions/index.actions';
+import './Foods.css';
 
 function Foods() {
   const dispatch = useDispatch();
@@ -65,22 +67,36 @@ function Foods() {
   return (
     <div>
       <Header title="Foods" visible />
-      <button type="reset" onClick={ handleClickToggle }>
-        Reset
-      </button>
-      {
-        buttonsNames.map((buttonName, index) => (
-          <button
-            key={ index }
-            type="button"
-            data-testid={ `${buttonName}-category-filter` }
-            name={ buttonName }
-            onClick={ handleClick }
+      <div className="d-flex justify-content-center">
+
+        <div className="container-buttons d-flex justify-content-center flex-wrap">
+          <Button
+            type="reset"
+            onClick={ handleClickToggle }
+            variant="dark"
+            size="sm"
+            className="m-1"
           >
-            {buttonName}
-          </button>
-        ))
-      }
+            Reset
+          </Button>
+          {
+            buttonsNames.map((buttonName, index) => (
+              <Button
+                key={ index }
+                type="button"
+                data-testid={ `${buttonName}-category-filter` }
+                name={ buttonName }
+                onClick={ handleClick }
+                variant="dark"
+                size="sm"
+                className="m-1"
+              >
+                {buttonName}
+              </Button>
+            ))
+          }
+        </div>
+      </div>
       {
         foods && foods
           .map((meal, index) => {

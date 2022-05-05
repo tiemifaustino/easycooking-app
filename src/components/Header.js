@@ -116,19 +116,17 @@ function Header(props) {
 
       {
         showInput && (
-          <Form className="d-flex justify-content-center flex-column">
-            <Form.Group className="d-flex justify-content-center m-0">
-              <Form.Label htmlFor="search-input">
-                <Form.Control
-                  type="text"
-                  placeholder="Search"
-                  data-testid="search-input"
-                  id="search-input"
-                  value={ search }
-                  onChange={ handleChangeSearch }
-                />
-              </Form.Label>
-            </Form.Group>
+          <Form className="d-flex justify-content-center flex-column mx-4">
+            <Form.Label htmlFor="search-input">
+              <Form.Control
+                type="text"
+                placeholder="Search"
+                data-testid="search-input"
+                id="search-input"
+                value={ search }
+                onChange={ handleChangeSearch }
+              />
+            </Form.Label>
 
             <Form.Group className="d-flex justify-content-around mb-2">
               <Form.Label htmlFor="ingredient-search-radio" className="d-flex">
@@ -173,7 +171,7 @@ function Header(props) {
               data-testid="exec-search-btn"
               onClick={ handleClickSearch }
               variant="danger"
-              className="mx-4 mb-3"
+              className="mx-5 mb-3"
             >
               Search
             </Button>
