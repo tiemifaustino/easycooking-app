@@ -21,7 +21,7 @@ function FoodInProgress() {
         category: APIRecipeByID.strCategory,
         ingredients: ingredients
           .map((ingredient) => (APIRecipeByID[ingredient] !== null
-              && APIRecipeByID[ingredient])),
+&& APIRecipeByID[ingredient])),
         preparation: APIRecipeByID.strInstructions,
       });
     };
