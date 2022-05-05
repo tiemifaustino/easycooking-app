@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import favoriteNotChecked from '../images/whiteHeartIcon.svg';
 import shareBtnLogo from '../images/shareIcon.svg';
 
-function InProgress({ page, id, meal, saveLocal }) {
+function InProgress({ page, id, recipe, saveLocal }) {
   const [inputChecked, setInputChecked] = useState([]);
   const [saveLocalStorage, setSaveLocalStorage] = useState({ cocktails: {}, meals: {} });
   const history = useHistory();
@@ -42,6 +42,7 @@ function InProgress({ page, id, meal, saveLocal }) {
       }
     };
     if (inputChecked.length > 0) handleLocalStorage();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inputChecked]);
 
   useEffect(() => {
@@ -49,6 +50,7 @@ function InProgress({ page, id, meal, saveLocal }) {
       localStorage.setItem('inProgressRecipes', JSON.stringify(saveLocalStorage));
     };
     if (inputChecked.length > 0) localStorageSave();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [saveLocalStorage]);
 
   const handleInputChecked = ({ target: { value, checked } }) => (checked
@@ -59,25 +61,25 @@ function InProgress({ page, id, meal, saveLocal }) {
   return (
     <div>
       {
-        meal ? (
+        recipe ? (
           <div>
             <div>
               <img
                 data-testid="recipe-photo"
-                src={ meal.image }
+                src={ recipe.image }
                 alt="Ilustração da Receita"
               />
               <span data-testid="recipe-title">
-                {meal.name}
+                {recipe.name}
               </span>
             </div>
 
             <div>
-              <p data-testid="recipe-category">{meal.category}</p>
-              <button data-testid="share-btn" type="button" onClick="">
+              <p data-testid="recipe-category">{recipe.category}</p>
+              <button data-testid="share-btn" type="button">
                 <img src={ shareBtnLogo } alt="shareIcon" />
               </button>
-              <button data-testid="favorite-btn" type="button" onClick="">
+              <button data-testid="favorite-btn" type="button">
                 <img src={ favoriteNotChecked } alt="favorite" />
               </button>
             </div>
@@ -85,7 +87,7 @@ function InProgress({ page, id, meal, saveLocal }) {
             <div>
               <h2>Ingredients</h2>
               {
-                meal.ingredients.map((ingredient, index) => ingredient && (
+                recipe.ingredients.map((ingredient, index) => ingredient && (
                   <div
                     key={ `${index}-ingredient-name-and-measure` }
                     data-testid={ `${index}-ingredient-step` }
@@ -108,11 +110,11 @@ function InProgress({ page, id, meal, saveLocal }) {
             </div>
             <div>
               <h2>Instructions</h2>
-              <span data-testid="instructions">{meal.preparation}</span>
+              <span data-testid="instructions">{recipe.preparation}</span>
               <button
                 data-testid="finish-recipe-btn"
                 type="button"
-                disabled={ inputChecked.length !== meal.ingredients
+                disabled={ inputChecked.length !== recipe.ingredients
                   .filter((value) => value !== undefined && value).length }
                 onClick={ () => history.push('/done-recipes') }
               >
