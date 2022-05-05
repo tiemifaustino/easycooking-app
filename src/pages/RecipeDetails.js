@@ -68,11 +68,11 @@ function RecipeDetails() {
   }, [recipe]);
 
   useEffect(() => {
-    // const sortRandomizer = 0.5;
+    // const sortRandomize = 0.5;
     const MAXIMUN_NUMBER_OF_CARDS = 6;
     if (cocktail.drinks?.length > 0) {
       const randomCards = [...cocktail.drinks];
-      // .sort(() => Math.random() - sortRandomizer);
+      // .sort(() => Math.random() - sortRandomize);
       setRecommendedCards(randomCards.slice(0, MAXIMUN_NUMBER_OF_CARDS));
     }
   }, [cocktail]);
@@ -95,7 +95,6 @@ function RecipeDetails() {
       const favoritesString = JSON.stringify(filteredFavorites);
       localStorage.setItem('favoriteRecipes', favoritesString);
     } else {
-      console.log(recipe, meal);
       const favoriteRecipeToAdd = {
         id,
         type: 'food',
