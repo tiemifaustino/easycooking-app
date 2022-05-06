@@ -63,10 +63,10 @@ function Drinks() {
   };
 
   return (
-    <div>
+    <div className="container-page-drinks">
       <Header title="Drinks" visible />
 
-      <div className="d-flex justify-content-center">
+      <div className="d-flex justify-content-center mt-2">
         <div className="d-flex justify-content-center flex-wrap">
           <Button
             type="reset"
@@ -96,7 +96,7 @@ function Drinks() {
         </div>
       </div>
 
-      <div className="d-flex flex-wrap justify-content-center mb-4">
+      <div className="d-flex flex-wrap justify-content-center container-cards-drinks">
         {
           drinks && drinks.map((drink, index) => {
             const maxdrinks = 11;

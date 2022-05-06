@@ -7,8 +7,6 @@ function Profile() {
   const history = useHistory();
   const getEmail = JSON.parse(localStorage.getItem('user'));
 
-  // console.log(email);
-
   const handleClearClick = () => {
     localStorage.clear();
     history.push('/');

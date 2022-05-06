@@ -19,13 +19,23 @@
 
   --color-3: #b10f2e;
 
-  --color-4: #f3b39e;
+  --color-4: #f8a362;
 
-  --color-5: #fdffff;
+  --color-5: #fcf9f4;
 }
+
 
 body {
   background-color: var(--color-background);
+}
+
+.recipe-button {
+  bottom: 0;
+  position: fixed;
+}
+
+.share-btn {
+  background-image: 'src/images/blackHeartIcon.svg';
 }
 
 /*

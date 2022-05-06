@@ -1,3 +1,11 @@
 .container-buttons {
   width: 300px;
 }
+
+.container-page-foods {
+  background-color: var(--color-5);
+}
+
+.container-cards-foods {
+  padding-bottom: 70px;
+}

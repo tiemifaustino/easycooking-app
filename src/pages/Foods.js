@@ -65,10 +65,10 @@ function Foods() {
   };
 
   return (
-    <div>
+    <div className="container-page-foods">
       <Header title="Foods" visible />
 
-      <div className="d-flex justify-content-center">
+      <div className="d-flex justify-content-center mt-2">
         <div className="container-buttons d-flex justify-content-center flex-wrap">
           <Button
             type="reset"
@@ -98,7 +98,7 @@ function Foods() {
         </div>
       </div>
 
-      <div className="d-flex flex-wrap justify-content-center">
+      <div className="d-flex flex-wrap justify-content-center container-cards-foods">
         {
           foods && foods
             .map((meal, index) => {

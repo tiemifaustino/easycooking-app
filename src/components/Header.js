@@ -129,7 +129,7 @@ function Header(props) {
             </Form.Label>
 
             <Form.Group className="d-flex justify-content-around mb-2">
-              <Form.Label htmlFor="ingredient-search-radio" className="d-flex">
+              <Form.Label htmlFor="ingredient-search-radio" className="d-flex input-text">
                 <Form.Check
                   type="radio"
                   data-testid="ingredient-search-radio"
@@ -141,7 +141,7 @@ function Header(props) {
                 Ingredient
               </Form.Label>
 
-              <Form.Label htmlFor="name-search-radio" className="d-flex">
+              <Form.Label htmlFor="name-search-radio" className="d-flex input-text">
                 <Form.Check
                   type="radio"
                   data-testid="name-search-radio"
@@ -149,11 +149,15 @@ function Header(props) {
                   name="typeInput"
                   value="Name"
                   onChange={ handleChangeInput }
+
                 />
                 Name
               </Form.Label>
 
-              <Form.Label htmlFor="first-letter-search-radio" className="d-flex">
+              <Form.Label
+                htmlFor="first-letter-search-radio"
+                className="d-flex input-text"
+              >
                 <Form.Check
                   type="radio"
                   data-testid="first-letter-search-radio"
