@@ -14,28 +14,6 @@ function FavoriteCards({ index, title, img, category, nationality }) {
     navigator.clipboard.writeText(textToCopy);
   };
 
-  // const checkIfIsFavorite = () => {
-  //   const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
-  //   const isRecipeFavorite = favoriteRecipes?.some(
-  //     (favoriteRecipe) => favoriteRecipe.id === id,
-  //   );
-  //   setIsFavorite(isRecipeFavorite);
-  // };
-
-  // const handleFavorite = () => {
-  //   const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
-  //   console.log(favoriteRecipes);
-  //   if (favoriteRecipes.some(
-  //     (favoriteRecipe) => favoriteRecipe.id === id,
-  //   )) {
-  //     console.log('entrou if favoritecards');
-  //     const favoritesRemoved = favoriteRecipes.filter((favRecipe) => favRecipe.id !== id);
-  //     const favoritesString = JSON.stringify(favoritesRemoved);
-  //     setIsFavorite(!isFavorite);
-  //     localStorage.setItem('favoriteRecipes', favoritesString);
-  //   }
-  // };
-
   return (
     <div>
       <img

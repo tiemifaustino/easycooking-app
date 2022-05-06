@@ -25,7 +25,7 @@ function FavoriteRecipes() {
         data-testid="filter-by-drink-btn"
         type="button"
       >
-        Driks
+        Drinks
       </button>
       {
         favoriteLocalStorage && favoriteLocalStorage
