@@ -38,6 +38,14 @@ body {
   background-image: 'src/images/blackHeartIcon.svg';
 }
 
+.cardIngredients {
+  text-align: center;
+}
+
+.container-cards {
+  padding-bottom: 70px;
+}
+
 /*
 
 .meals {

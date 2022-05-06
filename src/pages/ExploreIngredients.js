@@ -1,11 +1,13 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import { Card } from 'react-bootstrap';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { requestIngredientsListThunk,
   requestIngredientsDrinksThunk, ingredientFilter } from '../actions/index.actions';
 import CardIngredients from '../components/CardIngredients';
+import './ExploreIngredients.css';
 
 function ExploreIngredients() {
   const { ingredients,
@@ -31,26 +33,28 @@ function ExploreIngredients() {
   };
 
   return (
-    <>
+    <div className="container-page-ingredients">
       <Header title="Explore Ingredients" visible={ false } />
-      <div className="d-flex flex-wrap ">
+      <div className="d-flex flex-wrap justify-content-center mx-3 mt-3 container-cards">
         {
           pathname === '/explore/foods/ingredients'
         && ingredients && ingredients.map((ingredient, index) => {
             const maxIngredients = 11;
             if (index > maxIngredients) return;
             return (
-              <button
+              <Card
                 onClick={ () => handleClickMeals(ingredient.strIngredient) }
                 key={ ingredient.idIngredient }
                 type="button"
+                style={ { width: '9.2rem', height: '14rem' } }
+                className="m-1"
               >
                 <CardIngredients
                   index={ index }
                   img={ `https://www.themealdb.com/images/ingredients/${ingredient.strIngredient}-Small.png` }
                   title={ ingredient.strIngredient }
                 />
-              </button>
+              </Card>
             );
           })
         }
@@ -76,7 +80,7 @@ function ExploreIngredients() {
         })
       }
       <Footer />
-    </>
+    </div>
   );
 }
 

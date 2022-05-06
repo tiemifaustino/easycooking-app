@@ -1,16 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Card } from 'react-bootstrap';
 
 function CardIngredients({ index, img, title }) {
   return (
-    <div data-testid={ `${index}-ingredient-card` }>
-      <img
+    <Card.Body data-testid={ `${index}-ingredient-card` }>
+      <Card.Img
         data-testid={ `${index}-card-img` }
         alt={ title }
         src={ img }
+        variant="top"
+        className="mb-3"
       />
-      <p data-testid={ `${index}-card-name` }>{ title }</p>
-    </div>
+      <Card.Text
+        data-testid={ `${index}-card-name` }
+        className="d-flex justify-content-center align-items cardIngredients"
+      >
+        { title }
+
+      </Card.Text>
+    </Card.Body>
   );
 }
 
