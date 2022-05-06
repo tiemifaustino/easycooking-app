@@ -21,7 +21,7 @@ export default function Footer() {
   return (
     <footer
       data-testid="footer"
-      className="d-flex justify-content-around"
+      className="d-flex justify-content-around align-items-center"
     >
       <button
         type="button"

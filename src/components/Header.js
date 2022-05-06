@@ -80,7 +80,7 @@ function Header(props) {
 
   return (
     <header>
-      <div className="d-flex justify-content-around p-2">
+      <div className="d-flex justify-content-around align-items-center p-2">
         <button
           type="button"
           onClick={ handleProfileClick }

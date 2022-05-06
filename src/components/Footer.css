@@ -2,8 +2,6 @@ footer {
   background-color: var(--color-background);
   bottom: 0;
   height: 60px;
-  padding-bottom: 5px;
-  padding-top: 5px;
   position: fixed;
   width: 100%;
 }
