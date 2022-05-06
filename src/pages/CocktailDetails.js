@@ -85,10 +85,10 @@ function CocktailDetails() {
               id={ id }
               type="drink"
               nationality=""
-              category={ cocktail[0].category }
-              name={ cocktail[0].name }
-              image={ cocktail[0].image }
-              alcoholicOrNot={ cocktail[0].alcoholicOrNot }
+              category={ cocktail[0].strCategory }
+              name={ cocktail[0].strDrink }
+              image={ cocktail[0].strDrinkThumb }
+              alcoholicOrNot={ cocktail[0].strAlcoholic }
             />
             <p data-testid="recipe-category">{cocktail[0].strAlcoholic}</p>
           </div>

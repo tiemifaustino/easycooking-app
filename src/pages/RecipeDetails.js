@@ -85,9 +85,9 @@ function RecipeDetails() {
               id={ id }
               type="food"
               nationality={ meal[0].strArea }
-              category={ meal[0].category }
-              name={ meal[0].name }
-              image={ meal[0].image }
+              category={ meal[0].strCategory }
+              name={ meal[0].strMeal }
+              image={ meal[0].strMealThumb }
               alcoholicOrNot=""
             />
             <p data-testid="recipe-category">{meal[0].strCategory}</p>
