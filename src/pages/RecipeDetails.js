@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
+import Image from 'react-bootstrap/Image';
 import { requestRecipeByIDThunk, cocktailThunk } from '../actions/index.actions';
 import SimpleSliderDrinks from '../components/SimpleSliderDrinks';
 import shareBtnLogo from '../images/shareIcon.svg';
@@ -117,10 +118,11 @@ function RecipeDetails() {
     meal.length > 0
       ? (
         <div>
-          <img
+          <Image
             src={ meal[0].strMealThumb }
             alt="recipe thumbnail"
             data-testid="recipe-photo"
+            className="img-fluid"
           />
           <div>
             <h2 data-testid="recipe-title">{meal[0].strMeal}</h2>

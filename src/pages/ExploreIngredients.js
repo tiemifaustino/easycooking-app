@@ -33,26 +33,28 @@ function ExploreIngredients() {
   return (
     <>
       <Header title="Explore Ingredients" visible={ false } />
-      {
-        pathname === '/explore/foods/ingredients'
+      <div className="d-flex flex-wrap ">
+        {
+          pathname === '/explore/foods/ingredients'
         && ingredients && ingredients.map((ingredient, index) => {
-          const maxIngredients = 11;
-          if (index > maxIngredients) return;
-          return (
-            <button
-              onClick={ () => handleClickMeals(ingredient.strIngredient) }
-              key={ ingredient.idIngredient }
-              type="button"
-            >
-              <CardIngredients
-                index={ index }
-                img={ `https://www.themealdb.com/images/ingredients/${ingredient.strIngredient}-Small.png` }
-                title={ ingredient.strIngredient }
-              />
-            </button>
-          );
-        })
-      }
+            const maxIngredients = 11;
+            if (index > maxIngredients) return;
+            return (
+              <button
+                onClick={ () => handleClickMeals(ingredient.strIngredient) }
+                key={ ingredient.idIngredient }
+                type="button"
+              >
+                <CardIngredients
+                  index={ index }
+                  img={ `https://www.themealdb.com/images/ingredients/${ingredient.strIngredient}-Small.png` }
+                  title={ ingredient.strIngredient }
+                />
+              </button>
+            );
+          })
+        }
+      </div>
       {
         pathname === '/explore/drinks/ingredients'
         && drinksIngredients && drinksIngredients.map((drinkIngredient, index) => {
