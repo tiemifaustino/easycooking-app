@@ -1,45 +1,17 @@
 import PropTypes from 'prop-types';
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
-import shareBtnLogo from '../images/shareIcon.svg';
-import favoriteNotChecked from '../images/whiteHeartIcon.svg';
 import favoriteChecked from '../images/blackHeartIcon.svg';
+import shareBtnLogo from '../images/shareIcon.svg';
 
-function FavoriteCards({ index, title, img, category, nationality }) {
-  const { id } = useParams();
+function FavoriteCards({ index, title, img, category, nationality, id }) {
   const [isFavorite, setIsFavorite] = useState(false);
-  const [goneButtons, setGoneButtons] = useState(false);
+  const { recipe } = useSelector((state) => state.recipeByIDReducer);
+  const { cocktail } = useSelector((state) => state.cocktailReducer);
   const handleShare = () => {
     toast.success('Link copied!');
     navigator.clipboard.writeText(window.location.href);
-  };
-
-  const handleFavorite = () => {
-    const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
-
-    if (!isFavorite) {
-      const filteredFavorites = favoriteRecipes
-        .filter((favoriteRecipe) => favoriteRecipe.id !== id);
-      const favoritesString = JSON.stringify(filteredFavorites);
-      localStorage.setItem('favoriteRecipes', favoritesString);
-    } else {
-      // const favoriteRecipeToAdd = {
-      //   id,
-      //   type: '',
-      //   nationality: '',
-      //   category: '',
-      //   alcoholicOrNot: '',
-      //   name: '',
-      //   image: '',
-
-      // };
-      // const favoritesString = JSON
-      //   .stringify([favoriteRecipeToAdd]);
-      // localStorage.setItem('favoriteRecipes', favoritesString);
-    }
-    setGoneButtons(!goneButtons);
-    setIsFavorite(!isFavorite);
   };
 
   const checkIfIsFavorite = () => {
@@ -47,16 +19,49 @@ function FavoriteCards({ index, title, img, category, nationality }) {
     const isRecipeFavorite = favoriteRecipes?.some(
       (favoriteRecipe) => favoriteRecipe.id === id,
     );
-    setIsFavorite(!isRecipeFavorite);
+    setIsFavorite(isRecipeFavorite);
   };
 
   useEffect(() => {
     checkIfIsFavorite();
-  }, []);
+  }, [isFavorite]);
 
-  useEffect(() => {
+  const handleFavorite = () => {
+    const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    console.log(favoriteRecipes);
 
-  }, [goneButtons]);
+    // const favoriteRecipeToAdd = {
+    //   id,
+    //   type: '',
+    //   nationality: '',
+    //   category: '',
+    //   alcoholicOrNot: '',
+    //   name: '',
+    //   image: '',
+
+    // };
+    // let favoritesString = JSON.stringify([favoriteRecipeToAdd]);
+
+    // if (favoriteRecipes === null) {
+    //   localStorage.setItem('favoriteRecipes', favoritesString);
+    //   setIsFavorite(isFavorite);
+    if (favoriteRecipes.some(
+      (favoriteRecipe) => favoriteRecipe.id === id,
+    )) {
+      console.log('entrou if favoritecards');
+      const favoritesRemoved = favoriteRecipes.filter((favRecipe) => favRecipe.id !== id);
+      const favoritesString = JSON.stringify(favoritesRemoved);
+      setIsFavorite(!isFavorite);
+      localStorage.setItem('favoriteRecipes', favoritesString);
+    }
+
+    // else {
+    //   console.log('entrou else')
+    //   favoritesString = JSON.stringify([...favoriteRecipes, favoriteRecipeToAdd]);
+    //   setIsFavorite(isFavorite);
+    // }
+    // checkIfIsFavorite();
+  };
 
   return (
     <div>
@@ -72,37 +77,33 @@ function FavoriteCards({ index, title, img, category, nationality }) {
         {`${nationality} - ${category}`}
       </p>
       <p data-testid={ `${index}-horizontal-done-date` } />
-      {
-        goneButtons ? '' : (
-          <input
-            type="image"
-            data-testid={ `${index}-horizontal-share-btn` }
-            onClick={ handleShare }
-            src={ shareBtnLogo }
-            alt="Share button"
-          />
-        )
-      }
 
-      {!goneButtons
-       && (
-         isFavorite
-           ? (
-             <input
-               type="image"
-               data-testid={ `${index}-horizontal-favorite-btn"` }
-               alt="Favorite button"
-               onClick={ handleFavorite }
-               src={ favoriteChecked }
-             />)
-           : (
-             <input
-               type="image"
-               data-testid={ `${index}-horizontal-favorite-btn"` }
-               alt="Favorite button"
-               onClick={ handleFavorite }
-               src={ favoriteNotChecked }
-             />))}
+      <input
+        type="image"
+        data-testid={ `${index}-horizontal-share-btn` }
+        onClick={ handleShare }
+        src={ shareBtnLogo }
+        alt="Share button"
+      />
+
+      {
+
+        <input
+          type="image"
+          data-testid={ `${index}-horizontal-favorite-btn"` }
+          alt="Favorite button"
+          onClick={ handleFavorite }
+          src={ favoriteChecked }
+        />
+        // : (
+        //   <input
+        //     type="image"
+        //     data-testid={ `${index}-horizontal-favorite-btn"` }
+        //     alt="Favorite button"
+        //     onClick={ handleFavorite }
+        //     src={ favoriteNotChecked }
+        //   />)
+      }
     </div>
   );
 }

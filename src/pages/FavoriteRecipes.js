@@ -31,6 +31,7 @@ function FavoriteRecipes() {
         favoriteLocalStorage && favoriteLocalStorage
           .map((favorite, index) => (
             <FavoriteCards
+              id={ favorite.id }
               key={ favorite.id }
               index={ index }
               title={ favorite.name }

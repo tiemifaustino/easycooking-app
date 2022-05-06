@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams, useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { requestCocktailByIDThunk, recipeThunk } from '../actions/index.actions';
+import { recipeThunk, requestCocktailByIDThunk } from '../actions/index.actions';
 import SimpleSliderRecipes from '../components/SimpleSliderRecipes';
+import favoriteChecked from '../images/blackHeartIcon.svg';
 import shareBtnLogo from '../images/shareIcon.svg';
 import favoriteNotChecked from '../images/whiteHeartIcon.svg';
-import favoriteChecked from '../images/blackHeartIcon.svg';
 
 function CocktailDetails() {
   const { id } = useParams();
@@ -88,29 +88,34 @@ function CocktailDetails() {
 
   const handleFavorite = () => {
     const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    const favoriteRecipeToAdd = {
+      id,
+      type: 'drink',
+      nationality: '',
+      category: cocktail[0].strCategory,
+      alcoholicOrNot: cocktail[0].strAlcoholic,
+      name: cocktail[0].strDrink,
+      image: cocktail[0].strDrinkThumb,
 
-    if (isFavorite) {
-      const filteredFavorites = favoriteRecipes
-        .filter((favoriteRecipe) => favoriteRecipe.id !== id);
-      const favoritesString = JSON.stringify([...favoriteRecipes, filteredFavorites]);
+    };
+    let favoritesString = JSON
+      .stringify([favoriteRecipeToAdd]);
+
+    if (favoriteRecipes === null) {
       localStorage.setItem('favoriteRecipes', favoritesString);
+      setIsFavorite(isFavorite);
+    } else if (favoriteRecipes.some(
+      (favoriteRecipe) => favoriteRecipe.id === id,
+    )) {
+      const favoritesRemoved = favoriteRecipes.filter((favRecipe) => favRecipe.id !== id);
+      favoritesString = JSON.stringify(favoritesRemoved);
+      setIsFavorite(!isFavorite);
     } else {
-      const favoriteRecipeToAdd = {
-        id,
-        type: 'drink',
-        nationality: '',
-        category: cocktail[0].strCategory,
-        alcoholicOrNot: cocktail[0].strAlcoholic,
-        name: cocktail[0].strDrink,
-        image: cocktail[0].strDrinkThumb,
-
-      };
-      const favoritesString = JSON
-        .stringify([favoriteRecipeToAdd]);
-      localStorage.setItem('favoriteRecipes', favoritesString);
+      favoritesString = JSON.stringify([...favoriteRecipes, favoriteRecipeToAdd]);
+      setIsFavorite(isFavorite);
     }
-
-    setIsFavorite(!isFavorite);
+    localStorage.setItem('favoriteRecipes', favoritesString);
+    checkIfIsFavorite();
   };
 
   return (
