@@ -38,8 +38,8 @@ function FavoriteCards({ index, title, img, category, nationality, id }) {
     //   alcoholicOrNot: '',
     //   name: '',
     //   image: '',
-
     // };
+
     // let favoritesString = JSON.stringify([favoriteRecipeToAdd]);
 
     // if (favoriteRecipes === null) {
