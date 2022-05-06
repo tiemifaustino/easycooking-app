@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import InProgress from '../components/InProgress';
-// import ShareBtn from '../components/ShareBtn';
 import { fetchRecipeByID } from '../services/API';
 
 function FoodInProgress() {
@@ -24,6 +23,8 @@ function FoodInProgress() {
           .map((ingredient) => (APIRecipeByID[ingredient] !== null
 && APIRecipeByID[ingredient])),
         preparation: APIRecipeByID.strInstructions,
+        nationality: APIRecipeByID.strArea,
+        alcoholicOrNot: '',
       });
     };
     const getLocalStorage = () => {
@@ -38,7 +39,6 @@ function FoodInProgress() {
 
   return (
     <div>
-      {/* <ShareBtn /> */}
       <InProgress
         id={ id }
         page="food"

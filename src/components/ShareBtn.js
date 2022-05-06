@@ -5,22 +5,16 @@ import shareBtnLogo from '../images/shareIcon.svg';
 function ShareBtn() {
   const handleShare = () => {
     toast.success('Link copied!');
-    navigator.clipboard.writeText(window.location.href);
+    const textToCopy = window.location.href.replace('/in-progress', '');
+    navigator.clipboard.writeText(textToCopy);
   };
 
   return (
-    <div>
-      <button data-testid="share-btn" type="button" onClick={ handleShare }>
-        <img src={ shareBtnLogo } alt="shareIcon" />
-      </button>
-    </div>
-    // <input
-    //   type="image"
-    //   data-testid="share-btn"
-    //
-    //   src={ shareBtnLogo }
-    //   alt="Share button"
-    // />
+
+    <button data-testid="share-btn" type="button" onClick={ handleShare }>
+      <img src={ shareBtnLogo } alt="shareIcon" />
+    </button>
+
   );
 }
 

@@ -23,6 +23,8 @@ function DrinkInProgress() {
           .map((ingredient) => (APIRecipeByID[ingredient] !== null
 && APIRecipeByID[ingredient])),
         preparation: APIRecipeByID.strInstructions,
+        nationality: '',
+        alcoholicOrNot: APIRecipeByID.strAlcoholic,
       });
     };
     const getLocalStorage = () => {

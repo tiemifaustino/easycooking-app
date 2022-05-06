@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
-import favoriteNotChecked from '../images/whiteHeartIcon.svg';
-import shareBtnLogo from '../images/shareIcon.svg';
+import ShareBtn from './ShareBtn';
+import FavoriteBtn from './favoriteBtn';
 
 function InProgress({ page, id, recipe, saveLocal }) {
   const [inputChecked, setInputChecked] = useState([]);
@@ -41,7 +41,7 @@ function InProgress({ page, id, recipe, saveLocal }) {
         break;
       }
     };
-    if (inputChecked.length > 0) handleLocalStorage();
+    if (inputChecked && inputChecked.length > 0) handleLocalStorage();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inputChecked]);
 
@@ -76,16 +76,23 @@ function InProgress({ page, id, recipe, saveLocal }) {
 
             <div>
               <p data-testid="recipe-category">{recipe.category}</p>
-              <button data-testid="share-btn" type="button">
-                <img src={ shareBtnLogo } alt="shareIcon" />
-              </button>
-              <button data-testid="favorite-btn" type="button">
-                <img src={ favoriteNotChecked } alt="favorite" />
-              </button>
+              <ShareBtn />
+              <FavoriteBtn
+                id={ id }
+                type={ page }
+                nationality={ recipe.nationality }
+                category={ recipe.category }
+                name={ recipe.name }
+                image={ recipe.image }
+                alcoholicOrNot={ recipe.alcoholicOrNot }
+              />
             </div>
 
             <div>
-              <h2>Ingredients</h2>
+              <h2>
+                Ingredients
+                {console.log(recipe)}
+              </h2>
               {
                 recipe.ingredients.map((ingredient, index) => ingredient && (
                   <div
@@ -100,7 +107,7 @@ function InProgress({ page, id, recipe, saveLocal }) {
                         id={ `${index}-ingredient-step` }
                         value={ ingredient }
                         onChange={ handleInputChecked }
-                        checked={ inputChecked.some((value) => value === ingredient) }
+                        checked={ inputChecked?.some((value) => value === ingredient) }
                       />
                       {ingredient}
                     </label>
@@ -114,7 +121,7 @@ function InProgress({ page, id, recipe, saveLocal }) {
               <button
                 data-testid="finish-recipe-btn"
                 type="button"
-                disabled={ inputChecked.length !== recipe.ingredients
+                disabled={ inputChecked && inputChecked.length !== recipe.ingredients
                   .filter((value) => value !== undefined && value).length }
                 onClick={ () => history.push('/done-recipes') }
               >
