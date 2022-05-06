@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import favoriteChecked from '../images/blackHeartIcon.svg';
 import favoriteNotChecked from '../images/whiteHeartIcon.svg';
 
-function FavoriteBtn({ id, type, nationality, category, name, image,
+function FavoriteBtnHorizontal({ id, index, type, nationality, category, name, image,
   alcoholicOrNot }) {
   const [isFavorite, setIsFavorite] = useState();
   const history = useHistory();
@@ -61,15 +61,15 @@ function FavoriteBtn({ id, type, nationality, category, name, image,
       <img
         src={ isFavorite ? favoriteChecked : favoriteNotChecked }
         alt="favorite"
-        data-testid="favorite-btn"
+        data-testid={ `${index}-horizontal-favorite-btn` }
       />
     </button>
   );
 }
 
-FavoriteBtn.propTypes = {
+FavoriteBtnHorizontal.propTypes = {
   id: PropTypes.string,
   page: PropTypes.string,
 }.isRequired;
 
-export default FavoriteBtn;
+export default FavoriteBtnHorizontal;
