@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
-import { toast } from 'react-toastify';
 import { requestCocktailByIDThunk, recipeThunk } from '../actions/index.actions';
 import SimpleSliderRecipes from '../components/SimpleSliderRecipes';
-import shareBtnLogo from '../images/shareIcon.svg';
-import favoriteNotChecked from '../images/whiteHeartIcon.svg';
-import favoriteChecked from '../images/blackHeartIcon.svg';
+import FavoriteBtn from '../components/favoriteBtn';
+import ShareBtn from '../components/ShareBtn';
 
 function CocktailDetails() {
   const { id } = useParams();
@@ -20,7 +18,6 @@ function CocktailDetails() {
   const [recommendedCards, setRecommendedCards] = useState([]);
   const [currentBtn, setCurrentBtn] = useState('Start Recipe');
   const [showBtn, setShowBtn] = useState(true);
-  const [isFavorite, setIsFavorite] = useState(false);
 
   const findButtonInLocalStorage = () => {
     const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
@@ -30,19 +27,10 @@ function CocktailDetails() {
     if (recipesInProgress?.cocktails[id] !== undefined) setCurrentBtn('Continue Recipe');
   };
 
-  const checkIfIsFavorite = () => {
-    const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
-    const isRecipeFavorite = favoriteRecipes?.some(
-      (favoriteRecipe) => favoriteRecipe.id === id,
-    );
-    setIsFavorite(isRecipeFavorite);
-  };
-
   useEffect(() => {
     dispatch(recipeThunk({ search: '', typeInput: 'Name' }));
     dispatch(requestCocktailByIDThunk(id));
     findButtonInLocalStorage();
-    checkIfIsFavorite();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -81,38 +69,6 @@ function CocktailDetails() {
     history.push(`/drinks/${id}/in-progress`);
   };
 
-  const handleShare = () => {
-    toast.success('Link copied!');
-    navigator.clipboard.writeText(window.location.href);
-  };
-
-  const handleFavorite = () => {
-    const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
-
-    if (isFavorite) {
-      const filteredFavorites = favoriteRecipes
-        .filter((favoriteRecipe) => favoriteRecipe.id !== id);
-      const favoritesString = JSON.stringify(filteredFavorites);
-      localStorage.setItem('favoriteRecipes', favoritesString);
-    } else {
-      const favoriteRecipeToAdd = {
-        id,
-        type: 'drink',
-        nationality: '',
-        category: cocktail[0].strCategory,
-        alcoholicOrNot: cocktail[0].strAlcoholic,
-        name: cocktail[0].strDrink,
-        image: cocktail[0].strDrinkThumb,
-
-      };
-      const favoritesString = JSON
-        .stringify([favoriteRecipeToAdd]);
-      localStorage.setItem('favoriteRecipes', favoritesString);
-    }
-
-    setIsFavorite(!isFavorite);
-  };
-
   return (
     drink.length > 0
       ? (
@@ -124,30 +80,16 @@ function CocktailDetails() {
           />
           <div>
             <h2 data-testid="recipe-title">{cocktail[0].strDrink}</h2>
-            <input
-              type="image"
-              data-testid="share-btn"
-              onClick={ handleShare }
-              src={ shareBtnLogo }
-              alt="Share button"
+            <ShareBtn />
+            <FavoriteBtn
+              id={ id }
+              type="drink"
+              nationality=""
+              category={ cocktail[0].category }
+              name={ cocktail[0].name }
+              image={ cocktail[0].image }
+              alcoholicOrNot={ cocktail[0].alcoholicOrNot }
             />
-            {isFavorite
-              ? (
-                <input
-                  type="image"
-                  data-testid="favorite-btn"
-                  alt="Favorite button"
-                  src={ favoriteChecked }
-                  onClick={ handleFavorite }
-                />)
-              : (
-                <input
-                  type="image"
-                  data-testid="favorite-btn"
-                  alt="Favorite button"
-                  src={ favoriteNotChecked }
-                  onClick={ handleFavorite }
-                />) }
             <p data-testid="recipe-category">{cocktail[0].strAlcoholic}</p>
           </div>
 
