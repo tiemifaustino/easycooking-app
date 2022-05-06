@@ -5,6 +5,9 @@ import Header from '../components/Header';
 
 function Profile() {
   const history = useHistory();
+  const getEmail = JSON.parse(localStorage.getItem('user'));
+
+  // console.log(email);
 
   const handleClearClick = () => {
     localStorage.clear();
@@ -16,7 +19,7 @@ function Profile() {
       <Header title="Profile" visible={ false } />
       <div>
         <h2 data-testid="profile-email">
-          {JSON.parse(localStorage.getItem('user')).email}
+          { getEmail && getEmail.email }
         </h2>
         <button
           type="button"

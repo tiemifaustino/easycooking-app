@@ -67,8 +67,8 @@ function Foods() {
   return (
     <div>
       <Header title="Foods" visible />
-      <div className="d-flex justify-content-center">
 
+      <div className="d-flex justify-content-center">
         <div className="container-buttons d-flex justify-content-center flex-wrap">
           <Button
             type="reset"
@@ -83,8 +83,8 @@ function Foods() {
             buttonsNames.map((buttonName, index) => (
               <Button
                 key={ index }
-                type="button"
                 data-testid={ `${buttonName}-category-filter` }
+                type="button"
                 name={ buttonName }
                 onClick={ handleClick }
                 variant="dark"
@@ -97,6 +97,7 @@ function Foods() {
           }
         </div>
       </div>
+
       <div className="d-flex flex-wrap justify-content-center">
         {
           foods && foods
@@ -115,6 +116,7 @@ function Foods() {
             })
         }
       </div>
+
       <Footer />
     </div>
   );
