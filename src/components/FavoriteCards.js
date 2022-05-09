@@ -35,11 +35,12 @@ function FavoriteCards({ id, index, name, img, type, category,
     <Card className="mx-3 my-3 title">
       <Card.Body className="d-flex p-0">
         <Card.Img
+          type="image"
           data-testid={ `${index}-horizontal-image` }
           alt={ name }
           src={ img }
+          width="50%"
           style={ { width: '10rem' } }
-          type="image"
           onClick={ handleClick }
         />
 
@@ -50,9 +51,9 @@ function FavoriteCards({ id, index, name, img, type, category,
           <Link
             to={ `/${type}s/${id}` }
             data-testid={ `${index}-horizontal-name` }
-            className="title"
+            // className="title"
           >
-            <h5>{name}</h5>
+            <p>{name}</p>
           </Link>
 
           <p data-testid={ `${index}-horizontal-top-text` }>
