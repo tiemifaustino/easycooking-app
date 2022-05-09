@@ -62,7 +62,7 @@ function Drinks() {
   };
 
   return (
-    <div className="container-page-drinks">
+    <div className="container-page">
       <Header title="Drinks" visible />
 
       <div className="d-flex justify-content-center mt-2">

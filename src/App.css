@@ -67,18 +67,14 @@ body {
   background-color: var(--color-background);
 }
 
-.container-page {
+.container-page-explore {
   background-color: var(--color-5);
   height: 100vh;
 }
 
-.container-page-explore, .container-page-foods, .container-page-drinks {
+.container-page {
   background-color: var(--color-5);
 }
-
-/* .share-btn {
-  background-image: 'src/images/blackHeartIcon.svg';
-} */
 
 .container-cards {
   padding-bottom: 70px;
@@ -168,3 +164,7 @@ footer {
   bottom: 0;
   position: fixed;
 }
+
+/* .share-btn {
+  background-image: 'src/images/blackHeartIcon.svg';
+} */

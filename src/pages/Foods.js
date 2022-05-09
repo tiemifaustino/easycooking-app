@@ -64,7 +64,7 @@ function Foods() {
   };
 
   return (
-    <div className="container-page-foods">
+    <div className="container-page">
       <Header title="Foods" visible />
 
       <div className="d-flex justify-content-center mt-2">

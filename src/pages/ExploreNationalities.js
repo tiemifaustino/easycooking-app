@@ -27,7 +27,7 @@ function ExploreNationalities() {
   }, [nationalityValue]);
 
   return (
-    <div className="container-page-explore">
+    <div className="container-page">
       <Header title="Explore Nationalities" visible />
       <div>
 

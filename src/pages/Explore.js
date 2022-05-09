@@ -8,7 +8,7 @@ function Explore() {
   const history = useHistory();
 
   return (
-    <div className="container-page">
+    <div className="container-page-explore">
       <Header title="Explore" visible={ false } />
 
       <div className="d-flex flex-column mx-5 mt-5">
