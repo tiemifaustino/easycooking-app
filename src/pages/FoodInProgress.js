@@ -5,7 +5,7 @@ import { fetchRecipeByID } from '../services/API';
 
 function FoodInProgress() {
   const { id } = useParams();
-  const [meal, setMeal] = useState();
+  const [recipe, setRecipe] = useState();
   const [saveLocalStorage, setSaveLocalStorage] = useState({ cocktails: {}, meals: {} });
 
   useEffect(() => {
@@ -15,7 +15,7 @@ function FoodInProgress() {
       const ingredients = Object
         .keys(APIRecipeByID).filter((key) => key.includes('strIngredient'));
 
-      setMeal({
+      setRecipe({
         image: APIRecipeByID.strMealThumb,
         name: APIRecipeByID.strMeal,
         category: APIRecipeByID.strCategory,
@@ -23,6 +23,8 @@ function FoodInProgress() {
           .map((ingredient) => (APIRecipeByID[ingredient] !== null
 && APIRecipeByID[ingredient])),
         preparation: APIRecipeByID.strInstructions,
+        nationality: APIRecipeByID.strArea,
+        alcoholicOrNot: '',
       });
     };
     const getLocalStorage = () => {
@@ -32,15 +34,18 @@ function FoodInProgress() {
     };
     AllRecipeFood();
     getLocalStorage();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
-    <InProgress
-      id={ id }
-      page="food"
-      meal={ meal }
-      saveLocal={ saveLocalStorage }
-    />
+    <div>
+      <InProgress
+        id={ id }
+        page="food"
+        recipe={ recipe }
+        saveLocal={ saveLocalStorage }
+      />
+    </div>
 
   );
 }

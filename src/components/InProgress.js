@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
-import favoriteNotChecked from '../images/whiteHeartIcon.svg';
-import shareBtnLogo from '../images/shareIcon.svg';
+import ShareBtn from './ShareBtn';
+import FavoriteBtn from './favoriteBtn';
 
-function InProgress({ page, id, meal, saveLocal }) {
+function InProgress({ page, id, recipe, saveLocal }) {
   const [inputChecked, setInputChecked] = useState([]);
   const [saveLocalStorage, setSaveLocalStorage] = useState({ cocktails: {}, meals: {} });
   const history = useHistory();
@@ -41,7 +41,8 @@ function InProgress({ page, id, meal, saveLocal }) {
         break;
       }
     };
-    if (inputChecked.length > 0) handleLocalStorage();
+    if (inputChecked && inputChecked.length > 0) handleLocalStorage();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inputChecked]);
 
   useEffect(() => {
@@ -49,6 +50,7 @@ function InProgress({ page, id, meal, saveLocal }) {
       localStorage.setItem('inProgressRecipes', JSON.stringify(saveLocalStorage));
     };
     if (inputChecked.length > 0) localStorageSave();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [saveLocalStorage]);
 
   const handleInputChecked = ({ target: { value, checked } }) => (checked
@@ -59,33 +61,40 @@ function InProgress({ page, id, meal, saveLocal }) {
   return (
     <div>
       {
-        meal ? (
+        recipe ? (
           <div>
             <div>
               <img
                 data-testid="recipe-photo"
-                src={ meal.image }
+                src={ recipe.image }
                 alt="Ilustração da Receita"
               />
               <span data-testid="recipe-title">
-                {meal.name}
+                {recipe.name}
               </span>
             </div>
 
             <div>
-              <p data-testid="recipe-category">{meal.category}</p>
-              <button data-testid="share-btn" type="button" onClick="">
-                <img src={ shareBtnLogo } alt="shareIcon" />
-              </button>
-              <button data-testid="favorite-btn" type="button" onClick="">
-                <img src={ favoriteNotChecked } alt="favorite" />
-              </button>
+              <p data-testid="recipe-category">{recipe.category}</p>
+              <ShareBtn />
+              <FavoriteBtn
+                id={ id }
+                type={ page }
+                nationality={ recipe.nationality }
+                category={ recipe.category }
+                name={ recipe.name }
+                image={ recipe.image }
+                alcoholicOrNot={ recipe.alcoholicOrNot }
+              />
             </div>
 
             <div>
-              <h2>Ingredients</h2>
+              <h2>
+                Ingredients
+                {console.log(recipe)}
+              </h2>
               {
-                meal.ingredients.map((ingredient, index) => ingredient && (
+                recipe.ingredients.map((ingredient, index) => ingredient && (
                   <div
                     key={ `${index}-ingredient-name-and-measure` }
                     data-testid={ `${index}-ingredient-step` }
@@ -98,7 +107,7 @@ function InProgress({ page, id, meal, saveLocal }) {
                         id={ `${index}-ingredient-step` }
                         value={ ingredient }
                         onChange={ handleInputChecked }
-                        checked={ inputChecked.some((value) => value === ingredient) }
+                        checked={ inputChecked?.some((value) => value === ingredient) }
                       />
                       {ingredient}
                     </label>
@@ -108,11 +117,11 @@ function InProgress({ page, id, meal, saveLocal }) {
             </div>
             <div>
               <h2>Instructions</h2>
-              <span data-testid="instructions">{meal.preparation}</span>
+              <span data-testid="instructions">{recipe.preparation}</span>
               <button
                 data-testid="finish-recipe-btn"
                 type="button"
-                disabled={ inputChecked.length !== meal.ingredients
+                disabled={ inputChecked && inputChecked.length !== recipe.ingredients
                   .filter((value) => value !== undefined && value).length }
                 onClick={ () => history.push('/done-recipes') }
               >
