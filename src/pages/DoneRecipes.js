@@ -1,8 +1,13 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from '../components/Header';
 import DoneRecipesCard from '../components/DoneRecipesCard';
 
 function DoneRecipes() {
+  const [finishRecipe, setFinishRecipe] = useState([]);
+  useEffect(() => {
+    setFinishRecipe(JSON.parse(localStorage.getItem('doneRecipes')));
+  }, []);
+
   return (
     <>
       <Header title="Done Recipes" visible={ false } />
@@ -24,8 +29,24 @@ function DoneRecipes() {
       >
         Drinks
       </button>
-      <DoneRecipesCard />
 
+      {
+        finishRecipe?.map((recipe, index) => (
+          <DoneRecipesCard
+            key={ `${index}` }
+            id={ recipe.id }
+            index={ index }
+            name={ recipe.name }
+            img={ recipe.image }
+            type={ recipe.type }
+            category={ recipe.category }
+            nationality={ recipe.nationality }
+            alcoholic={ recipe.alcoholic }
+            doneDate={ recipe.doneDate }
+            tags={ [...recipe.tags] }
+          />
+        ))
+      }
     </>
 
   );
