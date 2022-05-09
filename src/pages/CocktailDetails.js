@@ -132,7 +132,7 @@ function CocktailDetails() {
             </p>
           </div>
 
-          <h2 className="title-h2-page-details  px-3 m-3">Recommended</h2>
+          <h2 className="title px-3 m-3">Recommended</h2>
           <SimpleSliderRecipes
             recommendedCards={ recommendedCards }
           />

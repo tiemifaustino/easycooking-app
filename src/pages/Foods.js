@@ -97,7 +97,7 @@ function Foods() {
         </div>
       </div>
 
-      <div className="d-flex flex-wrap justify-content-center container-cards-foods">
+      <div className="d-flex flex-wrap justify-content-center container-cards">
         {
           foods && foods
             .map((meal, index) => {

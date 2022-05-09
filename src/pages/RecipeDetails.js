@@ -111,7 +111,7 @@ function RecipeDetails() {
           </div>
 
           <div>
-            <h2 className="title-h2-page-details px-3 m-3">Ingredients</h2>
+            <h2 className="title px-3 m-3">Ingredients</h2>
             <ul className="mx-4 px-5 py-4 container-details">
               { ingredients.map((ingredient, index) => (
                 <li

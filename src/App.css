@@ -72,7 +72,7 @@ body {
   height: 100vh;
 }
 
-.container-page-explore {
+.container-page-explore, .container-page-foods, .container-page-drinks {
   background-color: var(--color-5);
 }
 
@@ -80,16 +80,12 @@ body {
   background-image: 'src/images/blackHeartIcon.svg';
 } */
 
-.container-page-foods {
-  background-color: var(--color-5);
+.container-cards {
+  padding-bottom: 70px;
 }
 
 .container-buttons {
   width: 300px;
-}
-
-.container-cards-foods {
-  padding-bottom: 70px;
 }
 
 .cardIngredients {
@@ -98,14 +94,6 @@ body {
   height: 35%;
   text-align: center;
   width: 100%;
-}
-
-.container-cards {
-  padding-bottom: 70px;
-}
-
-.container-page-drinks {
-  background-color: var(--color-5);
 }
 
 .name-recipe {
@@ -122,10 +110,6 @@ body {
 .container-details {
   background-color: var(--color-5);
   border-radius: 10px;
-  color: var(--color-2);
-}
-
-.title-h2-page-details {
   color: var(--color-2);
 }
 

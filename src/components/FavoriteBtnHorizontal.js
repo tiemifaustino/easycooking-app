@@ -57,6 +57,7 @@ function FavoriteBtnHorizontal({ id, index, type, nationality, category, name, i
     <button
       type="button"
       onClick={ handleFavorite }
+      className="button-icon"
     >
       <img
         src={ isFavorite ? favoriteChecked : favoriteNotChecked }
