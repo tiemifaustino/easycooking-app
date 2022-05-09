@@ -72,6 +72,10 @@ body {
   height: 100vh;
 }
 
+.container-page-ingredients {
+  background-color: var(--color-5);
+}
+
 /* .share-btn {
   background-image: 'src/images/blackHeartIcon.svg';
 } */
@@ -90,6 +94,7 @@ body {
 
 .cardIngredients {
   border-radius: 3px;
+  color: var(--color-2);
   height: 35%;
   text-align: center;
   width: 100%;
