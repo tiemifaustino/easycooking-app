@@ -2,39 +2,64 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { toast } from 'react-toastify';
 import { Card } from 'react-bootstrap';
+import { Link, useHistory } from 'react-router-dom';
 import FavoriteBtnHorizontal from './FavoriteBtnHorizontal';
 import shareBtnLogo from '../images/shareIcon.svg';
 
-function FavoriteCards({ index, title, img, category, nationality }) {
-  const favoriteLocalStorage = JSON.parse(localStorage.getItem('favoriteRecipes'));
+function FavoriteCards({ id, index, name, img, type, category,
+  nationality, alcoholic }) {
+  const history = useHistory();
+  // const favoriteLocalStorage = JSON.parse(localStorage.getItem('favoriteRecipes'));
 
   const handleShare = () => {
     toast.success('Link copied!');
-    const textToCopy = window.location.href.replace('/in-progress', '');
+    let textToCopy = window.location.href.replace('/favorite-recipes', '');
+    if (type === 'food') {
+      textToCopy += `/foods/${id}`;
+    } else if (type === 'drink') {
+      textToCopy += `/drinks/${id}`;
+    }
+
     navigator.clipboard.writeText(textToCopy);
   };
 
+  const handleClick = () => {
+    if (type === 'food') {
+      history.push(`/foods/${id}`);
+    } else if (type === 'drink') {
+      history.push(`/drinks/${id}`);
+    }
+  };
+
   return (
-    <Card className="m-3 title">
+    <Card className="mx-3 my-3 title">
       <Card.Body className="d-flex p-0">
         <Card.Img
           data-testid={ `${index}-horizontal-image` }
-          alt={ title }
+          alt={ name }
           src={ img }
           style={ { width: '10rem' } }
+          type="image"
+          onClick={ handleClick }
         />
 
         <div
           className="d-flex flex-column justify-content-center
           align-items-stretch card-favorite m-2 ml-3"
         >
-          <Card.Title data-testid={ `${index}-horizontal-name` }>
-            { title }
-          </Card.Title>
+          <Link
+            to={ `/${type}s/${id}` }
+            data-testid={ `${index}-horizontal-name` }
+            className="title"
+          >
+            <h5>{name}</h5>
+          </Link>
+
           <p data-testid={ `${index}-horizontal-top-text` }>
             {`${nationality} - ${category}`}
           </p>
           <p data-testid={ `${index}-horizontal-done-date` } />
+          <p data-testid={ `${index}-horizontal-top-text` }>{alcoholic}</p>
 
           <div className="d-flex justify-content-around">
             <input
@@ -46,18 +71,19 @@ function FavoriteCards({ index, title, img, category, nationality }) {
             />
             <FavoriteBtnHorizontal
               index={ index }
-              id={ favoriteLocalStorage[index].id }
-              type={ favoriteLocalStorage[index].type }
-              nationality={ favoriteLocalStorage[index].nationality }
-              category={ favoriteLocalStorage[index].category }
-              name={ favoriteLocalStorage[index].name }
-              image={ favoriteLocalStorage[index].image }
-              alcoholicOrNot={ favoriteLocalStorage[index].alcoholicOrNot }
+              id={ id }
+              type={ type }
+              nationality={ nationality }
+              category={ category }
+              name={ name }
+              image={ img }
+              alcoholicOrNot={ alcoholic }
             />
           </div>
         </div>
       </Card.Body>
     </Card>
+
   );
 }
 

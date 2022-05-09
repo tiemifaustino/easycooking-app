@@ -142,6 +142,8 @@ function RecipeDetails() {
                 src={ meal[0].strYoutube.replace('watch?v=', 'embed/') }
                 title="video da receita"
                 className="video-details"
+                samesite="None"
+                secure="true"
               />
             </div>
           </div>
