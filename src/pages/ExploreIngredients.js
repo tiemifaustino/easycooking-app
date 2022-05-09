@@ -32,7 +32,7 @@ function ExploreIngredients() {
   };
 
   return (
-    <div className="container-page-explore">
+    <div className="container-page">
       <Header title="Explore Ingredients" visible={ false } />
 
       <div className="d-flex flex-wrap justify-content-center mx-2 mt-3 container-cards">

@@ -14,7 +14,7 @@ function Profile() {
   };
 
   return (
-    <div className="container-page">
+    <div className="container-page-explore">
       <Header title="Profile" visible={ false } />
       <div className="my-5">
         <h4 data-testid="profile-email">

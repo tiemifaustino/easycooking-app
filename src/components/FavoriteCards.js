@@ -22,10 +22,12 @@ function FavoriteCards({ index, title, img, category, nationality }) {
           alt={ title }
           src={ img }
           style={ { width: '10rem' } }
-          // variant="top"
         />
 
-        <div className="d-flex flex-column justify-content-center m-2 ml-3">
+        <div
+          className="d-flex flex-column justify-content-center
+          align-items-stretch card-favorite m-2 ml-3"
+        >
           <Card.Title data-testid={ `${index}-horizontal-name` }>
             { title }
           </Card.Title>

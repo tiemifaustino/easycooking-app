@@ -92,9 +92,9 @@ function Header(props) {
           />
         </button>
 
-        <h1 data-testid="page-title" className="title">
+        <h3 data-testid="page-title" className="title title-align">
           { title }
-        </h1>
+        </h3>
 
         {
           visible && (
@@ -128,7 +128,10 @@ function Header(props) {
             </Form.Label>
 
             <Form.Group className="d-flex justify-content-around mb-2">
-              <Form.Label htmlFor="ingredient-search-radio" className="d-flex input-text">
+              <Form.Label
+                htmlFor="ingredient-search-radio"
+                className="d-flex input-text"
+              >
                 <Form.Check
                   type="radio"
                   data-testid="ingredient-search-radio"
@@ -148,7 +151,6 @@ function Header(props) {
                   name="typeInput"
                   value="Name"
                   onChange={ handleChangeInput }
-
                 />
                 Name
               </Form.Label>

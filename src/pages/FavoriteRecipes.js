@@ -8,7 +8,7 @@ function FavoriteRecipes() {
   console.log(favoriteLocalStorage);
 
   return (
-    <div className="container-cards container-page-explore">
+    <div className="container-cards container-page">
       <Header title="Favorite Recipes" visible={ false } />
 
       <div className="d-flex justify-content-center mt-3 mb-4">

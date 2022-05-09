@@ -124,7 +124,7 @@ function RecipeDetails() {
               )) }
             </ul>
 
-            <h2 className="title-h2-page-details  px-3 m-3">Instructions</h2>
+            <h2 className="title px-3 m-3">Instructions</h2>
             <p
               data-testid="instructions"
               className="container-details mx-4 p-3"
@@ -133,15 +133,17 @@ function RecipeDetails() {
 
             </p>
 
-            <h2 className="title-h2-page-details  px-3 m-3">Video</h2>
-            <iframe
-              width="420"
-              height="315"
-              data-testid="video"
-              src={ meal[0].strYoutube.replace('watch?v=', 'embed/') }
-              title="video da receita"
-              className="video-details m-3 p-2 d-flex justify-content-center"
-            />
+            <h2 className="title px-3 m-3">Video</h2>
+            <div className="m-3 p-2 d-flex justify-content-center">
+              <iframe
+                width="420"
+                height="315"
+                data-testid="video"
+                src={ meal[0].strYoutube.replace('watch?v=', 'embed/') }
+                title="video da receita"
+                className="video-details"
+              />
+            </div>
           </div>
 
           <h2 className="title-h2-page-details  px-3 m-3">Recommended</h2>

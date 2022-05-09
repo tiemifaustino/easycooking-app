@@ -5,10 +5,10 @@ import DoneRecipesCard from '../components/DoneRecipesCard';
 
 function DoneRecipes() {
   return (
-    <>
+    <div className="container-cards container-page-explore">
       <Header title="Done Recipes" visible={ false } />
 
-      <div className="d-flex justify-content-center mt-1 mb-4">
+      <div className="d-flex justify-content-center mt-3 mb-4">
         <div className="container-buttons d-flex justify-content-center m-0">
           <Button
             data-testid="filter-by-all-btn"
@@ -41,7 +41,7 @@ function DoneRecipes() {
       </div>
 
       <DoneRecipesCard />
-    </>
+    </div>
   );
 }
 

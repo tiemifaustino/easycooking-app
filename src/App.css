@@ -58,9 +58,18 @@ header {
   color: var(--color-2);
 }
 
+.title-align {
+  text-align: center;
+}
+
 .input-text {
   color: var(--color-2);
   font-weight: 500;
+}
+
+input:checked {
+  accent-color: var(--color-2);
+  border: 2px solid var(--color-2);
 }
 
 body {
@@ -92,6 +101,10 @@ body {
   width: 100%;
 }
 
+.card-favorite {
+  width: 100%;
+}
+
 .name-recipe {
   background-color: var(--color-2);
   border-radius: 0 0 15px 15px;
@@ -111,6 +124,7 @@ body {
 
 .video-details {
   border: none;
+  border-radius: 10px;
   height: auto;
   width: auto;
 }
@@ -148,6 +162,10 @@ body {
   width: 200px;
 }
 
+.select-nacionalities option:hover {
+  background-color: var(--color-background);
+}
+
 footer {
   background-color: var(--color-background);
   bottom: 0;
@@ -168,3 +186,4 @@ footer {
 /* .share-btn {
   background-image: 'src/images/blackHeartIcon.svg';
 } */
+
