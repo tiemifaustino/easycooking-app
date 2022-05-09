@@ -99,11 +99,6 @@ body {
   padding-bottom: 70px;
 }
 
-.container-page-ingredients {
-  background-color: var(--color-5);
-  height: 100%;
-}
-
 .container-page-drinks {
   background-color: var(--color-5);
 }
@@ -113,13 +108,34 @@ body {
 }
 
 .name-recipe {
-  border-radius: 8px;
+  background-color: var(--color-2);
+  border-radius: 0 0 15px 15px;
+  color: var(--color-5);
+}
+
+.container-icons {
+  background-color: var(--color-5);
+  border-radius: 10px;
+}
+
+.container-details {
+  background-color: var(--color-5);
+  border-radius: 10px;
+  color: var(--color-2);
+}
+
+.title-h2-page-details {
+  color: var(--color-2);
+}
+
+.video-details {
+  border: none;
+  height: auto;
+  width: auto;
 }
 
 .not-found {
   border-radius: 50%;
-
-  /* width: auto; */
 }
 
 footer {

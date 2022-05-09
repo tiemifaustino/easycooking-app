@@ -85,29 +85,35 @@ function RecipeDetails() {
 
               <div
                 className="name-recipe d-flex justify-content-between
-                  align-items-center p-2"
+                  align-items-center pt-2 px-3"
               >
                 <div>
                   <h2 data-testid="recipe-title">{meal[0].strMeal}</h2>
                   <p data-testid="recipe-category">{meal[0].strCategory}</p>
                 </div>
-                <div>
-                  <ShareBtn />
-                  <FavoriteBtn
-                    id={ id }
-                    type="food"
-                    nationality={ meal[0].strArea }
-                    category={ meal[0].strCategory }
-                    name={ meal[0].strMeal }
-                    image={ meal[0].strMealThumb }
-                    alcoholicOrNot=""
-                  />
+
+                <div className="d-flex align-items-center ">
+                  <div className="container-icons mx-1">
+                    <ShareBtn />
+                  </div>
+                  <div className="container-icons mx-1">
+                    <FavoriteBtn
+                      id={ id }
+                      type="food"
+                      nationality={ meal[0].strArea }
+                      category={ meal[0].strCategory }
+                      name={ meal[0].strMeal }
+                      image={ meal[0].strMealThumb }
+                      alcoholicOrNot=""
+                    />
+                  </div>
                 </div>
+
               </div>
 
               <div>
-                <h2 className="px-2">Ingredients</h2>
-                <ul className="px-5">
+                <h2 className="title-h2-page-details px-3 m-3">Ingredients</h2>
+                <ul className="mx-4 px-5 py-4 container-details ">
                   {ingredients.map((ingredient, index) => (
                     <li
                       key={ `${index}-ingredient-name-and-measure` }
@@ -118,19 +124,28 @@ function RecipeDetails() {
                     </li>
                   ))}
                 </ul>
-                <h2>Instructions</h2>
-                <p data-testid="instructions">{meal[0].strInstructions}</p>
-                <h2>Video</h2>
+
+                <h2 className="title-h2-page-details  px-3 m-3">Instructions</h2>
+                <p
+                  data-testid="instructions"
+                  className="container-details mx-4 p-3 "
+                >
+                  {meal[0].strInstructions}
+
+                </p>
+
+                <h2 className="title-h2-page-details  px-3 m-3">Video</h2>
                 <iframe
                   width="420"
                   height="315"
                   data-testid="video"
                   src={ meal[0].strYoutube.replace('watch?v=', 'embed/') }
                   title="video da receita"
+                  className="video-details m-3 p-2 d-flex justify-content-center"
                 />
               </div>
 
-              <h2>Recommended</h2>
+              <h2 className="title-h2-page-details  px-3 m-3">Recommended</h2>
               <SimpleSliderDrinks
                 recommendedCards={ recommendedCards }
               />
