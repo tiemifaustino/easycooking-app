@@ -16,6 +16,8 @@ function DrinkInProgress() {
         .keys(APIRecipeByID).filter((key) => key.includes('strIngredient'));
 
       setRecipe({
+        id: APIRecipeByID.idDrink,
+        type: 'drink',
         image: APIRecipeByID.strDrinkThumb,
         name: APIRecipeByID.strDrink,
         category: APIRecipeByID.strCategory,
@@ -25,6 +27,7 @@ function DrinkInProgress() {
         preparation: APIRecipeByID.strInstructions,
         nationality: '',
         alcoholicOrNot: APIRecipeByID.strAlcoholic,
+        tags: '',
       });
     };
     const getLocalStorage = () => {
