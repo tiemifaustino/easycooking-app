@@ -148,6 +148,7 @@ function RecipeDetails() {
           <SimpleSliderDrinks
             recommendedCards={ recommendedCards }
           />
+
           <footer className="d-flex justify-content-center footer-button">
             {
               showBtn

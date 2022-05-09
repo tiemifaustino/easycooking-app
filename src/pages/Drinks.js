@@ -95,7 +95,7 @@ function Drinks() {
         </div>
       </div>
 
-      <div className="d-flex flex-wrap justify-content-center container-cards-drinks">
+      <div className="d-flex flex-wrap justify-content-center container-cards">
         {
           drinks && drinks.map((drink, index) => {
             const maxdrinks = 11;
