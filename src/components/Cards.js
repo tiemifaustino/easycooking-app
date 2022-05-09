@@ -30,7 +30,7 @@ function Cards({ index, img, title, id }) {
       />
       <Card.Text
         data-testid={ `${index}-card-name` }
-        className="card-text p-2"
+        className="card-text p-2 d-flex justify-content-center align-items-center"
       >
         { title }
 

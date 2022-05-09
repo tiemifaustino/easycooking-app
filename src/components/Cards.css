@@ -8,4 +8,5 @@
 .card-text {
   background-color: var(--color-background);
   font-weight: 600;
+  height: 100%;
 }
