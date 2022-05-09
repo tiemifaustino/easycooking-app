@@ -6,7 +6,6 @@ import Footer from '../components/Footer';
 import Header from '../components/Header';
 import { cocktailThunk, cocktailCategoriesThunk,
   ingredientFilter } from '../actions/index.actions';
-import './Drinks.css';
 
 function Drinks() {
   const dispatch = useDispatch();

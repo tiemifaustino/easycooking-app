@@ -6,7 +6,6 @@ import { Form, Button } from 'react-bootstrap';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 import { recipeThunk, cocktailThunk } from '../actions/index.actions';
-import './Header.css';
 
 function Header(props) {
   const { title, visible } = props;

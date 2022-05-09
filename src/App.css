@@ -22,18 +22,70 @@
   --color-5: #fcf9f4;
 }
 
+h4 {
+  color: var(--color-2);
+  font-weight: 600;
+  text-align: center;
+}
+
+.logo {
+  animation: bounce 2s;
+}
+
+@keyframes bounce {
+
+  from {
+    transform: translateY(-150px);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
+header {
+  background-color: var(--color-background);
+  font-size: 1rem;
+}
+
+.button-icon {
+  background-color: transparent;
+  border: none;
+  padding: 5px;
+}
+
+.title {
+  color: var(--color-2);
+}
+
+.input-text {
+  color: var(--color-2);
+  font-weight: 500;
+}
 
 body {
   background-color: var(--color-background);
 }
 
-.recipe-button {
-  bottom: 0;
-  position: fixed;
+.container-page {
+  background-color: var(--color-5);
+  height: 100vh;
 }
 
-.share-btn {
+/* .share-btn {
   background-image: 'src/images/blackHeartIcon.svg';
+} */
+
+.container-page-foods {
+  background-color: var(--color-5);
+}
+
+.container-buttons {
+  width: 300px;
+}
+
+.container-cards-foods {
+  padding-bottom: 70px;
 }
 
 .cardIngredients {
@@ -47,74 +99,28 @@ body {
   padding-bottom: 70px;
 }
 
-/*
+.container-page-ingredients {
+  background-color: var(--color-5);
+  height: 100%;
+}
 
-.meals {
-  align-items: center;
-  background: #0fa36b;
-  color: #464646;
-  display: flex;
-  flex-direction: column;
-  font-family: sans-serif;
-  height: 100vh;
-  justify-content: center;
+.container-page-drinks {
+  background-color: var(--color-5);
+}
+
+.container-cards-drinks {
+  padding-bottom: 70px;
+}
+
+footer {
+  background-color: var(--color-background);
+  bottom: 0;
+  height: 60px;
+  position: fixed;
   width: 100%;
 }
 
-.rocksGlass {
-  animation: shake 1s infinite ease;
-  max-height: 80vh;
+.recipe-button {
+  bottom: 0;
+  position: fixed;
 }
-
-/*
-#iceLeft {
-  animation: clink .8s infinite ease;
-  opacity: 0.6;
-  transform-origin: 36px 66px;
-}
-
-#iceRight {
-  animation: clink .8s .2s infinite ease;
-  opacity: 0.6;
-  transform-origin: 60px 78px;
-}
-*/
-
-/*
-.meals > .logo {
-  animation: shake 1.5s infinite ease;
-  color: aliceblue;
-  font-family: Montserrat , sans-serif;
-  font-size: 3em;
-  font-weight: 900;
-}
-
-@keyframes shake {
-
-  0% {
-    transform: rotate(5deg);
-  }
-
-  50% {
-    transform: rotate(-5deg);
-  }
-
-  100% {
-    transform: rotate(5deg);
-  }
-}
-
-@keyframes clink {
-
-  0% {
-    transform: rotate(-10deg);
-  }
-
-  50% {
-    transform: rotate(20deg);
-  }
-
-  100% {
-    transform: rotate(-10deg);
-  }
-}  */

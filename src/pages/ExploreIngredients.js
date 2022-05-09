@@ -7,7 +7,6 @@ import Footer from '../components/Footer';
 import { requestIngredientsListThunk,
   requestIngredientsDrinksThunk, ingredientFilter } from '../actions/index.actions';
 import CardIngredients from '../components/CardIngredients';
-import './ExploreIngredients.css';
 
 function ExploreIngredients() {
   const { ingredients,

@@ -6,7 +6,6 @@ import Footer from '../components/Footer';
 import Header from '../components/Header';
 import { recipeThunk, recipeCategoriesThunk,
   ingredientFilter } from '../actions/index.actions';
-import './Foods.css';
 
 function Foods() {
   const dispatch = useDispatch();

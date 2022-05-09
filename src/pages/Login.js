@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Form, Button } from 'react-bootstrap';
-import './Login.css';
 import logoApp from '../images/logoAppFundo.png';
 
 function Login() {
