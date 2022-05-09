@@ -178,6 +178,9 @@ function InProgress({ page, id, recipe, saveLocal }) {
                 disabled={ inputChecked && inputChecked.length !== recipe.ingredients
                   .filter((value) => value !== undefined && value).length }
                 onClick={ handleClick }
+                className="my-2"
+                size="lg"
+                variant="danger"
               >
                 Finish Recipe
               </Button>
