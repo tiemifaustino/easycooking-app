@@ -19,11 +19,9 @@ function FavoriteBtnHorizontal({ id, index, type, nationality, category, name, i
     );
     setIsFavorite(isRecipeFavorite);
   };
-
   useEffect(() => {
     checkIfIsFavorite();
   });
-
   const handleFavorite = () => {
     const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
     const favoriteRecipeToAdd = {

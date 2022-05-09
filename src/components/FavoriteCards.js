@@ -51,9 +51,9 @@ function FavoriteCards({ id, index, name, img, type, category,
           <Link
             to={ `/${type}s/${id}` }
             data-testid={ `${index}-horizontal-name` }
-            // className="title"
+            className="title"
           >
-            <p>{name}</p>
+            <h5>{name}</h5>
           </Link>
 
           <p data-testid={ `${index}-horizontal-top-text` }>

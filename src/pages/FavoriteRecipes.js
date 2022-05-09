@@ -6,7 +6,7 @@ import FavoriteCards from '../components/FavoriteCards';
 
 function FavoriteRecipes() {
   const { favoriteRecipes } = useSelector((state) => state.favoriteReducer);
-  const [filter] = React.useState('');
+  const [filter, setFilter] = React.useState('');
 
   return (
     <div className="container-cards container-page">
@@ -20,6 +20,7 @@ function FavoriteRecipes() {
             variant="dark"
             size="md"
             className="mx-2 px-4"
+            onClick={ () => setFilter('') }
           >
             All
           </Button>
@@ -29,6 +30,7 @@ function FavoriteRecipes() {
             variant="dark"
             size="md"
             className="mx-2 px-4"
+            onClick={ () => setFilter('food') }
           >
             Food
           </Button>
@@ -38,6 +40,7 @@ function FavoriteRecipes() {
             variant="dark"
             size="md"
             className="mx-2 px-4"
+            onClick={ () => setFilter('drink') }
           >
             Drinks
           </Button>
