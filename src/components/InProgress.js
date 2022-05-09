@@ -41,7 +41,8 @@ function InProgress({ page, id, recipe, saveLocal }) {
         break;
       }
     };
-    if (inputChecked && inputChecked.length > 0) handleLocalStorage();
+    handleLocalStorage();
+
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inputChecked]);
 
@@ -49,7 +50,7 @@ function InProgress({ page, id, recipe, saveLocal }) {
     const localStorageSave = () => {
       localStorage.setItem('inProgressRecipes', JSON.stringify(saveLocalStorage));
     };
-    if (inputChecked.length > 0) localStorageSave();
+    localStorageSave();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [saveLocalStorage]);
 
@@ -57,6 +58,32 @@ function InProgress({ page, id, recipe, saveLocal }) {
     ? setInputChecked([...inputChecked, value])
     : setInputChecked(inputChecked
       .filter((ingredient) => ingredient !== value)));
+
+  const handleClick = () => {
+    const timeElapsed = Date.now();
+    const today = new Date(timeElapsed);
+    const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
+    const currentRecipe = {
+      id,
+      type: recipe.type,
+      nationality: recipe.nationality,
+      category: recipe.category,
+      alcoholicOrNot: recipe.alcoholicOrNot,
+      name: recipe.name,
+      image: recipe.image,
+      doneDate: today.toDateString(),
+      tags: recipe.tags,
+    };
+
+    if (!doneRecipes) {
+      const doneRecipeString = JSON.stringify([currentRecipe]);
+      localStorage.setItem('doneRecipes', doneRecipeString);
+    } else {
+      const doneRecipeString = JSON.stringify([...doneRecipes, currentRecipe]);
+      localStorage.setItem('doneRecipes', doneRecipeString);
+    }
+    history.push('/done-recipes');
+  };
 
   return (
     <div>
@@ -123,13 +150,13 @@ function InProgress({ page, id, recipe, saveLocal }) {
                 type="button"
                 disabled={ inputChecked && inputChecked.length !== recipe.ingredients
                   .filter((value) => value !== undefined && value).length }
-                onClick={ () => history.push('/done-recipes') }
+                onClick={ handleClick }
               >
                 Finish Recipe
               </button>
             </div>
           </div>
-        ) : <p>Loading</p>
+        ) : ''
       }
     </div>
   );
