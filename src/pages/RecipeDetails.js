@@ -5,7 +5,7 @@ import Image from 'react-bootstrap/Image';
 import { requestRecipeByIDThunk, cocktailThunk } from '../actions/index.actions';
 import SimpleSliderDrinks from '../components/SimpleSliderDrinks';
 import ShareBtn from '../components/ShareBtn';
-import FavoriteBtn from '../components/favoriteBtn';
+import FavoriteBtn from '../components/FavoriteBtn';
 
 function RecipeDetails() {
   const { id } = useParams();

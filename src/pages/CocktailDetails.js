@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
 import { requestCocktailByIDThunk, recipeThunk } from '../actions/index.actions';
 import SimpleSliderRecipes from '../components/SimpleSliderRecipes';
-import FavoriteBtn from '../components/favoriteBtn';
+import FavoriteBtn from '../components/FavoriteBtn';
 import ShareBtn from '../components/ShareBtn';
 
 function CocktailDetails() {

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import ShareBtn from './ShareBtn';
-import FavoriteBtn from './favoriteBtn';
+import FavoriteBtn from './FavoriteBtn';
 
 function InProgress({ page, id, recipe, saveLocal }) {
   const [inputChecked, setInputChecked] = useState([]);
