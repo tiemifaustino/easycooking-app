@@ -83,8 +83,8 @@ function Login() {
           data-testid="login-submit-btn"
           disabled={ isLoginBtnDisabled }
           type="submit"
-          variant="danger"
           value="Submit"
+          variant="danger"
           className="mt-3"
           size="md"
         >

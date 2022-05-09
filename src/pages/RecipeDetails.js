@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Image from 'react-bootstrap/Image';
+import { Button } from 'react-bootstrap';
 import { requestRecipeByIDThunk, cocktailThunk } from '../actions/index.actions';
 import SimpleSliderDrinks from '../components/SimpleSliderDrinks';
 import ShareBtn from '../components/ShareBtn';
@@ -71,102 +72,102 @@ function RecipeDetails() {
   };
 
   return (
-    <div>
-      {
-        meal.length > 0
-          ? (
-            <>
-              <Image
-                src={ meal[0].strMealThumb }
-                alt="recipe thumbnail"
-                data-testid="recipe-photo"
-                className="img-fluid"
-              />
 
-              <div
-                className="name-recipe d-flex justify-content-between
+    meal.length > 0
+      ? (
+        <>
+          <Image
+            src={ meal[0].strMealThumb }
+            alt="recipe thumbnail"
+            data-testid="recipe-photo"
+            className="img-fluid"
+          />
+
+          <div
+            className="name-recipe d-flex justify-content-between
                   align-items-center pt-2 px-3"
-              >
-                <div>
-                  <h2 data-testid="recipe-title">{meal[0].strMeal}</h2>
-                  <p data-testid="recipe-category">{meal[0].strCategory}</p>
-                </div>
+          >
+            <div>
+              <h2 data-testid="recipe-title">{meal[0].strMeal}</h2>
+              <p data-testid="recipe-category">{meal[0].strCategory}</p>
+            </div>
 
-                <div className="d-flex align-items-center ">
-                  <div className="container-icons mx-1">
-                    <ShareBtn />
-                  </div>
-                  <div className="container-icons mx-1">
-                    <FavoriteBtn
-                      id={ id }
-                      type="food"
-                      nationality={ meal[0].strArea }
-                      category={ meal[0].strCategory }
-                      name={ meal[0].strMeal }
-                      image={ meal[0].strMealThumb }
-                      alcoholicOrNot=""
-                    />
-                  </div>
-                </div>
-
+            <div className="d-flex align-items-center ">
+              <div className="container-icons mx-1">
+                <ShareBtn />
               </div>
-
-              <div>
-                <h2 className="title-h2-page-details px-3 m-3">Ingredients</h2>
-                <ul className="mx-4 px-5 py-4 container-details ">
-                  {ingredients.map((ingredient, index) => (
-                    <li
-                      key={ `${index}-ingredient-name-and-measure` }
-                      data-testid={ `${index}-ingredient-name-and-measure` }
-                    >
-                      {`${ingredient} ${measurements[index]}`}
-
-                    </li>
-                  ))}
-                </ul>
-
-                <h2 className="title-h2-page-details  px-3 m-3">Instructions</h2>
-                <p
-                  data-testid="instructions"
-                  className="container-details mx-4 p-3 "
-                >
-                  {meal[0].strInstructions}
-
-                </p>
-
-                <h2 className="title-h2-page-details  px-3 m-3">Video</h2>
-                <iframe
-                  width="420"
-                  height="315"
-                  data-testid="video"
-                  src={ meal[0].strYoutube.replace('watch?v=', 'embed/') }
-                  title="video da receita"
-                  className="video-details m-3 p-2 d-flex justify-content-center"
+              <div className="container-icons mx-1">
+                <FavoriteBtn
+                  id={ id }
+                  type="food"
+                  nationality={ meal[0].strArea }
+                  category={ meal[0].strCategory }
+                  name={ meal[0].strMeal }
+                  image={ meal[0].strMealThumb }
+                  alcoholicOrNot=""
                 />
               </div>
+            </div>
+          </div>
 
-              <h2 className="title-h2-page-details  px-3 m-3">Recommended</h2>
-              <SimpleSliderDrinks
-                recommendedCards={ recommendedCards }
-              />
-              {
-                showBtn
-                  ? (
-                    <button
-                      className="recipe-button"
-                      type="button"
-                      data-testid="start-recipe-btn"
-                      onClick={ () => handleClick() }
-                    >
-                      {currentBtn}
-                    </button>)
-                  : ''
-              }
-            </>
-          )
-          : ('')
-      }
-    </div>
+          <div>
+            <h2 className="title-h2-page-details px-3 m-3">Ingredients</h2>
+            <ul className="mx-4 px-5 py-4 container-details">
+              { ingredients.map((ingredient, index) => (
+                <li
+                  key={ `${index}-ingredient-name-and-measure` }
+                  data-testid={ `${index}-ingredient-name-and-measure` }
+                >
+                  {`${ingredient} ${measurements[index]}`}
+
+                </li>
+              )) }
+            </ul>
+
+            <h2 className="title-h2-page-details  px-3 m-3">Instructions</h2>
+            <p
+              data-testid="instructions"
+              className="container-details mx-4 p-3"
+            >
+              {meal[0].strInstructions}
+
+            </p>
+
+            <h2 className="title-h2-page-details  px-3 m-3">Video</h2>
+            <iframe
+              width="420"
+              height="315"
+              data-testid="video"
+              src={ meal[0].strYoutube.replace('watch?v=', 'embed/') }
+              title="video da receita"
+              className="video-details m-3 p-2 d-flex justify-content-center"
+            />
+          </div>
+
+          <h2 className="title-h2-page-details  px-3 m-3">Recommended</h2>
+          <SimpleSliderDrinks
+            recommendedCards={ recommendedCards }
+          />
+          <footer className="d-flex justify-content-center footer-button">
+            {
+              showBtn
+                ? (
+                  <Button
+                    className="recipe-button my-2"
+                    type="button"
+                    data-testid="start-recipe-btn"
+                    onClick={ () => handleClick() }
+                    size="lg"
+                    variant="danger"
+                  >
+                    {currentBtn}
+                  </Button>)
+                : ''
+            }
+          </footer>
+        </>
+      )
+      : ''
   );
 }
 

@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
+import Image from 'react-bootstrap/Image';
+import { Button } from 'react-bootstrap';
 import { requestCocktailByIDThunk, recipeThunk } from '../actions/index.actions';
 import SimpleSliderRecipes from '../components/SimpleSliderRecipes';
 import FavoriteBtn from '../components/FavoriteBtn';
@@ -73,29 +75,43 @@ function CocktailDetails() {
     drink.length > 0
       ? (
         <div>
-          <img
+          <Image
             src={ cocktail[0].strDrinkThumb }
             alt="cocktail thumbnail"
             data-testid="recipe-photo"
+            className="img-fluid"
           />
-          <div>
-            <h2 data-testid="recipe-title">{cocktail[0].strDrink}</h2>
-            <ShareBtn />
-            <FavoriteBtn
-              id={ id }
-              type="drink"
-              nationality=""
-              category={ cocktail[0].strCategory }
-              name={ cocktail[0].strDrink }
-              image={ cocktail[0].strDrinkThumb }
-              alcoholicOrNot={ cocktail[0].strAlcoholic }
-            />
-            <p data-testid="recipe-category">{cocktail[0].strAlcoholic}</p>
+
+          <div
+            className="name-recipe d-flex justify-content-between
+          align-items-center pt-2 px-3"
+          >
+            <div>
+              <h2 data-testid="recipe-title">{cocktail[0].strDrink}</h2>
+              <p data-testid="recipe-category">{cocktail[0].strAlcoholic}</p>
+            </div>
+
+            <div className="d-flex align-items-center ">
+              <div className="container-icons mx-1">
+                <ShareBtn />
+              </div>
+              <div className="container-icons mx-1">
+                <FavoriteBtn
+                  id={ id }
+                  type="drink"
+                  nationality=""
+                  category={ cocktail[0].strCategory }
+                  name={ cocktail[0].strDrink }
+                  image={ cocktail[0].strDrinkThumb }
+                  alcoholicOrNot={ cocktail[0].strAlcoholic }
+                />
+              </div>
+            </div>
           </div>
 
           <div>
-            <ul>
-              <h2>Ingredients</h2>
+            <h2 className="title-h2-page-details px-3 m-3">Ingredients</h2>
+            <ul className="mx-4 px-5 py-4 container-details">
               {ingredients.map((ingredient, index) => (
                 <li
                   key={ `${index}-ingredient-name-and-measure` }
@@ -106,26 +122,37 @@ function CocktailDetails() {
                 </li>
               ))}
             </ul>
-            <h2>Instructions</h2>
-            <p data-testid="instructions">
+
+            <h2 className="title-h2-page-details  px-3 m-3">Instructions</h2>
+            <p
+              data-testid="instructions"
+              className="container-details mx-4 p-3"
+            >
               {cocktail[0].strInstructions}
             </p>
           </div>
-          <h2>Recommended</h2>
+
+          <h2 className="title-h2-page-details  px-3 m-3">Recommended</h2>
           <SimpleSliderRecipes
             recommendedCards={ recommendedCards }
           />
-          {showBtn
-            ? (
-              <button
-                className="recipe-button"
-                type="button"
-                data-testid="start-recipe-btn"
-                onClick={ () => handleClick() }
-              >
-                {currentBtn}
-              </button>)
-            : ''}
+          <footer className="d-flex justify-content-center footer-button">
+            {
+              showBtn
+                ? (
+                  <Button
+                    className="recipe-button my-2"
+                    type="button"
+                    data-testid="start-recipe-btn"
+                    onClick={ () => handleClick() }
+                    size="lg"
+                    variant="danger"
+                  >
+                    {currentBtn}
+                  </Button>)
+                : ''
+            }
+          </footer>
         </div>
       ) : '');
 }

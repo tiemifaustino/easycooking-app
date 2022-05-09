@@ -134,6 +134,10 @@ body {
   width: auto;
 }
 
+.margin-instructions {
+  margin-bottom: 80px;
+}
+
 .not-found {
   border-radius: 50%;
 }
@@ -144,6 +148,10 @@ footer {
   height: 60px;
   position: fixed;
   width: 100%;
+}
+
+.footer-button {
+  height: 70px;
 }
 
 .recipe-button {
