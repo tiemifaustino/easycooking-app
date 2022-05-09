@@ -112,6 +112,16 @@ body {
   padding-bottom: 70px;
 }
 
+.name-recipe {
+  border-radius: 8px;
+}
+
+.not-found {
+  border-radius: 50%;
+
+  /* width: auto; */
+}
+
 footer {
   background-color: var(--color-background);
   bottom: 0;

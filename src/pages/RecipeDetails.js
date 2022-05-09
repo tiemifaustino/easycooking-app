@@ -71,72 +71,88 @@ function RecipeDetails() {
   };
 
   return (
-    meal.length > 0
-      ? (
-        <div>
-          <Image
-            src={ meal[0].strMealThumb }
-            alt="recipe thumbnail"
-            data-testid="recipe-photo"
-            className="img-fluid"
-          />
-          <div>
-            <h2 data-testid="recipe-title">{meal[0].strMeal}</h2>
-            <ShareBtn />
-            <FavoriteBtn
-              id={ id }
-              type="food"
-              nationality={ meal[0].strArea }
-              category={ meal[0].strCategory }
-              name={ meal[0].strMeal }
-              image={ meal[0].strMealThumb }
-              alcoholicOrNot=""
-            />
-            <p data-testid="recipe-category">{meal[0].strCategory}</p>
-          </div>
+    <div>
+      {
+        meal.length > 0
+          ? (
+            <>
+              <Image
+                src={ meal[0].strMealThumb }
+                alt="recipe thumbnail"
+                data-testid="recipe-photo"
+                className="img-fluid"
+              />
 
-          <div>
-            <ul>
-              <h2>Ingredients</h2>
-              {ingredients.map((ingredient, index) => (
-                <li
-                  key={ `${index}-ingredient-name-and-measure` }
-                  data-testid={ `${index}-ingredient-name-and-measure` }
-                >
-                  {`${ingredient} ${measurements[index]}`}
-
-                </li>
-              ))}
-            </ul>
-            <h2>Instructions</h2>
-            <p data-testid="instructions">{meal[0].strInstructions}</p>
-            <h2>Video</h2>
-            <iframe
-              width="420"
-              height="315"
-              data-testid="video"
-              src={ meal[0].strYoutube.replace('watch?v=', 'embed/') }
-              title="video da receita"
-            />
-          </div>
-          <h2>Recommended</h2>
-          <SimpleSliderDrinks
-            recommendedCards={ recommendedCards }
-          />
-          {showBtn
-            ? (
-              <button
-                className="recipe-button"
-                type="button"
-                data-testid="start-recipe-btn"
-                onClick={ () => handleClick() }
+              <div
+                className="name-recipe d-flex justify-content-between
+                  align-items-center p-2"
               >
-                {currentBtn}
-              </button>)
-            : ''}
+                <div>
+                  <h2 data-testid="recipe-title">{meal[0].strMeal}</h2>
+                  <p data-testid="recipe-category">{meal[0].strCategory}</p>
+                </div>
+                <div>
+                  <ShareBtn />
+                  <FavoriteBtn
+                    id={ id }
+                    type="food"
+                    nationality={ meal[0].strArea }
+                    category={ meal[0].strCategory }
+                    name={ meal[0].strMeal }
+                    image={ meal[0].strMealThumb }
+                    alcoholicOrNot=""
+                  />
+                </div>
+              </div>
 
-        </div>
-      ) : '');
+              <div>
+                <h2 className="px-2">Ingredients</h2>
+                <ul className="px-5">
+                  {ingredients.map((ingredient, index) => (
+                    <li
+                      key={ `${index}-ingredient-name-and-measure` }
+                      data-testid={ `${index}-ingredient-name-and-measure` }
+                    >
+                      {`${ingredient} ${measurements[index]}`}
+
+                    </li>
+                  ))}
+                </ul>
+                <h2>Instructions</h2>
+                <p data-testid="instructions">{meal[0].strInstructions}</p>
+                <h2>Video</h2>
+                <iframe
+                  width="420"
+                  height="315"
+                  data-testid="video"
+                  src={ meal[0].strYoutube.replace('watch?v=', 'embed/') }
+                  title="video da receita"
+                />
+              </div>
+
+              <h2>Recommended</h2>
+              <SimpleSliderDrinks
+                recommendedCards={ recommendedCards }
+              />
+              {
+                showBtn
+                  ? (
+                    <button
+                      className="recipe-button"
+                      type="button"
+                      data-testid="start-recipe-btn"
+                      onClick={ () => handleClick() }
+                    >
+                      {currentBtn}
+                    </button>)
+                  : ''
+              }
+            </>
+          )
+          : ('')
+      }
+    </div>
+  );
 }
 
 export default RecipeDetails;
