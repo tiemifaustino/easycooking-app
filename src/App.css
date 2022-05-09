@@ -39,7 +39,10 @@ body {
 }
 
 .cardIngredients {
+  border-radius: 3px;
+  height: 35%;
   text-align: center;
+  width: 100%;
 }
 
 .container-cards {

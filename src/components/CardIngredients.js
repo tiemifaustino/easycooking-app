@@ -4,17 +4,20 @@ import { Card } from 'react-bootstrap';
 
 function CardIngredients({ index, img, title }) {
   return (
-    <Card.Body data-testid={ `${index}-ingredient-card` }>
+    <Card.Body
+      data-testid={ `${index}-ingredient-card` }
+      className="px-0"
+    >
       <Card.Img
         data-testid={ `${index}-card-img` }
         alt={ title }
         src={ img }
         variant="top"
-        className="mb-3"
+        className="mb-3 px-1"
       />
       <Card.Text
         data-testid={ `${index}-card-name` }
-        className="d-flex justify-content-center align-items cardIngredients"
+        className="d-flex justify-content-center align-items-center cardIngredients py-4"
       >
         { title }
 

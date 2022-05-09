@@ -35,7 +35,8 @@ function ExploreIngredients() {
   return (
     <div className="container-page-ingredients">
       <Header title="Explore Ingredients" visible={ false } />
-      <div className="d-flex flex-wrap justify-content-center mx-3 mt-3 container-cards">
+
+      <div className="d-flex flex-wrap justify-content-center mx-2 mt-3 container-cards">
         {
           pathname === '/explore/foods/ingredients'
         && ingredients && ingredients.map((ingredient, index) => {
@@ -46,8 +47,8 @@ function ExploreIngredients() {
                 onClick={ () => handleClickMeals(ingredient.strIngredient) }
                 key={ ingredient.idIngredient }
                 type="button"
-                style={ { width: '9.2rem', height: '14rem' } }
-                className="m-1"
+                style={ { width: '9.2rem', height: '15rem' } }
+                className="m-2"
               >
                 <CardIngredients
                   index={ index }
@@ -58,27 +59,30 @@ function ExploreIngredients() {
             );
           })
         }
-      </div>
-      {
-        pathname === '/explore/drinks/ingredients'
+        {
+          pathname === '/explore/drinks/ingredients'
         && drinksIngredients && drinksIngredients.map((drinkIngredient, index) => {
-          const maxIngredients = 11;
-          if (index > maxIngredients) return;
-          return (
-            <button
-              onClick={ () => handleClickDrinks(drinkIngredient.strIngredient1) }
-              key={ index }
-              type="button"
-            >
-              <CardIngredients
-                index={ index }
-                img={ `https://www.thecocktaildb.com/images/ingredients/${drinkIngredient.strIngredient1}-Small.png` }
-                title={ drinkIngredient.strIngredient1 }
-              />
-            </button>
-          );
-        })
-      }
+            const maxIngredients = 11;
+            if (index > maxIngredients) return;
+            return (
+              <Card
+                onClick={ () => handleClickDrinks(drinkIngredient.strIngredient1) }
+                key={ index }
+                type="button"
+                style={ { width: '9.2rem', height: '15rem' } }
+                className="m-2"
+              >
+                <CardIngredients
+                  index={ index }
+                  img={ `https://www.thecocktaildb.com/images/ingredients/${drinkIngredient.strIngredient1}-Small.png` }
+                  title={ drinkIngredient.strIngredient1 }
+                />
+              </Card>
+            );
+          })
+        }
+      </div>
+
       <Footer />
     </div>
   );
