@@ -1,10 +1,11 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import Header from '../components/Header';
 import FavoriteCards from '../components/FavoriteCards';
 
 function FavoriteRecipes() {
-  const favoriteLocalStorage = JSON.parse(localStorage.getItem('favoriteRecipes'));
-  console.log(favoriteLocalStorage);
+  const { favoriteRecipes } = useSelector((state) => state.favoriteReducer);
+  const [filter, setFilter] = React.useState('');
 
   return (
     <>
@@ -12,32 +13,37 @@ function FavoriteRecipes() {
       <button
         data-testid="filter-by-all-btn"
         type="button"
+        onClick={ () => setFilter('') }
       >
         All
       </button>
       <button
         data-testid="filter-by-food-btn"
         type="button"
+        onClick={ () => setFilter('food') }
       >
         Food
       </button>
       <button
         data-testid="filter-by-drink-btn"
         type="button"
+        onClick={ () => setFilter('drink') }
       >
         Drinks
       </button>
       {
-        favoriteLocalStorage && favoriteLocalStorage
+        favoriteRecipes?.filter((item) => item.type.includes(filter))
           .map((favorite, index) => (
             <FavoriteCards
               id={ favorite.id }
               key={ favorite.id }
               index={ index }
-              title={ favorite.name }
+              name={ favorite.name }
+              type={ favorite.type }
               img={ favorite.image }
               category={ favorite.category }
               nationality={ favorite.nationality }
+              alcoholic={ favorite.alcoholicOrNot }
             />
           ))
       }

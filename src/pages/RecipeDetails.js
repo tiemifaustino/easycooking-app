@@ -115,6 +115,8 @@ function RecipeDetails() {
               data-testid="video"
               src={ meal[0].strYoutube.replace('watch?v=', 'embed/') }
               title="video da receita"
+              samesite="None"
+              secure="true"
             />
           </div>
           <h2>Recommended</h2>
