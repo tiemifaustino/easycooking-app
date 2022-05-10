@@ -3,6 +3,7 @@ import Slider from 'react-slick';
 import PropTypes from 'prop-types';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import { Card } from 'react-bootstrap';
 
 class SimpleSliderDrinks extends Component {
   render() {
@@ -15,21 +16,34 @@ class SimpleSliderDrinks extends Component {
     };
     const { recommendedCards } = this.props;
     return (
-      <div>
+      <div className="margin-carousel p-1">
         <Slider { ...settings }>
-          {recommendedCards && recommendedCards.map((card, index) => (
-            <div
-              key={ card.idDrink }
-              data-testid={ `${index}-recomendation-card` }
-            >
-              <img
-                src={ card.strDrinkThumb }
-                alt={ `${card.strDrink} thumbnail` }
-              />
-              <p>{card.strAlcoholic}</p>
-              <p data-testid={ `${index}-recomendation-title` }>{card.strDrink}</p>
-            </div>
-          ))}
+          {
+            recommendedCards && recommendedCards.map((card, index) => (
+              <div key={ card.idDrink }>
+                <Card
+                  data-testid={ `${index}-recomendation-card` }
+                  key={ card.idDrink }
+                  style={ { width: '8.5rem' } }
+                  className="title card-carousel"
+                >
+                  <Card.Img
+                    src={ card.strDrinkThumb }
+                    alt={ `${card.strDrink} thumbnail` }
+                    variant="top"
+                    className="card-carousel-img"
+                  />
+                  <Card.Text className="px-1">{card.strAlcoholic}</Card.Text>
+                  <Card.Title
+                    data-testid={ `${index}-recomendation-title` }
+                    className="px-1"
+                  >
+                    {card.strDrink}
+                  </Card.Title>
+                </Card>
+              </div>
+            ))
+          }
         </Slider>
       </div>
     );

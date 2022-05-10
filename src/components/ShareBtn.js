@@ -10,11 +10,18 @@ function ShareBtn() {
   };
 
   return (
-
-    <button data-testid="share-btn" type="button" onClick={ handleShare }>
-      <img src={ shareBtnLogo } alt="shareIcon" />
+    <button
+      data-testid="share-btn"
+      type="button"
+      onClick={ handleShare }
+      className="button-icon"
+    >
+      <img
+        src={ shareBtnLogo }
+        alt="shareIcon"
+        className="p-1"
+      />
     </button>
-
   );
 }
 

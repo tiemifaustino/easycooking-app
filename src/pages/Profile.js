@@ -1,49 +1,60 @@
-import React, { useState } from 'react';
-import { useHistory, Redirect } from 'react-router-dom';
+import React from 'react';
+import { useHistory } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 
 function Profile() {
   const history = useHistory();
-  const [logout, setLogout] = useState(false);
+  const getEmail = JSON.parse(localStorage.getItem('user'));
 
   const handleClearClick = () => {
     localStorage.clear();
-    setLogout(true);
+    history.push('/');
   };
 
   return (
-    <>
+    <div className="container-page-explore">
       <Header title="Profile" visible={ false } />
-      <div>
-        <h2 data-testid="profile-email">
-          {localStorage.getItem('user')}
-        </h2>
-        <button
-          type="button"
-          data-testid="profile-done-btn"
-          onClick={ () => history.push('/done-recipes') }
-        >
-          Done Recipes
-        </button>
-        <button
-          type="button"
-          data-testid="profile-favorite-btn"
-          onClick={ () => history.push('/favorite-recipes') }
-        >
-          Favorite Recipes
-        </button>
-        <button
-          type="button"
-          data-testid="profile-logout-btn"
-          onClick={ handleClearClick }
-        >
-          Logout
-        </button>
-        { logout && <Redirect to="/" /> }
+      <div className="my-5">
+        <h4 data-testid="profile-email">
+          { getEmail && getEmail.email }
+        </h4>
+        <div className="d-flex flex-column mx-5 mt-5">
+          <Button
+            type="button"
+            data-testid="profile-done-btn"
+            onClick={ () => history.push('/done-recipes') }
+            variant="danger"
+            size="lg"
+            className="my-2"
+          >
+            Done Recipes
+          </Button>
+          <Button
+            type="button"
+            data-testid="profile-favorite-btn"
+            onClick={ () => history.push('/favorite-recipes') }
+            variant="danger"
+            size="lg"
+            className="my-2"
+          >
+            Favorite Recipes
+          </Button>
+          <Button
+            type="button"
+            data-testid="profile-logout-btn"
+            onClick={ handleClearClick }
+            variant="danger"
+            size="lg"
+            className="my-2"
+          >
+            Logout
+          </Button>
+        </div>
       </div>
       <Footer />
-    </>
+    </div>
   );
 }
 

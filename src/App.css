@@ -1,68 +1,203 @@
-.meals {
-  align-items: center;
-  background: #0fa36b;
-  color: #464646;
-  display: flex;
-  flex-direction: column;
-  font-family: sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Radio+Canada:wght@300;400;500;600;700&display=swap') ;
+
+* {
+  box-sizing: border-box;
+  font-family: Radio Canada , sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+
+  --color-background: #f4d8c2;
+
+  --color-1: #280000;
+
+  --color-2: #80160c;
+
+  --color-3: #b10f2e;
+
+  --color-4: #f8a362;
+
+  --color-5: #fcf9f4;
+}
+
+h4 {
+  color: var(--color-2);
+  font-weight: 600;
+  text-align: center;
+}
+
+.logo {
+  animation: bounce 2s;
+}
+
+@keyframes bounce {
+
+  from {
+    transform: translateY(-150px);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
+header {
+  background-color: var(--color-background);
+  font-size: 1rem;
+}
+
+.button-icon {
+  background-color: transparent;
+  border: none;
+  padding: 5px;
+}
+
+.title {
+  color: var(--color-2);
+}
+
+.title-align {
+  text-align: center;
+}
+
+.input-text {
+  color: var(--color-2);
+  font-weight: 500;
+}
+
+input:checked {
+  accent-color: var(--color-2);
+  border: 2px solid var(--color-2);
+}
+
+body {
+  background-color: var(--color-background);
+}
+
+.link {
+  text-decoration: none;
+}
+
+.container-page-explore {
+  background-color: var(--color-5);
   height: 100vh;
-  justify-content: center;
+}
+
+.container-page {
+  background-color: var(--color-5);
+}
+
+.container-cards {
+  padding-bottom: 70px;
+}
+
+.container-buttons {
+  width: 300px;
+}
+
+.cardIngredients {
+  border-radius: 3px;
+  color: var(--color-2);
+  height: 35%;
+  text-align: center;
   width: 100%;
 }
 
-.rocksGlass {
-  animation: shake 1s infinite ease;
-  max-height: 80vh;
+.card-favorite {
+  background-color: var(--color-background);
+  width: 100%;
 }
 
-/*
-#iceLeft {
-  animation: clink .8s infinite ease;
-  opacity: 0.6;
-  transform-origin: 36px 66px;
+.card-background {
+  background-color: var(--color-2);
+  border: none;
+  border-radius: 10px;
 }
 
-#iceRight {
-  animation: clink .8s .2s infinite ease;
-  opacity: 0.6;
-  transform-origin: 60px 78px;
-}
-*/
-
-.meals > .logo {
-  animation: shake 1.5s infinite ease;
-  color: aliceblue;
-  font-family: Montserrat , sans-serif;
-  font-size: 3em;
-  font-weight: 900;
+.card-title {
+  background-color: var(--color-2);
+  color: var(--color-5);
 }
 
-@keyframes shake {
-
-  0% {
-    transform: rotate(5deg);
-  }
-
-  50% {
-    transform: rotate(-5deg);
-  }
-
-  100% {
-    transform: rotate(5deg);
-  }
+.tags {
+  background-color: var(--color-5);
+  border-radius: 8px;
+  margin: 5px;
+  text-align: center;
 }
 
-@keyframes clink {
+.name-recipe {
+  background-color: var(--color-2);
+  border-radius: 0 0 15px 15px;
+  color: var(--color-5);
+}
 
-  0% {
-    transform: rotate(-10deg);
-  }
+.container-icons {
+  background-color: var(--color-5);
+  border-radius: 10px;
+}
 
-  50% {
-    transform: rotate(20deg);
-  }
+.container-details {
+  background-color: var(--color-5);
+  border-radius: 10px;
+  color: var(--color-2);
+}
 
-  100% {
-    transform: rotate(-10deg);
-  }
+.video-details {
+  border: none;
+  border-radius: 10px;
+  height: auto;
+  width: auto;
+}
+
+.margin-instructions {
+  margin-bottom: 80px;
+}
+
+.margin-carousel {
+  margin-bottom: 110px;
+  margin-left: 27px;
+  margin-right: 27px;
+}
+
+.card-carousel {
+  border: none;
+  border-radius: 10px;
+}
+
+.card-carousel-img {
+  border: none;
+  border-radius: 10px 10px 0 0;
+}
+
+.not-found {
+  border-radius: 50%;
+}
+
+.select-nacionalities {
+  background-color: white;
+  border-radius: 5px;
+  color: var(--color-2);
+  font-size: 1.2rem;
+  padding: 5px;
+  width: 200px;
+}
+
+footer {
+  background-color: var(--color-background);
+  bottom: 0;
+  height: 60px;
+  position: fixed;
+  width: 100%;
+}
+
+.footer-button {
+  height: 70px;
+}
+
+.recipe-button {
+  bottom: 0;
+  position: fixed;
 }

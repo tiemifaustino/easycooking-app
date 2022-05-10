@@ -65,11 +65,13 @@ function FavoriteBtn({ id, type, nationality, category, name, image,
     <button
       type="button"
       onClick={ handleFavorite }
+      className="button-icon"
     >
       <img
         src={ isFavorite ? favoriteChecked : favoriteNotChecked }
         alt="favorite"
         data-testid="favorite-btn"
+        className="p-1"
       />
     </button>
   );

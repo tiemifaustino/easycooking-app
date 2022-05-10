@@ -1,0 +1,12 @@
+.card-component {
+  border-radius: 10px;
+  color: var(--color-2);
+  cursor: pointer;
+  text-align: center;
+}
+
+.card-text {
+  background-color: var(--color-background);
+  font-weight: 600;
+  height: 100%;
+}

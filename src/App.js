@@ -14,10 +14,12 @@ import Foods from './pages/Foods';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
 import RecipeDetails from './pages/RecipeDetails';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import FoodInProgress from './pages/FoodInProgress';
 import DrinkInProgress from './pages/DrinkInProgress';
 import NotFound from './pages/NotFound';
 import 'react-toastify/dist/ReactToastify.css';
+import './App.css';
 
 function App() {
   return (

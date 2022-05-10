@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
+import { Card } from 'react-bootstrap';
+import './Cards.css';
 
 function Cards({ index, img, title, id }) {
   const history = useHistory();
@@ -13,17 +15,27 @@ function Cards({ index, img, title, id }) {
   };
 
   return (
-    <div data-testid={ `${index}-recipe-card` }>
-
-      <input
+    <Card
+      data-testid={ `${index}-recipe-card` }
+      style={ { width: '9rem' } }
+      className="d-flex flex-column m-2 card-component"
+    >
+      <Card.Img
+        variant="top"
         type="image"
         data-testid={ `${index}-card-img` }
         alt={ title }
         src={ img }
         onClick={ handleClick }
       />
-      <p data-testid={ `${index}-card-name` }>{ title }</p>
-    </div>
+      <Card.Text
+        data-testid={ `${index}-card-name` }
+        className="card-text p-2 d-flex justify-content-center align-items-center"
+      >
+        { title }
+
+      </Card.Text>
+    </Card>
   );
 }
 
