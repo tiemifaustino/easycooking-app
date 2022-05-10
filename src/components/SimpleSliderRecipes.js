@@ -25,7 +25,7 @@ class SimpleSliderRecipes extends Component {
                   key={ card.idMeal }
                   data-testid={ `${index}-recomendation-card` }
                   style={ { width: '8.5rem' } }
-                  className="title card-carousel"
+                  className="card-title card-carousel"
                 >
                   <Card.Img
                     src={ card.strMealThumb }
@@ -33,10 +33,15 @@ class SimpleSliderRecipes extends Component {
                     variant="top"
                     className="card-carousel-img"
                   />
-                  <Card.Text>{card.strCategory}</Card.Text>
+                  <Card.Text
+                    className="title title-align container-page"
+                  >
+                    {card.strCategory}
+
+                  </Card.Text>
                   <Card.Title
                     data-testid={ `${index}-recomendation-title` }
-                    className="px-1"
+                    className="px-1 title-align"
                   >
                     {card.strMeal}
 

@@ -76,10 +76,6 @@ body {
   background-color: var(--color-background);
 }
 
-.link {
-  text-decoration: none;
-}
-
 .container-page-explore {
   background-color: var(--color-5);
   height: 100vh;

@@ -25,7 +25,7 @@ class SimpleSliderDrinks extends Component {
                   data-testid={ `${index}-recomendation-card` }
                   key={ card.idDrink }
                   style={ { width: '8.5rem' } }
-                  className="title card-carousel"
+                  className="card-title card-carousel"
                 >
                   <Card.Img
                     src={ card.strDrinkThumb }
@@ -33,10 +33,15 @@ class SimpleSliderDrinks extends Component {
                     variant="top"
                     className="card-carousel-img"
                   />
-                  <Card.Text className="px-1">{card.strAlcoholic}</Card.Text>
+                  <Card.Text
+                    className="title title-align container-page"
+                  >
+                    {card.strAlcoholic}
+
+                  </Card.Text>
                   <Card.Title
                     data-testid={ `${index}-recomendation-title` }
-                    className="px-1"
+                    className="px-1 title-align"
                   >
                     {card.strDrink}
                   </Card.Title>
