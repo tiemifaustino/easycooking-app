@@ -5,6 +5,7 @@ import Image from 'react-bootstrap/Image';
 import { Button } from 'react-bootstrap';
 import ShareBtn from './ShareBtn';
 import FavoriteBtn from './FavoriteBtn';
+// import useLocalStorage from '../hooks/useLocalStorage';
 
 function InProgress({ page, id, recipe, saveLocal }) {
   const [inputChecked, setInputChecked] = useState([]);
@@ -43,7 +44,7 @@ function InProgress({ page, id, recipe, saveLocal }) {
         break;
       }
     };
-    handleLocalStorage();
+    if (inputChecked && inputChecked.length > 0) handleLocalStorage();
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inputChecked]);
@@ -52,9 +53,11 @@ function InProgress({ page, id, recipe, saveLocal }) {
     const localStorageSave = () => {
       localStorage.setItem('inProgressRecipes', JSON.stringify(saveLocalStorage));
     };
-    localStorageSave();
+    if (inputChecked.length > 0) localStorageSave();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [saveLocalStorage]);
+
+  // useLocalStorage(saveLocalStorage, inputChecked);
 
   const handleInputChecked = ({ target: { value, checked } }) => (checked
     ? setInputChecked([...inputChecked, value])
@@ -77,13 +80,14 @@ function InProgress({ page, id, recipe, saveLocal }) {
       tags: recipe.tags,
     };
 
-    if (!doneRecipes) {
-      const doneRecipeString = JSON.stringify([currentRecipe]);
-      localStorage.setItem('doneRecipes', doneRecipeString);
-    } else {
-      const doneRecipeString = JSON.stringify([...doneRecipes, currentRecipe]);
-      localStorage.setItem('doneRecipes', doneRecipeString);
-    }
+    // if (!doneRecipes) {
+    //   const doneRecipeString = JSON.stringify([currentRecipe]);
+    //   localStorage.setItem('doneRecipes', doneRecipeString);
+
+    const doneRecipeString = JSON
+      .stringify([...doneRecipes || '', currentRecipe]);
+    localStorage.setItem('doneRecipes', doneRecipeString);
+
     history.push('/done-recipes');
   };
 
@@ -154,11 +158,9 @@ function InProgress({ page, id, recipe, saveLocal }) {
               </div>
             </div>
 
-            <div className="margin-instructions">
-              <h2
-                className="title-h2-page-details px-3 m-3"
-              >
-                Instructions
+            <div>
+              <h2>
+                Ingredients
 
               </h2>
               <p
