@@ -131,7 +131,7 @@ function InProgress({ page, id, recipe, saveLocal }) {
             </div>
 
             <div>
-              <h2 className="title-h2-page-details px-3 m-3">Ingredients</h2>
+              <h2 className="title px-3 m-3">Ingredients</h2>
               <div className="mx-4 px-4 py-4 container-details">
                 {
                   recipe.ingredients.map((ingredient, index) => ingredient && (
@@ -158,11 +158,8 @@ function InProgress({ page, id, recipe, saveLocal }) {
               </div>
             </div>
 
-            <div>
-              <h2>
-                Ingredients
-
-              </h2>
+            <div className="margin-instructions">
+              <h2 className="title px-3 m-3">Instructions</h2>
               <p
                 data-testid="instructions"
                 className="container-details mx-4 p-3 mb-5"

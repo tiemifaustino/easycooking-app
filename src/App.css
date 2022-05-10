@@ -76,6 +76,10 @@ body {
   background-color: var(--color-background);
 }
 
+.link {
+  text-decoration: none;
+}
+
 .container-page-explore {
   background-color: var(--color-5);
   height: 100vh;
@@ -102,7 +106,26 @@ body {
 }
 
 .card-favorite {
+  background-color: var(--color-background);
   width: 100%;
+}
+
+.card-background {
+  background-color: var(--color-2);
+  border: none;
+  border-radius: 10px;
+}
+
+.card-title {
+  background-color: var(--color-2);
+  color: var(--color-5);
+}
+
+.tags {
+  background-color: var(--color-5);
+  border-radius: 8px;
+  margin: 5px;
+  text-align: center;
 }
 
 .name-recipe {
@@ -162,10 +185,6 @@ body {
   width: 200px;
 }
 
-.select-nacionalities option:hover {
-  background-color: var(--color-background);
-}
-
 footer {
   background-color: var(--color-background);
   bottom: 0;
@@ -182,8 +201,3 @@ footer {
   bottom: 0;
   position: fixed;
 }
-
-/* .share-btn {
-  background-image: 'src/images/blackHeartIcon.svg';
-} */
-

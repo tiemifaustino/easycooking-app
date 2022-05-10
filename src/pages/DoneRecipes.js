@@ -11,7 +11,7 @@ function DoneRecipes() {
   }, []);
 
   return (
-    <div className="container-cards container-page-explore">
+    <div className="container-cards container-page">
       <Header title="Done Recipes" visible={ false } />
 
       <div className="d-flex justify-content-center mt-3 mb-4">
@@ -62,11 +62,10 @@ function DoneRecipes() {
               alcoholic={ recipe.alcoholicOrNot }
               doneDate={ recipe.doneDate }
               tags={ [...recipe.tags] }
+              // tags={ recipe.tags && recipe.tags.split(',') }
             />
           ))
       }
-
-      <DoneRecipesCard />
     </div>
   );
 }
