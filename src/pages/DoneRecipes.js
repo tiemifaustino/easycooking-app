@@ -61,8 +61,7 @@ function DoneRecipes() {
               nationality={ recipe.nationality }
               alcoholic={ recipe.alcoholicOrNot }
               doneDate={ recipe.doneDate }
-              tags={ [...recipe.tags] }
-              // tags={ recipe.tags && recipe.tags.split(',') }
+              tags={ recipe.tags && recipe.tags.toString().split(',') }
             />
           ))
       }
