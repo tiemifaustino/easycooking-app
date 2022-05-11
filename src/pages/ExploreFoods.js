@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import { requestRecipeSupriseThunk } from '../actions/index.actions';
@@ -21,35 +22,46 @@ function ExploreFoods() {
   };
 
   return (
-    <>
+    <div className="container-page-explore">
       <Header title="Explore Foods" visible={ false } />
 
-      <button
-        data-testid="explore-by-ingredient"
-        type="button"
-        onClick={ () => history.push('/explore/foods/ingredients') }
-      >
-        By Ingredient
-      </button>
+      <div className="d-flex flex-column mx-5 mt-5">
+        <Button
+          data-testid="explore-by-ingredient"
+          type="button"
+          onClick={ () => history.push('/explore/foods/ingredients') }
+          variant="danger"
+          size="lg"
+          className="my-3"
+        >
+          By Ingredient
+        </Button>
 
-      <button
-        data-testid="explore-by-nationality"
-        type="button"
-        onClick={ () => history.push('/explore/foods/nationalities') }
-      >
-        By Nationality
-      </button>
+        <Button
+          data-testid="explore-by-nationality"
+          type="button"
+          onClick={ () => history.push('/explore/foods/nationalities') }
+          variant="danger"
+          size="lg"
+          className="my-3"
+        >
+          By Nationality
+        </Button>
 
-      <button
-        data-testid="explore-surprise"
-        type="button"
-        onClick={ handleClickSuprise }
-      >
-        Surprise me!
-      </button>
+        <Button
+          data-testid="explore-surprise"
+          type="button"
+          onClick={ handleClickSuprise }
+          variant="danger"
+          size="lg"
+          className="my-3"
+        >
+          Surprise me!
+        </Button>
+      </div>
 
       <Footer />
-    </>
+    </div>
   );
 }
 

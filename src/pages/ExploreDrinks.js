@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import { requestCocktailSupriseThunk } from '../actions/index.actions';
@@ -21,25 +22,35 @@ function ExploreDrinks() {
   };
 
   return (
-    <>
+    <div className="container-page-explore">
       <Header title="Explore Drinks" visible={ false } />
-      <button
-        data-testid="explore-by-ingredient"
-        type="button"
-        onClick={ () => history.push('/explore/drinks/ingredients') }
-      >
-        By Ingredient
-      </button>
 
-      <button
-        data-testid="explore-surprise"
-        type="button"
-        onClick={ handleClickSuprise }
-      >
-        Surprise me!
-      </button>
+      <div className="d-flex flex-column mx-5 mt-5">
+        <Button
+          data-testid="explore-by-ingredient"
+          type="button"
+          onClick={ () => history.push('/explore/drinks/ingredients') }
+          variant="danger"
+          size="lg"
+          className="my-3"
+        >
+          By Ingredient
+        </Button>
+
+        <Button
+          data-testid="explore-surprise"
+          type="button"
+          onClick={ handleClickSuprise }
+          variant="danger"
+          size="lg"
+          className="my-3"
+        >
+          Surprise me!
+        </Button>
+      </div>
+
       <Footer />
-    </>
+    </div>
   );
 }
 

@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { Form, Button } from 'react-bootstrap';
+import logoApp from '../images/logoAppFundo.png';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -40,34 +42,55 @@ function Login() {
 
   return (
     <>
-      <h1>Login</h1>
-      <form
+      <div className="d-flex justify-content-center mt-2">
+        <img
+          className="logo"
+          src={ logoApp }
+          alt="Logotipo do App"
+          width="320px"
+        />
+      </div>
+      <Form
         onSubmit={ (event) => handleSubmit(event) }
+        className="d-flex flex-column mx-5"
       >
-        <input
-          data-testid="email-input"
-          type="email"
-          value={ email }
-          onChange={ (event) => handleChange(event.target, setEmail) }
-          placeholder="Email"
-        />
+        <h4>Login</h4>
 
-        <input
-          data-testid="password-input"
-          type="password"
-          value={ password }
-          onChange={ (event) => handleChange(event.target, setPassword) }
-          placeholder="Password"
-        />
+        <Form.Group className="mb-3">
+          <Form.Control
+            data-testid="email-input"
+            type="email"
+            value={ email }
+            onChange={ (event) => handleChange(event.target, setEmail) }
+            placeholder="Email"
+            className="mt-3"
+            size="md"
+          />
+        </Form.Group>
 
-        <button
+        <Form.Group className="mb-3">
+          <Form.Control
+            data-testid="password-input"
+            type="password"
+            value={ password }
+            onChange={ (event) => handleChange(event.target, setPassword) }
+            placeholder="Password"
+            size="md"
+          />
+        </Form.Group>
+
+        <Button
           data-testid="login-submit-btn"
           disabled={ isLoginBtnDisabled }
           type="submit"
+          value="Submit"
+          variant="danger"
+          className="mt-3"
+          size="md"
         >
           Enter
-        </button>
-      </form>
+        </Button>
+      </Form>
     </>
   );
 }

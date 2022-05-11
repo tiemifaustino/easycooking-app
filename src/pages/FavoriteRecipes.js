@@ -1,47 +1,68 @@
 import React from 'react';
+import { Button } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
 import Header from '../components/Header';
 import FavoriteCards from '../components/FavoriteCards';
 
 function FavoriteRecipes() {
-  const favoriteLocalStorage = JSON.parse(localStorage.getItem('favoriteRecipes'));
-  console.log(favoriteLocalStorage);
+  const { favoriteRecipes } = useSelector((state) => state.favoriteReducer);
+  const [filter, setFilter] = React.useState('');
 
   return (
-    <>
+    <div className="container-cards container-page">
       <Header title="Favorite Recipes" visible={ false } />
-      <button
-        data-testid="filter-by-all-btn"
-        type="button"
-      >
-        All
-      </button>
-      <button
-        data-testid="filter-by-food-btn"
-        type="button"
-      >
-        Food
-      </button>
-      <button
-        data-testid="filter-by-drink-btn"
-        type="button"
-      >
-        Drinks
-      </button>
+
+      <div className="d-flex justify-content-center mt-3 mb-4">
+        <div className="container-buttons d-flex justify-content-center m-0">
+          <Button
+            data-testid="filter-by-all-btn"
+            type="button"
+            variant="dark"
+            size="md"
+            className="mx-2 px-4"
+            onClick={ () => setFilter('') }
+          >
+            All
+          </Button>
+          <Button
+            data-testid="filter-by-food-btn"
+            type="button"
+            variant="dark"
+            size="md"
+            className="mx-2 px-4"
+            onClick={ () => setFilter('food') }
+          >
+            Food
+          </Button>
+          <Button
+            data-testid="filter-by-drink-btn"
+            type="button"
+            variant="dark"
+            size="md"
+            className="mx-2 px-4"
+            onClick={ () => setFilter('drink') }
+          >
+            Drinks
+          </Button>
+        </div>
+      </div>
       {
-        favoriteLocalStorage && favoriteLocalStorage
+        favoriteRecipes?.filter((item) => item.type.includes(filter))
           .map((favorite, index) => (
             <FavoriteCards
               id={ favorite.id }
               key={ favorite.id }
               index={ index }
-              title={ favorite.name }
+              name={ favorite.name }
+              type={ favorite.type }
               img={ favorite.image }
               category={ favorite.category }
               nationality={ favorite.nationality }
+              alcoholic={ favorite.alcoholicOrNot }
             />
           ))
       }
-    </>
+    </div>
 
   );
 }

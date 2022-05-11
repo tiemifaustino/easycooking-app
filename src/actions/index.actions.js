@@ -17,7 +17,7 @@ import {
   REQUEST_RECIPE_NATIONALITY, REQUEST_RECIPE_NATIONALITY_SUCCESS,
   REQUEST_RECIPE_NATIONALITY_FAILURE, REQUEST_INGREDIENTS_LIST_SUCCESS,
   REQUEST_INGREDIENTS_LIST_FAILURE, REQUEST_INGREDIENTS_DRINKS_SUCCESS,
-  REQUEST_INGREDIENTS_DRINKS_FAILURE } from './actionType';
+  REQUEST_INGREDIENTS_DRINKS_FAILURE, STATE_FAVORITE_RECIPES } from './actionType';
 
 export const requestRecipe = () => ({ type: REQUEST_RECIPE });
 export const requestRecipeSuccess = (recipe) => ({
@@ -243,7 +243,8 @@ export function requestIngredientsDrinksThunk() {
     }
   };
 }
-
 export const ingredientFilter = (filter) => ({
   type: 'FILTER', filter,
 });
+export const stateFavoriteRecipes = (favorite) => ({
+  type: STATE_FAVORITE_RECIPES, favorite });
