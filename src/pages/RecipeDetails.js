@@ -43,12 +43,14 @@ function RecipeDetails() {
     if (recipe.length > 0) {
       const mealIngredients = Object.entries(recipe[0])
         .filter((mealIngredient) => mealIngredient[0].includes('strIngredient'))
-        .filter((ingredientsArray) => ingredientsArray[1] !== '')
+        .filter((ingredientsArray) => ingredientsArray[1] !== ''
+        && ingredientsArray[1] !== null)
         .map((ingredientBeingMapped) => ingredientBeingMapped[1]);
 
       const mealMeasurements = Object.entries(recipe[0])
         .filter((mealMeasurement) => mealMeasurement[0].includes('strMeasure'))
-        .filter((measurementsArray) => measurementsArray[1] !== '')
+        .filter((measurementsArray) => measurementsArray[1] !== ''
+        && measurementsArray[1] !== null)
         .map((measurementsMapped) => measurementsMapped[1]);
 
       setIngredients(mealIngredients);

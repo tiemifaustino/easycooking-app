@@ -43,12 +43,12 @@ function CocktailDetails() {
     if (cocktail.length > 0) {
       const drinkIngredients = Object.entries(cocktail[0])
         .filter((drinkIngredient) => drinkIngredient[0].includes('strIngredient'))
-        .filter((drinksArray) => drinksArray[1] !== null)
+        .filter((drinksArray) => drinksArray[1] !== null && drinksArray[1] !== '')
         .map((ingredientBeingMapped) => ingredientBeingMapped[1]);
 
       const drinkMeasurements = Object.entries(cocktail[0])
         .filter((drinkMeasurement) => drinkMeasurement[0].includes('strMeasure'))
-        .filter((drinksArray) => drinksArray[1] !== null)
+        .filter((drinksArray) => drinksArray[1] !== null && drinksArray[1] !== '')
         .map((measurementsMapped) => measurementsMapped[1]);
 
       setIngredients(drinkIngredients);

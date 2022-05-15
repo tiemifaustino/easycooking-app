@@ -18,6 +18,9 @@ function Drinks() {
     'Ordinary Drink',
     'Cocktail',
     'Milk / Float / Shake',
+    // 'Shake',
+    // 'Shot',
+    // 'Beer',
     'Other/Unknown',
     'Cocoa',
   ];
@@ -37,6 +40,7 @@ function Drinks() {
     } else {
       dispatch(cocktailThunk(objToDispatch));
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
 
   const handleClick = ({ target }) => {
