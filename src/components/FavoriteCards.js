@@ -15,17 +15,14 @@ function FavoriteCards({ id, index, name, img, type, category,
     let textToCopy = window.location.href.replace('/favorite-recipes', '');
     textToCopy += `/drinks/${id}`;
     if (type === 'food') {
-      textToCopy += `/foods/${id}`;
+      textToCopy = `${window.location.href.replace('/favorite-recipes', '')}/foods/${id}`;
     }
 
     navigator.clipboard.writeText(textToCopy);
   };
 
   const handleClick = () => {
-    if (type === 'food') {
-      history.push(`/foods/${id}`);
-    }
-    history.push(`/drinks/${id}`);
+    history.push(`/${type}s/${id}`);
   };
 
   return (
