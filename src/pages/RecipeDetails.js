@@ -60,11 +60,11 @@ function RecipeDetails() {
   }, [recipe]);
 
   useEffect(() => {
-    // const sortRandomize = 0.5;
+    const sortRandomize = 0.5;
     const MAXIMUN_NUMBER_OF_CARDS = 6;
     if (cocktail.drinks?.length > 0) {
-      const randomCards = [...cocktail.drinks];
-      // .sort(() => Math.random() - sortRandomize);
+      const randomCards = [...cocktail.drinks]
+        .sort(() => Math.random() - sortRandomize);
       setRecommendedCards(randomCards.slice(0, MAXIMUN_NUMBER_OF_CARDS));
     }
   }, [cocktail]);
@@ -120,7 +120,7 @@ function RecipeDetails() {
                   key={ `${index}-ingredient-name-and-measure` }
                   data-testid={ `${index}-ingredient-name-and-measure` }
                 >
-                  {`${ingredient} ${measurements[index]}`}
+                  {(`${ingredient} ${measurements[index]}`).replace('undefined', '')}
 
                 </li>
               )) }

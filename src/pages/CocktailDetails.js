@@ -43,12 +43,14 @@ function CocktailDetails() {
     if (cocktail.length > 0) {
       const drinkIngredients = Object.entries(cocktail[0])
         .filter((drinkIngredient) => drinkIngredient[0].includes('strIngredient'))
-        .filter((drinksArray) => drinksArray[1] !== null && drinksArray[1] !== '')
+        .filter((drinksArray) => drinksArray[1] !== null
+        && drinksArray[1] !== '' && drinksArray[1] !== 'undefined')
         .map((ingredientBeingMapped) => ingredientBeingMapped[1]);
 
       const drinkMeasurements = Object.entries(cocktail[0])
         .filter((drinkMeasurement) => drinkMeasurement[0].includes('strMeasure'))
-        .filter((drinksArray) => drinksArray[1] !== null && drinksArray[1] !== '')
+        .filter((drinksArray) => drinksArray[1] !== null
+         && drinksArray[1] !== '' && drinksArray[1] !== 'undefined')
         .map((measurementsMapped) => measurementsMapped[1]);
 
       setIngredients(drinkIngredients);
@@ -58,11 +60,11 @@ function CocktailDetails() {
   }, [cocktail]);
 
   useEffect(() => {
-    // const sortRandomizer = 0.5;
+    const sortRandomizer = 0.5;
     const MAXIMUN_NUMBER_OF_CARDS = 6;
     if (recipe.meals?.length > 0) {
-      const randomCards = [...recipe.meals];
-      // .sort(() => Math.random() - sortRandomizer);
+      const randomCards = [...recipe.meals]
+        .sort(() => Math.random() - sortRandomizer);
       setRecommendedCards(randomCards.slice(0, MAXIMUN_NUMBER_OF_CARDS));
     }
   }, [recipe]);
@@ -117,7 +119,7 @@ function CocktailDetails() {
                   key={ `${index}-ingredient-name-and-measure` }
                   data-testid={ `${index}-ingredient-name-and-measure` }
                 >
-                  {`${ingredient} ${measurements[index]}`}
+                  {(`${ingredient} ${measurements[index]}`).replace('undefined', '')}
 
                 </li>
               ))}

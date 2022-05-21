@@ -17,10 +17,9 @@ function Drinks() {
     'All',
     'Ordinary Drink',
     'Cocktail',
-    'Milk / Float / Shake',
-    // 'Shake',
-    // 'Shot',
-    // 'Beer',
+    'Shake',
+    'Shot',
+    'Beer',
     'Other/Unknown',
     'Cocoa',
   ];
