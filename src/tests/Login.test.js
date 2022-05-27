@@ -1,8 +1,8 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
 import { fireEvent, render, screen } from '@testing-library/react';
-import renderWithRouterAndRedux from '../testHelpers/test-utils.jsx';
-import Login from '../../pages/Login';
+import renderWithRouterAndRedux from './testHelpers/test-utils.jsx';
+import Login from '../pages/Login';
 // import { render, fireEvent, screen } from './testHelpers/test-utils.jsx';
 
 describe('Testing page <Login.js>', () => {
@@ -63,7 +63,8 @@ describe('Testing page <Login.js>', () => {
     userEvent.click(enterBtn);
     expect(history.location.pathname).toBe('/foods');
   });
-  it('testa as chaves no local storage', () => {
+  it(` Expect that by clicking on the button the ''Email'' key will be sent to 
+  LOCALSTORAGE in the following format "{"email":"test@test.com"}"`, () => {
     const USER_IN_LOCAL_STORAGE = '{"email":"test@test.com"}';
     const TOKEN = '1';
 

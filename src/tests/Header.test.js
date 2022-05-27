@@ -1,13 +1,21 @@
 import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import renderWithRouterAndRedux from '../testHelpers/test-utils.jsx';
-import Login from '../../pages/Login';
-import Foods from '../../pages/Foods';
-import Drinks from '../../pages/Drinks';
+import renderWithRouterAndRedux from './testHelpers/test-utils.jsx';
+import Login from '../pages/Login';
+import Foods from '../pages/Foods';
+import Drinks from '../pages/Drinks';
+import App from '../App';
 
 describe('Testing component <HEADER.js>', () => {
+  beforeEach(() => {
+    global.fetch = jest.fn().mockImplementation((url) => fetchRequest(url));
+  });
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
   const SEARCH_BUTTON = 'exec-search-btn';
+  const ROUTE = { initialEntries: ['/foods'] };
   it('expects HEADER not to be present on login screen', () => {
     render(<Login />);
     const headerBTN = screen.queryByRole('img', { name: /searchicon/i });
@@ -58,12 +66,7 @@ describe('Testing component <HEADER.js>', () => {
     expect(searchBtn).toBeInTheDocument();
   });
   it('Search the food API if the person is on the FOODS page', () => {
-    jest.spyOn(global, 'fetch');
-    global.fetch.mockResolvedValue({
-      json: 'mock',
-    });
-    jest.spyOn(window, 'alert').mockImplementation(() => {});
-    renderWithRouterAndRedux(<Foods />);
+    renderWithRouterAndRedux(<App />, ROUTE);
     const showSearchBtn = screen.getByRole('img', { name: /searchicon/i });
     userEvent.click(showSearchBtn);
 
@@ -108,5 +111,29 @@ describe('Testing component <HEADER.js>', () => {
     userEvent.click(profileBtn);
 
     expect(history.location.pathname).toBe('/profile');
+  });
+  it('Expects to be able to search by First Letter', () => {
+    renderWithRouterAndRedux(<Foods />);
+
+    const showSearchBtn = screen.getByRole('img', { name: /searchicon/i });
+    userEvent.click(showSearchBtn);
+    const firstLetterRadio = screen.getByRole('radio', { name: /first letter/i });
+    userEvent.click(firstLetterRadio);
+
+    const searchBtn = screen.getByTestId(SEARCH_BUTTON);
+
+    userEvent.click(searchBtn);
+  });
+  it('Expects to be able to search by First Name', () => {
+    renderWithRouterAndRedux(<Foods />);
+
+    const showSearchBtn = screen.getByRole('img', { name: /searchicon/i });
+    userEvent.click(showSearchBtn);
+    const nameRadio = screen.getByRole('radio', { name: /name/i });
+    userEvent.click(nameRadio);
+
+    const searchBtn = screen.getByTestId(SEARCH_BUTTON);
+
+    userEvent.click(searchBtn);
   });
 });

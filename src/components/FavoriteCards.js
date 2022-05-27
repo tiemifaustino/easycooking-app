@@ -1,5 +1,5 @@
-import PropTypes from 'prop-types';
 import React from 'react';
+import PropTypes from 'prop-types';
 import { toast } from 'react-toastify';
 import { Card } from 'react-bootstrap';
 import { Link, useHistory } from 'react-router-dom';
@@ -13,21 +13,16 @@ function FavoriteCards({ id, index, name, img, type, category,
   const handleShare = () => {
     toast.success('Link copied!');
     let textToCopy = window.location.href.replace('/favorite-recipes', '');
+    textToCopy += `/drinks/${id}`;
     if (type === 'food') {
-      textToCopy += `/foods/${id}`;
-    } else if (type === 'drink') {
-      textToCopy += `/drinks/${id}`;
+      textToCopy = `${window.location.href.replace('/favorite-recipes', '')}/foods/${id}`;
     }
 
     navigator.clipboard.writeText(textToCopy);
   };
 
   const handleClick = () => {
-    if (type === 'food') {
-      history.push(`/foods/${id}`);
-    } else if (type === 'drink') {
-      history.push(`/drinks/${id}`);
-    }
+    history.push(`/${type}s/${id}`);
   };
 
   return (
@@ -96,6 +91,7 @@ FavoriteCards.propTypes = {
   index: PropTypes.number,
   img: PropTypes.string,
   title: PropTypes.string,
+  id: PropTypes.string,
 }.isRequired;
 
 export default FavoriteCards;

@@ -47,7 +47,7 @@ function FavoriteRecipes() {
         </div>
       </div>
       {
-        favoriteRecipes?.filter((item) => item.type.includes(filter))
+        favoriteRecipes && favoriteRecipes.filter((item) => item.type.includes(filter))
           .map((favorite, index) => (
             <FavoriteCards
               id={ favorite.id }
