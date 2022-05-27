@@ -22,29 +22,40 @@ We developed with 5 coworkers a recipe app, using **React Hooks**, **Context API
 
 ## 🎉 Application
 
+Check it out [here](https://easycooking-app.vercel.app/) our project in your browser!
+
+**Note:** the application was developed in `360 x 640` screen resolution. See in this resolution or on your cell phone.
 
 ## 📹 Demo
 
-### Login and Profile
+<h2 align="center">Login - Profile - Explore</h2>
 
-<div>
-<img alt="login" width="100" src="./src/img/login.png" />
-<img alt="profile" width="100" src="./src/img/profile.png" />
+<div align="center">
+  <img  alt="login" width="250" src="./img/login.png" />
+  <img alt="profile" width="250" src="./img/profile.png" />
+  <img alt="explore" width="250" src="./img/explore.png" />
 </div>
 
+<h2 align="center">Foods - Drinks - Favorite Recipes</h2>
+
+<div align="center">
+  <img  alt="foods" width="250" src="./img/foods.png" />
+  <img alt="drinks" width="250" src="./img/drinks.png" />
+  <img alt="favorite" width="250" src="./img/favorite.png" />
+</div>
 
 ## 💻 Run Locally
 
 Clone the project
 
 ```bash
-  git clone git@github.com:tiemifaustino/trivia-group24.git
+  git clone git@github.com:tiemifaustino/easycooking-app.git
 ```
 
 Go to the project directory
 
 ```bash
-  cd trivia-group24
+  cd easycooking-app
 ```
 
 Install dependencies
